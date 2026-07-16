@@ -1,0 +1,24 @@
+{
+  "name": "cloud-byte-plugins",
+  "owner": {
+    "name": "Cloud Byte Consulting"
+  },
+  "metadata": {
+    "description": "Platform engineering skill suites: agentic-readiness assessment and research authoring.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "platform-assessment",
+      "source": "./platform-assessment",
+      "description": "Assess an engineering org's platform and agentic readiness: ASDLC maturity scoring, platform ROI scorecard, org design, security/governance playbook, industry benchmarking, and IDP/ADP target architecture.",
+      "category": "assessment"
+    },
+    {
+      "name": "authoring",
+      "source": "./authoring",
+      "description": "Turn research and interviews into publishable deliverables: evidence-first research briefs and interview-based case studies.",
+      "category": "writing"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "authoring",
+  "version": "1.0.0",
+  "description": "Research authoring suite: write dense, evidence-first research briefs from reports and multi-source material, and turn interview transcripts into publishable case studies and expert features. Method skills - they generalize beyond platform engineering.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "keywords": [
+    "research-brief",
+    "case-study",
+    "interview",
+    "technical-writing",
+    "synthesis"
+  ]
+}
