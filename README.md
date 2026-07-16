@@ -38,7 +38,7 @@ claude plugin install authoring@cloud-byte-plugins
 Copilot loads skills from `.github/skills/`, `.claude/skills/`, or `.agents/skills/` in your project. Copy the skill folders in:
 
 ```bash
-npx skills add Cloud-Byte-Consulting/plugins -a copilot
+npx skills add Cloud-Byte-Consulting/plugins -a github-copilot
 ```
 
 or manually:
