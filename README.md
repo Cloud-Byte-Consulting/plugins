@@ -2,6 +2,8 @@
 
 Reusable agent skills in the open [Agent Skills](https://agentskills.io) format (`SKILL.md`), packaged as two plugins. Compatible with Claude (Claude Code, claude.ai), GitHub Copilot, OpenAI Codex, and Google Gemini/Antigravity — no format conversion required.
 
+**New here? Read [GETTING-STARTED.md](GETTING-STARTED.md)** — what to run first, a staged growth path (baseline → measure → report → iterate), and copy-paste first prompts.
+
 ## Plugins
 
 ### `platform-assessment`
