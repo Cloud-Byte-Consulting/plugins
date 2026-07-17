@@ -1,0 +1,18 @@
+{
+  "name": "ai-operations",
+  "version": "1.0.0",
+  "description": "Run AI agents and models as an operation, not an experiment: route work to the right model tier, triage what should be a chat/agent/team/nothing, verify agent output with judge layers and audits, govern cost/ownership/tool sprawl, and engineer the harness (instructions, memory, handoffs, knowledge layer) around your agents.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "keywords": [
+    "ai-operations",
+    "model-selection",
+    "agent-governance",
+    "agent-verification",
+    "token-cost",
+    "harness",
+    "agent-memory"
+  ]
+}

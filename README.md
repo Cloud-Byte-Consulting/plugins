@@ -27,6 +27,30 @@ Turn research and interviews into publishable deliverables. Method skills — th
 | `research-brief-writer` | Dense, evidence-first research briefs from reports and multi-source material |
 | `interview-case-study-writer` | Interview transcripts → expert features and company case studies |
 
+### `ai-operations`
+Operate AI at work — routing, triage, verification, governance, harness. Frameworks distilled from practitioner literature (2025–2026).
+
+| Skill | What it does |
+|---|---|
+| `work-shape-triage` | Decides what work should be a chat, one agent, a team, or nothing — four-estimates rubric + money-dial veto |
+| `model-selection-router` | Routes work across model tiers; personal eval sets, benchmark-interpretation discipline, launch triage |
+| `agent-trust-auditor` | Verifies agent output: judge layers, delegability tests, constitutions, completion-vs-acceptance analytics |
+| `agent-ops-governance` | Ownership cards, tool pruning, token cost measurement, prototype ladder, license/renewal review |
+| `agent-harness-engineer` | Audits and builds the instruction/memory/handoff/knowledge layer around agents |
+
+### `engineering-career`
+| Skill | What it does |
+|---|---|
+| `engineering-career-coach` | Level-up behaviors, junior anti-signals, org signal reading, behavioral interview prep, AI-era positioning |
+
+### `ai-engineering`
+Production LLM app practices, sourced from public educational materials.
+
+| Skill | What it does |
+|---|---|
+| `llm-evals-engineer` | Tracing, RAG metric suites, LLM-as-judge, guardrails, prompt versioning, budget gateways |
+| `llm-app-deployer` | Prototype → production: service extraction, container recipe, cloud rollout, vector-store tuning |
+
 ## Install
 
 ### Claude Code / claude.ai (plugin marketplace)

@@ -19,6 +19,24 @@
       "source": "./authoring",
       "description": "Turn research and interviews into publishable deliverables: evidence-first research briefs and interview-based case studies.",
       "category": "writing"
+    },
+    {
+      "name": "ai-operations",
+      "source": "./ai-operations",
+      "description": "Operate AI at work: model selection/routing, work-shape triage (chat/agent/team/nothing), agent output verification, cost/ownership/tool governance, and harness engineering (instructions, memory, handoffs).",
+      "category": "operations"
+    },
+    {
+      "name": "engineering-career",
+      "source": "./engineering-career",
+      "description": "Engineering career coaching: senior/staff level-up behaviors, org signal reading, behavioral interview prep, AI-era positioning.",
+      "category": "career"
+    },
+    {
+      "name": "ai-engineering",
+      "source": "./ai-engineering",
+      "description": "Ship production LLM apps: eval engineering (tracing, RAG metrics, LLM-as-judge, guardrails) and deployment (containers, cloud rollout, vector-store tuning).",
+      "category": "engineering"
     }
   ]
 }

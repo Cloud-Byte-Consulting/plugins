@@ -1,0 +1,17 @@
+{
+  "name": "ai-engineering",
+  "version": "1.0.0",
+  "description": "Build and ship production LLM applications: evaluation engineering (tracing, RAG metric suites, LLM-as-judge, guardrails, prompt versioning, budget gateways) and deployment (service extraction, production containers, cloud rollout, vector-store tuning).",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "keywords": [
+    "llm",
+    "evals",
+    "rag",
+    "deployment",
+    "observability",
+    "vector-database"
+  ]
+}

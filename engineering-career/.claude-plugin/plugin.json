@@ -1,0 +1,15 @@
+{
+  "name": "engineering-career",
+  "version": "1.0.0",
+  "description": "Engineering career coaching: level-up behaviors (senior/staff), junior anti-signals, manager and org signal reading, re-org readiness, behavioral interview preparation, and AI-era positioning.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "keywords": [
+    "career",
+    "promotion",
+    "interview-prep",
+    "engineering-leadership"
+  ]
+}

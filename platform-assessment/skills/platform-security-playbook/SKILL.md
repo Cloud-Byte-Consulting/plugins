@@ -13,7 +13,8 @@ description: >-
   approves what an agent ships", "what does the auditor need from our AI
   workflow". Fire on related phrasing, not just exact matches. For maturity
   scoring use asdlc-maturity-assessment; for platform architecture (including
-  sovereign variants) use idp-adp-architect.
+  sovereign variants) use idp-adp-architect; for verifying a single agent's
+  output, agent-trust-auditor.
 ---
 
 # Platform Security Playbook
