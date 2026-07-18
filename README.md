@@ -22,7 +22,7 @@ A fully scored discovery uses both `platform-assessment` and `adp-enablement`: t
 | `platform-security-playbook` | Designs and audits governance for human+agent development: 5 control responsibilities, privilege-separation patterns, regulatory mapping, vulnerability management, sovereignty overlay |
 | `platform-industry-brief` | Produces industry-contextualized briefs: benchmark databank + vertical pattern library (automotive, gaming, classifieds, healthcare, freight) |
 | `idp-adp-architect` | Designs Internal Developer Platform capabilities and an Agentic Developer Portal target architecture: five-plane model, human and machine interfaces, golden paths, AI/ML sixth plane, sovereign variant |
-| `platform-assessment-reporter` | Renders assessment results as evidence-backed reporting visuals: production-system quadrant, six-vector value radar, golden-path coverage maps — every point carries a metric/source/confidence tier; unmeasurable dimensions are explicitly marked qualitative |
+| `platform-assessment-reporter` | Generates cited assessment reports with separate platform, ASDLC, and ADP radar profiles, per-domain evaluation ledgers, production-system/value visuals, contradictions, confidence, and an evidence appendix |
 
 ### `authoring`
 Turn research and interviews into publishable deliverables. Method skills — they generalize beyond platform engineering.
