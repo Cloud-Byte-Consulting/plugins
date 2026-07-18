@@ -15,6 +15,8 @@ description: >-
 ## Purpose
 Turn "how good is our platform?" into a scored, percentile-positioned diagnosis. Score the organization on the CNCF Platform Engineering Maturity Model's 4×5 grid, place each score against a source-versioned industry distribution, cross-check with three secondary maturity axes, and emit a gap register the roadmap can consume. This is the platform-side twin of the sibling `asdlc-maturity-assessment` skill (platform-assessment plugin), which scores agent adoption; an Agentic Developer Portal engagement needs both readings, because agents amplify whatever platform maturity exists.
 
+If a reliable evidence catalog does not exist, start with the platform-assessment plugin's `platform-maturity-discovery` skill. It owns cross-system organizational discovery; this skill owns platform maturity scoring.
+
 ## Core model to hold in your head
 
 ### The CNCF 4×5 grid with a versioned benchmark

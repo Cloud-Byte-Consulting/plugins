@@ -11,14 +11,17 @@ Assess an engineering organization's platform and agentic readiness. Evidence-fi
 
 The enterprise operating-model additions are documented in [`PLATFORM-ENGINEERING-SOURCE-NOTES.md`](PLATFORM-ENGINEERING-SOURCE-NOTES.md).
 
+A fully scored discovery uses both `platform-assessment` and `adp-enablement`: the first gathers evidence and scores agentic delivery maturity; the second supplies the source-versioned platform-maturity benchmark. A standalone `platform-maturity-discovery` ZIP produces an evidence package and ADP gate readout, while marking unavailable formal scores as pending.
+
 | Skill | What it does |
 |---|---|
+| `platform-maturity-discovery` | Discovers platform-engineering and Agentic Developer Portal readiness from privacy-bounded signals across communications, meetings, work items, code, infrastructure, telemetry, and developer sentiment |
 | `asdlc-maturity-assessment` | Scores agentic development maturity on an 8-path × 5-level rubric (L0–L4); demands measurable attribution before scoring L2+ |
 | `platform-roi-scorecard` | Builds a defensible platform ROI case: survey + system data doctrine, cost/value formulas, benchmark calibration, AI-workload velocity metrics |
 | `platform-org-design-advisor` | Diagnoses platform team structure: reporting lines, role coverage (7 platform roles), autonomy-level-driven operating model, agent-transparency design |
 | `platform-security-playbook` | Designs and audits governance for human+agent development: 5 control responsibilities, privilege-separation patterns, regulatory mapping, vulnerability management, sovereignty overlay |
 | `platform-industry-brief` | Produces industry-contextualized briefs: benchmark databank + vertical pattern library (automotive, gaming, classifieds, healthcare, freight) |
-| `idp-adp-architect` | Designs IDP → ADP target architectures: five-plane model with per-cloud mappings, golden paths, AI/ML sixth plane, sovereign variant |
+| `idp-adp-architect` | Designs Internal Developer Platform capabilities and an Agentic Developer Portal target architecture: five-plane model, human and machine interfaces, golden paths, AI/ML sixth plane, sovereign variant |
 | `platform-assessment-reporter` | Renders assessment results as evidence-backed reporting visuals: production-system quadrant, six-vector value radar, golden-path coverage maps — every point carries a metric/source/confidence tier; unmeasurable dimensions are explicitly marked qualitative |
 
 ### `authoring`
@@ -154,7 +157,7 @@ platform-assessment/
 ├── .claude-plugin/plugin.json
 ├── .codex-plugin/plugin.json
 ├── skills/<name>/
-│   ├── SKILL.md                    # 7 assessment skills
+│   ├── SKILL.md                    # 8 assessment skills
 │   └── agents/openai.yaml
 └── perplexity/<name>.zip
 authoring/

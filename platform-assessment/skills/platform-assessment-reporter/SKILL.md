@@ -9,6 +9,8 @@ description: Turn platform and agentic-readiness assessment results into evidenc
 
 Render the outputs of platform assessments — maturity scores, ROI evidence, org diagnostics — as reporting visuals a leadership audience can act on: a production-system quadrant placement, a six-vector value radar, golden-path coverage maps, and before/after ledgers.
 
+For a full discovery engagement, consume the evidence catalog and three-part readout from `platform-maturity-discovery`: platform-engineering maturity, ASDLC maturity, and ADP readiness gates. Keep them separate; never average them into one score.
+
 The skill's one non-negotiable rule: **visuals inherit the evidence discipline of the data behind them.** Every plotted point carries a metric, a source, a date, and a confidence tier. Where no measurable metric exists, the point is rendered and labeled as qualitative — visibly distinct from measured data. A chart that hides fuzziness is a lie with better production values.
 
 Sibling skills feed this one: `asdlc-maturity-assessment` (level scores, path matrix), `platform-roi-scorecard` (cost/value numbers, benchmark calibration), `platform-org-design-advisor` (structure diagnostics). Assess first, then report. Client context: [YOUR ORGANIZATION / CLIENT].
@@ -96,8 +98,9 @@ For roll-out reporting: S-curve expectation (slow MVP → ramp → saturation), 
 3. **Select visuals.** Quadrant for "where are we" framing; radar for multi-dimensional state (and before/after or benchmark overlay); path coverage map for platform completeness; ledger for ROI claims; trajectory panel for adoption. Skip any visual whose axes would be majority-Qualitative — replace with a findings list instead of faking precision.
 4. **Score axes** per the rubrics above. Two-evidence-point minimum per quadrant axis; tier ceilings respected per radar vector.
 5. **Render** with tier encodings (solid/lighter/outlined/hatched), axis footnotes, survey years, and an explicit legend entry for qualitative marks. Formats: Mermaid (quadrantChart for the 2×2; flowchart for path maps), SVG/HTML for radars, markdown tables for ledgers — match the medium the audience will actually view.
-6. **Fuzziness callout pass.** Re-scan every visual: any point that reads as measured but isn't? Fix encoding or add the label. Add a one-line "what we could not measure and why" note per chart — absence of measurement is itself a finding (it usually indicates missing attribution or telemetry, which routes back to `asdlc-maturity-assessment`).
-7. **Deliver** with the evidence appendix and a reproduction note (queries/sources used, so next quarter's report is comparable).
+6. **Add the discovery appendix** when available: evidence coverage by signal domain, contradiction register, missing-data limitations, and the seven ADP readiness gates with pass/partial/fail/unobserved status.
+7. **Fuzziness callout pass.** Re-scan every visual: any point that reads as measured but isn't? Fix encoding or add the label. Add a one-line "what we could not measure and why" note per chart — absence of measurement is itself a finding (it usually indicates missing attribution or telemetry, which routes back to `asdlc-maturity-assessment`).
+8. **Deliver** with the evidence appendix and a reproduction note (queries/sources used, so next quarter's report is comparable).
 
 ## Guardrails
 

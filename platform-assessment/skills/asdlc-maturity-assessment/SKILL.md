@@ -8,6 +8,8 @@ description: Assess where an organization sits across the five levels (0–4) of
 ## Purpose
 Turn "how mature are we with AI coding agents?" into a defensible, leveled diagnosis and a specific next-level roadmap — not a vibe. Score the organization path-by-path against the 8-path × 5-level matrix below, back every score with evidence pulled from systems of record, and hand the resulting gaps to a platform roadmap. (For designing the platform that closes those gaps, hand off to the sibling `idp-adp-architect` skill — this skill diagnoses; that one architects.)
 
+When the engagement starts without a trusted evidence baseline, run `platform-maturity-discovery` first. It gathers organizational signals across communication, meetings, work items, repositories, infrastructure, and sentiment; this skill consumes that evidence and scores agentic delivery paths only.
+
 ## Core model to hold in your head
 
 ### SDLC vs. ASDLC

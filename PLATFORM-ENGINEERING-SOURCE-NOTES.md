@@ -18,9 +18,13 @@ The source is copyrighted and marked “All rights reserved.” The book and its
 
 These concepts were integrated into existing Cloud Byte frameworks rather than added as a book summary. Tool examples, benchmark figures, legal claims, and vendor case-study results from the book were deliberately not imported.
 
+The book recommends practitioner interviews, standardized group sensing sessions, developer surveys, usage analytics, ticket-flow timing, operational metrics, and continuous feedback. It does not define an Agentic Developer Portal or a cross-system organizational discovery model. The repository's `platform-maturity-discovery` skill extends those research methods across communications, meetings, work items, code, infrastructure, telemetry, and sentiment, with explicit privacy boundaries.
+
+Terminology in this repository distinguishes the human-facing **Internal Developer Portal**, the backend **Internal Developer Platform**, and the broader **Agentic Developer Portal (ADP)** that supports both human and agent users.
+
 ## Updated skill scope
 
-- `platform-assessment`: architecture, organization design, and ROI/value mapping.
+- `platform-assessment`: organizational discovery, architecture, organization design, and ROI/value mapping.
 - `adp-enablement`: maturity cross-checks, golden-path service lifecycle, and fitness-function/service-level governance.
 
-The security, agent identity, MCP API, agent API contract, and ASDLC scoring models were left unchanged because the source did not add a more specific control model for those scopes.
+The security, agent identity, MCP API, agent API contract, and ASDLC scoring models retain their specialist boundaries because the source did not add a more specific control model for those scopes.

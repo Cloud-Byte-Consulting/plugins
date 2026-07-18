@@ -1,0 +1,4 @@
+interface:
+  display_name: "Platform Maturity Discovery"
+  short_description: "Discover platform and ADP readiness from org signals"
+  default_prompt: "Use $platform-maturity-discovery to gather organizational evidence and assess platform-engineering and ADP readiness."
