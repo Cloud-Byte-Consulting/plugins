@@ -1,0 +1,29 @@
+{
+  "name": "inference-testing",
+  "version": "1.0.0",
+  "description": "Model-level inference testing for a research GPU platform: build eval suites and regression gates, benchmark serving performance (TTFT, tokens/sec, p95/p99), run release-gate audits (explainability, fairness, adversarial robustness), design shadow/canary/blue-green/A-B/bandit rollouts, stand up the 4-monitor drift stack, and red-team models before and after release. Translates SageMaker-era patterns to OSS on Lambda managed Kubernetes (Evidently, Prometheus, KServe-class serving).",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "keywords": [
+    "inference-testing",
+    "model-evaluation",
+    "benchmark",
+    "ttft",
+    "tokens-per-second",
+    "canary",
+    "shadow-deployment",
+    "drift-detection",
+    "shap",
+    "fairness-audit",
+    "adversarial-robustness",
+    "red-team",
+    "prompt-injection",
+    "release-gate",
+    "model-promotion",
+    "gpu-serving",
+    "kubernetes",
+    "lambda"
+  ]
+}
