@@ -1,0 +1,4 @@
+interface:
+  display_name: "Decision Intelligence Brief"
+  short_description: "Turn a decision into a compact intelligence brief"
+  default_prompt: "Use $decision-intelligence-brief to turn a decision into a compact intelligence brief."

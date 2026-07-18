@@ -1,0 +1,4 @@
+interface:
+  display_name: "Life Engine Setup"
+  short_description: "Set up a recurring personal briefing assistant"
+  default_prompt: "Use $life-engine-setup to set up a recurring personal briefing assistant."

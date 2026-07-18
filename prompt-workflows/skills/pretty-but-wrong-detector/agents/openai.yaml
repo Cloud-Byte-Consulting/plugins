@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pretty-But-Wrong Detector"
+  short_description: "Audit polished files for unsupported claims"
+  default_prompt: "Use $pretty-but-wrong-detector to audit polished files for unsupported claims."

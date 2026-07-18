@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Task Model Router"
+  short_description: "Route task steps to the right AI and draft"
+  default_prompt: "Use $ai-task-model-router to route task steps to the right AI and draft."

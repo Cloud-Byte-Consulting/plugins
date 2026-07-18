@@ -1,0 +1,4 @@
+interface:
+  display_name: "Consumer AI Anticipation Gap Scorecard"
+  short_description: "Score a consumer AI product's anticipation gaps"
+  default_prompt: "Use $consumer-ai-anticipation-gap-scorecard to score a consumer AI product's anticipation gaps."

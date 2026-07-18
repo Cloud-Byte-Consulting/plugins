@@ -1,0 +1,4 @@
+interface:
+  display_name: "Knowledge Architecture Advisor"
+  short_description: "Choose a wiki, database, or hybrid architecture"
+  default_prompt: "Use $knowledge-architecture-advisor to choose a wiki, database, or hybrid architecture."

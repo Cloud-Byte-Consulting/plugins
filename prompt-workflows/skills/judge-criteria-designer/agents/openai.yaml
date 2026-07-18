@@ -1,0 +1,4 @@
+interface:
+  display_name: "Judge Criteria Designer"
+  short_description: "Design testable judge criteria and safe actions"
+  default_prompt: "Use $judge-criteria-designer to design testable judge criteria and safe actions."

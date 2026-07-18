@@ -1,0 +1,4 @@
+interface:
+  display_name: "Consumer AI Anticipation Layer"
+  short_description: "Design safe anticipation into a consumer AI product"
+  default_prompt: "Use $consumer-ai-anticipation-layer to design safe anticipation into a consumer AI product."

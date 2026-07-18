@@ -1,0 +1,4 @@
+interface:
+  display_name: "Knowledge Base Drift Auditor"
+  short_description: "Audit a knowledge base for drift and contradictions"
+  default_prompt: "Use $knowledge-base-drift-auditor to audit a knowledge base for drift and contradictions."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Explanation Artifact Builder"
+  short_description: "Build durable explanations of complex code"
+  default_prompt: "Use $explanation-artifact-builder to build durable explanations of complex code."

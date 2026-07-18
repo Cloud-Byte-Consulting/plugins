@@ -1,0 +1,37 @@
+{
+  "name": "prompt-workflows",
+  "version": "1.0.0",
+  "description": "Thirty-five reusable workflows for model routing, personal productivity, code comprehension, knowledge systems, agent evaluation, consumer AI strategy, and Office documents.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "homepage": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/prompt-workflows",
+  "repository": "https://github.com/Cloud-Byte-Consulting/plugins",
+  "license": "Apache-2.0",
+  "keywords": [
+    "prompt-workflows",
+    "productivity",
+    "model-routing",
+    "knowledge-management",
+    "agent-evaluation",
+    "office-documents"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Prompt Workflows",
+    "shortDescription": "Reusable decision, analysis, and productivity workflows.",
+    "longDescription": "A portable library of 35 workflows spanning model selection, personal operations, code comprehension, knowledge architecture, agent evaluation, consumer AI strategy, and evidence-grounded Office document work.",
+    "developerName": "Cloud Byte Consulting",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive"
+    ],
+    "websiteURL": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/prompt-workflows",
+    "defaultPrompt": [
+      "Help me choose the right workflow for this task.",
+      "Audit this workflow before I automate it.",
+      "Turn these sources into an evidence-backed brief."
+    ]
+  }
+}

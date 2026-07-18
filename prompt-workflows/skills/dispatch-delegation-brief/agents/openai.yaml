@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dispatch Delegation Brief"
+  short_description: "Turn a task into an async delegation brief"
+  default_prompt: "Use $dispatch-delegation-brief to turn a task into an async delegation brief."

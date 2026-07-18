@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wiki Schema + Editorial Policy Designer"
+  short_description: "Design a wiki schema and editorial policy"
+  default_prompt: "Use $wiki-schema-editorial-policy-designer to design a wiki schema and editorial policy."

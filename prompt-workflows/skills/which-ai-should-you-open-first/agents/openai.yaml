@@ -1,0 +1,4 @@
+interface:
+  display_name: "Which AI Should You Open First?"
+  short_description: "Recommend which AI to open for a task"
+  default_prompt: "Use $which-ai-should-you-open-first to recommend which AI to open for a task."

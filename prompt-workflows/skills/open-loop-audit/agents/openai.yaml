@@ -1,0 +1,4 @@
+interface:
+  display_name: "Open Loop Audit"
+  short_description: "Audit open loops and identify true delegation"
+  default_prompt: "Use $open-loop-audit to audit open loops and identify true delegation."

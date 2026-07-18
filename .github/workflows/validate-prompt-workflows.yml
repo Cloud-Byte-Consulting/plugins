@@ -1,0 +1,56 @@
+name: Validate prompt workflows
+
+on:
+  pull_request:
+    paths:
+      - ".claude-plugin/marketplace.json"
+      - "prompt-workflows/**"
+      - "scripts/validate_repository.py"
+      - ".github/workflows/validate-prompt-workflows.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - ".claude-plugin/marketplace.json"
+      - "prompt-workflows/**"
+      - "scripts/validate_repository.py"
+      - ".github/workflows/validate-prompt-workflows.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate marketplace and plugins
+        run: python scripts/validate_repository.py
+      - name: Test cross-platform packaging
+        run: python -m unittest prompt-workflows/scripts/test_package_perplexity.py
+      - name: Verify Perplexity packages
+        run: python prompt-workflows/scripts/package_perplexity.py --check
+
+  installer-discovery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Discover nested skills with the pinned installer
+        run: npx --yes skills@1.5.19 add . --list --full-depth > available-skills.txt
+      - name: Require every prompt workflow
+        run: |
+          for skill_dir in prompt-workflows/skills/*; do
+            skill_name="$(basename "$skill_dir")"
+            grep -Fq "$skill_name" available-skills.txt
+          done

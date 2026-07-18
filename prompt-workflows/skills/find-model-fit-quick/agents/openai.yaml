@@ -1,0 +1,4 @@
+interface:
+  display_name: "Find Model Fit — Quick"
+  short_description: "Choose a model family from one short brief"
+  default_prompt: "Use $find-model-fit-quick to choose a model family from one short brief."

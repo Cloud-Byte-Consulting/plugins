@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wiki Synthesis Agent"
+  short_description: "Synthesize source material into durable wiki pages"
+  default_prompt: "Use $wiki-synthesis-agent to synthesize source material into durable wiki pages."

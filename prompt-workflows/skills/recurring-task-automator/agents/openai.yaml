@@ -1,0 +1,4 @@
+interface:
+  display_name: "Recurring Task Automator"
+  short_description: "Design a safe recurring agent automation"
+  default_prompt: "Use $recurring-task-automator to design a safe recurring agent automation."

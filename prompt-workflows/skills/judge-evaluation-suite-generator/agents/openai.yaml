@@ -1,0 +1,4 @@
+interface:
+  display_name: "Judge Evaluation Suite Generator"
+  short_description: "Generate an evaluation suite for an agent judge"
+  default_prompt: "Use $judge-evaluation-suite-generator to generate an evaluation suite for an agent judge."

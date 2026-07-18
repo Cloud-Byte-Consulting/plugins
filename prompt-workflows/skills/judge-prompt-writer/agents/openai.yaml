@@ -1,0 +1,4 @@
+interface:
+  display_name: "Judge Prompt Writer"
+  short_description: "Write rigorous prompts for LLM-as-judge systems"
+  default_prompt: "Use $judge-prompt-writer to write rigorous prompts for LLM-as-judge systems."
