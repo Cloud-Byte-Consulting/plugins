@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import re
-import tempfile
 import zipfile
 from pathlib import Path
 
@@ -72,7 +71,10 @@ def validate_skill(skill_dir: Path) -> list[Path]:
         raise ValueError(f"{skill_dir}: missing description frontmatter")
 
     files: list[Path] = []
-    for path in sorted(skill_dir.rglob("*")):
+    for path in sorted(
+        skill_dir.rglob("*"),
+        key=lambda candidate: candidate.relative_to(skill_dir).as_posix(),
+    ):
         if path.is_symlink():
             raise ValueError(f"{skill_dir}: symlinks are not portable: {path}")
         if path.is_file() and path.name != ".DS_Store":
@@ -138,19 +140,70 @@ def build(skills_dir: Path, output_dir: Path) -> list[Path]:
     return archives
 
 
+def verify_archive(skill_dir: Path, archive: Path) -> None:
+    """Verify a committed archive's portable contents and relevant metadata."""
+    if archive.stat().st_size > MAX_PACKAGE_BYTES:
+        raise ValueError(
+            f"{archive}: ZIP is {archive.stat().st_size} bytes; "
+            f"maximum is {MAX_PACKAGE_BYTES}"
+        )
+
+    expected = [
+        (path.relative_to(skill_dir).as_posix(), stable_file_bytes(path))
+        for path in validate_skill(skill_dir)
+    ]
+
+    try:
+        with zipfile.ZipFile(archive) as zipped:
+            infos = zipped.infolist()
+            actual_names = [info.filename for info in infos]
+            expected_names = [name for name, _ in expected]
+            if actual_names != expected_names:
+                raise ValueError(
+                    f"outdated Perplexity package entries: {archive}; "
+                    f"expected={expected_names}, actual={actual_names}"
+                )
+            if zipped.comment:
+                raise ValueError(f"non-portable ZIP comment in {archive}")
+
+            for info, (name, payload) in zip(infos, expected):
+                if info.date_time != FIXED_ZIP_TIME:
+                    raise ValueError(f"non-deterministic timestamp for {name} in {archive}")
+                if info.create_system != 3:
+                    raise ValueError(f"non-portable creator system for {name} in {archive}")
+                if info.compress_type != zipfile.ZIP_STORED:
+                    raise ValueError(f"unexpected compression for {name} in {archive}")
+                if info.external_attr != 0o100644 << 16:
+                    raise ValueError(f"non-portable file mode for {name} in {archive}")
+                if info.extra or info.comment:
+                    raise ValueError(f"unexpected ZIP metadata for {name} in {archive}")
+                if zipped.read(info) != payload:
+                    raise ValueError(f"outdated Perplexity package content: {archive}")
+    except zipfile.BadZipFile as error:
+        raise ValueError(f"invalid Perplexity package: {archive}") from error
+
+
 def check(skills_dir: Path, output_dir: Path) -> int:
-    with tempfile.TemporaryDirectory(prefix="perplexity-skills-") as temp:
-        generated = build(skills_dir, Path(temp))
-        expected_names = {path.name for path in generated}
-        actual_names = {path.name for path in output_dir.glob("*.zip")}
-        if actual_names != expected_names:
-            missing = sorted(expected_names - actual_names)
-            stale = sorted(actual_names - expected_names)
-            raise ValueError(f"Perplexity packages differ: missing={missing}, stale={stale}")
-        for archive in generated:
-            committed = output_dir / archive.name
-            if archive.read_bytes() != committed.read_bytes():
-                raise ValueError(f"outdated Perplexity package: {committed}")
+    skill_dirs = sorted(
+        (
+            path
+            for path in skills_dir.iterdir()
+            if path.is_dir() and (path / "SKILL.md").is_file()
+        ),
+        key=lambda path: path.name,
+    )
+    if not skill_dirs:
+        raise ValueError(f"no skills found under {skills_dir}")
+
+    expected_names = {f"{skill_dir.name}.zip" for skill_dir in skill_dirs}
+    actual_names = {path.name for path in output_dir.glob("*.zip")}
+    if actual_names != expected_names:
+        missing = sorted(expected_names - actual_names)
+        stale = sorted(actual_names - expected_names)
+        raise ValueError(f"Perplexity packages differ: missing={missing}, stale={stale}")
+
+    for skill_dir in skill_dirs:
+        verify_archive(skill_dir, output_dir / f"{skill_dir.name}.zip")
     return len(expected_names)
 
 

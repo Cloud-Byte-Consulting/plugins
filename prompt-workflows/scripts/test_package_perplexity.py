@@ -7,7 +7,7 @@ import zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from package_perplexity import FIXED_ZIP_TIME, package_skill
+from package_perplexity import FIXED_ZIP_TIME, check, package_skill
 
 
 SKILL = """---
@@ -53,6 +53,19 @@ class PackagePerplexityTests(unittest.TestCase):
                 self.assertTrue(
                     all(info.date_time == FIXED_ZIP_TIME for info in archive.infolist())
                 )
+
+    def test_check_verifies_archive_contents_against_source(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            skill = self.make_skill(root / "skills", "\n")
+            output = root / "perplexity"
+            package_skill(skill, output)
+
+            self.assertEqual(check(root / "skills", output), 1)
+
+            (skill / "SKILL.md").write_text(SKILL + "\nChanged.\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "outdated.*content"):
+                check(root / "skills", output)
 
 
 if __name__ == "__main__":
