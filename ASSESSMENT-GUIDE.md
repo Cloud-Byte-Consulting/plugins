@@ -149,6 +149,16 @@ sequenced roadmap.
 
 ## Privacy and people data
 
+For I7, use the [concise core survey](platform-assessment/skills/assessment-orchestrator/references/maturity-survey-instrument.md)
+by default. Use the [extended by-role survey](platform-assessment/skills/assessment-orchestrator/references/idp-adp-maturity-survey-by-role.md)
+when the charter calls for cross-role comparison, or select only the relevant
+section of the [methodology-specific questionnaires](platform-assessment/skills/assessment-orchestrator/references/methodology-specific-confirmation-gap-fill-questionnaires.md)
+when an evidence gap needs confirmation. Record the instrument version and
+question IDs. Do not administer all questionnaires merely because they are
+available. The [full research synthesis](platform-assessment/skills/assessment-orchestrator/references/idp-adp-maturity-assessment-research.md)
+is bundled as background material; its unified scoring proposal is not the
+suite's controlling assessment model.
+
 - Assess systems, paths, controls, queues, and aggregate experience—never people.
 - Prefer metadata and aggregates; collect content only when necessary and
   explicitly authorized.

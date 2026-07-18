@@ -179,9 +179,14 @@ cannot resolve the result, report partial, unobserved, or Pending as appropriate
 
 ## Privacy rules for I7 and communications
 
-- Use the survey in `references/maturity-survey-instrument.md` and preserve its
-  wording, cohort definitions, response rate, and suppression rules across
-  cycles.
+- Select the smallest approved instrument that closes the evidence gap:
+  `maturity-survey-instrument.md` for the core survey,
+  `idp-adp-maturity-survey-by-role.md` for role-specific distribution, or the
+  relevant section of
+  `methodology-specific-confirmation-gap-fill-questionnaires.md` for a targeted
+  methodology check. Do not issue all instruments by default.
+- Preserve wording, cohort definitions, response rate, and suppression rules
+  across cycles. Record which instrument version and question IDs were used.
 - Aggregate to team level or higher and suppress cohorts below the approved
   threshold.
 - Keep raw responses with the survey owner; state receives counts and themes.
@@ -206,10 +211,20 @@ or unobserved result.
 ## References
 
 - [references/maturity-survey-instrument.md](references/maturity-survey-instrument.md)
-  — original CONFIRM/GAP-FILL survey instrument and analysis contract.
+  — concise core CONFIRM/GAP-FILL survey and analysis contract.
+- [references/idp-adp-maturity-survey-by-role.md](references/idp-adp-maturity-survey-by-role.md)
+  — extended I7 instrument segmented for engineers, technical leads, managers,
+  directors, and executive leadership.
+- [references/methodology-specific-confirmation-gap-fill-questionnaires.md](references/methodology-specific-confirmation-gap-fill-questionnaires.md)
+  — targeted prompts for unresolved CNCF, Microsoft, DORA, SPACE, Cortex,
+  OpsLevel, CSA MCP, agent-instruction, and Team Topologies evidence gaps.
 - [references/research-alignment.md](references/research-alignment.md) — source
   stance, retained research mechanics, rejected combined-score proposals, and
   primary references.
+- [references/idp-adp-maturity-assessment-research.md](references/idp-adp-maturity-assessment-research.md)
+  — user-supplied background research. Read it for framework context and source
+  leads only; its ADP terminology and unified scoring proposal are not
+  controlling in this repository.
 
 ## Guardrails
 

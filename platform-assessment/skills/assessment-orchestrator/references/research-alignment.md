@@ -3,9 +3,16 @@
 ## Purpose
 
 Use this reference to keep incremental assessment work aligned with the
-repository's source policy and maturity models. It is an original synthesis of
-the user-provided research; the source report is not redistributed because no
-explicit publication license was supplied.
+repository's source policy and maturity models. The user supplied the full
+research report and two expanded questionnaire documents for inclusion on
+2026-07-18. They are now bundled as non-controlling references alongside this
+alignment layer.
+
+The supplied research uses ADP to mean Agentic Developer Platform and explores
+a unified 0–4 rubric. The repository uses ADP to mean Agentic Developer Portal
+and does not adopt the unified score. Treat the supplied report as framework
+context and a source-discovery aid; this file and `../SKILL.md` control whenever
+terminology, scoring, privacy, or evidence-handling guidance differs.
 
 ## Controlling model boundaries
 
@@ -50,6 +57,17 @@ knowledge and capability interfaces.
 - Automatic maturity scoring from survey response bands.
 - Passive email, chat, or transcript mining without explicit authority,
   jurisdiction review, minimization, and aggregation.
+
+## Included source documents
+
+- `idp-adp-maturity-assessment-research.md`: full background research and source
+  links; its synthesized rubric is a research hypothesis, not a formal score.
+- `methodology-specific-confirmation-gap-fill-questionnaires.md`: use only the
+  sections triggered by a documented evidence gap; answers remain Attested
+  evidence for the controlling scorer.
+- `idp-adp-maturity-survey-by-role.md`: optional extended I7 survey; distribute
+  only the relevant role section after the required approvals and suppression
+  rules are recorded.
 
 ## Primary references
 
