@@ -34,6 +34,8 @@ jobs:
           python-version: "3.12"
       - name: Validate marketplace and plugins
         run: python scripts/validate_repository.py
+      - name: Test cross-platform packaging
+        run: python -m unittest prompt-workflows/scripts/test_package_perplexity.py
       - name: Verify Perplexity packages
         run: python prompt-workflows/scripts/package_perplexity.py --check
 

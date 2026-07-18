@@ -13,6 +13,34 @@ from pathlib import Path
 MAX_PACKAGE_BYTES = 10 * 1024 * 1024
 FIXED_ZIP_TIME = (1980, 1, 1, 0, 0, 0)
 PORTABLE_NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+TEXT_EXTENSIONS = {
+    ".bash",
+    ".cfg",
+    ".css",
+    ".csv",
+    ".html",
+    ".ini",
+    ".js",
+    ".json",
+    ".jsx",
+    ".md",
+    ".markdown",
+    ".ps1",
+    ".py",
+    ".sh",
+    ".sql",
+    ".svg",
+    ".toml",
+    ".ts",
+    ".tsv",
+    ".tsx",
+    ".txt",
+    ".xml",
+    ".yaml",
+    ".yml",
+    ".zsh",
+}
+TEXT_FILENAMES = {"Dockerfile", "Makefile"}
 
 
 def frontmatter_value(text: str, key: str) -> str:
@@ -52,6 +80,20 @@ def validate_skill(skill_dir: Path) -> list[Path]:
     return files
 
 
+def stable_file_bytes(path: Path) -> bytes:
+    """Normalize UTF-8 text so checkout line endings cannot change archive bytes."""
+    payload = path.read_bytes()
+    if path.suffix.lower() not in TEXT_EXTENSIONS and path.name not in TEXT_FILENAMES:
+        return payload
+    try:
+        text = payload.decode("utf-8")
+    except UnicodeDecodeError:
+        return payload
+    if "\r" not in text:
+        return payload
+    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+
+
 def package_skill(skill_dir: Path, output_dir: Path) -> Path:
     files = validate_skill(skill_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -68,7 +110,7 @@ def package_skill(skill_dir: Path, output_dir: Path) -> Path:
                 info.create_system = 3
                 info.compress_type = zipfile.ZIP_STORED
                 info.external_attr = 0o100644 << 16
-                zipped.writestr(info, path.read_bytes(), compress_type=zipfile.ZIP_STORED)
+                zipped.writestr(info, stable_file_bytes(path), compress_type=zipfile.ZIP_STORED)
 
         size = temporary.stat().st_size
         if size > MAX_PACKAGE_BYTES:
