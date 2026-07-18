@@ -47,7 +47,7 @@ claude plugin install prompt-workflows@cloud-byte-plugins
 ```
 
 ### GitHub Copilot
-Copilot loads skills from `.github/skills/`, `.claude/skills/`, or `.agents/skills/` in your project. Copy the skill folders in:
+GitHub Copilot loads skills from `.github/skills/`, `.claude/skills/`, or `.agents/skills/` in your project. Copy the skill folders in:
 
 ```bash
 npx skills add Cloud-Byte-Consulting/plugins --full-depth -a github-copilot
@@ -84,9 +84,6 @@ Rebuild the packages after edits with:
 python3 prompt-workflows/scripts/package_perplexity.py
 python3 scripts/package_research_perplexity.py
 ```
-
-### Microsoft 365 Copilot (declarative agents)
-Different surface from GitHub Copilot: M365 Copilot doesn't load SKILL.md. The path is a **declarative agent** (Agent Builder or Teams Toolkit) whose plain-English *Instructions* are derived from a skill body, with knowledge grounding (SharePoint/Graph connectors) and MCP tools as *Actions*. Instructions have a size cap, so a skill must be condensed to its Workflow + Guardrails core. Not included in this repo yet — see [Copilot Developer Camp](https://microsoft.github.io/copilot-camp/) for the build pattern.
 
 ### Google Gemini / Antigravity
 ```bash

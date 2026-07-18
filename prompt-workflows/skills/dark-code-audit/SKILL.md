@@ -31,7 +31,7 @@ Group 1 — System Architecture:
 "Describe your system architecture. You can paste a repo structure, a list of services/modules, or describe it in plain language. I need to understand: what are the major components, how do they communicate, and where does data flow between them?"
 Group 2 — AI Tool Usage:
 "How does your team use AI coding tools? Specifically:
-- Which tools (e.g., Copilot, Cursor, ChatGPT, Claude, internal tools)?
+- Which tools (e.g., GitHub Copilot, Cursor, ChatGPT, Claude, internal tools)?
 - What percentage of new code is AI-generated (rough estimate)?
 - Are there mandates or targets for AI tool usage?
 - Do AI agents have any autonomous access — CI/CD, production, data pipelines, tool selection at runtime?"
