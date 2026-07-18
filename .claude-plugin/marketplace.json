@@ -4,8 +4,8 @@
     "name": "Cloud Byte Consulting"
   },
   "metadata": {
-    "description": "Portable Agent Skills for platform assessment, AI operations, engineering, authoring, career development, and reusable prompt workflows.",
-    "version": "1.1.0"
+    "description": "Portable Agent Skills for platform assessment, research-division operations, AI engineering, authoring, career development, and reusable prompt workflows.",
+    "version": "1.2.0"
   },
   "plugins": [
     {
@@ -13,6 +13,36 @@
       "source": "./platform-assessment",
       "description": "Assess an engineering org's platform and agentic readiness: ASDLC maturity scoring, platform ROI scorecard, org design, security/governance playbook, industry benchmarking, and IDP/ADP target architecture.",
       "category": "assessment"
+    },
+    {
+      "name": "adp-enablement",
+      "source": "./adp-enablement",
+      "description": "Engineer the Agentic Developer Portal: CNCF platform-maturity benchmark with industry percentiles, MCP servers over platform APIs, agent identity (no standing secrets, ephemeral credentials), agent-consumable API contracts, golden paths as products, and fitness-function instrumentation for the maturity roadmap.",
+      "category": "platform"
+    },
+    {
+      "name": "gpu-research-platform",
+      "source": "./gpu-research-platform",
+      "description": "Operate GPU research workloads on managed Kubernetes (Lambda-class clouds): GPU sharing (MIG/MPS/time-slicing), KEDA autoscaling on DCGM metrics, cost chargeback, researcher tenancy vending, GitOps bootstrap, CIS-derived security baseline with shared-responsibility filter, and GPU workload troubleshooting.",
+      "category": "platform"
+    },
+    {
+      "name": "model-training-ops",
+      "source": "./model-training-ops",
+      "description": "Run model creation and training as a product: training pipeline architecture (Argo/Kubeflow, trigger taxonomy), MLflow experiment/registry standards, distributed-training topology selection (Ray/Dask/Spark), Ray on K8s operations, notebook-to-production golden path, and fine-tuning strategy (prompt vs RAG vs PEFT).",
+      "category": "ml"
+    },
+    {
+      "name": "inference-testing",
+      "source": "./inference-testing",
+      "description": "Test and release models with evidence: model-level eval harnesses (synthetic ground truth, LLM-as-judge), GPU inference benchmarking (TTFT, tokens/sec, cost), release gates (explainability, fairness, adversarial robustness), rollout strategies (shadow/canary/bandit), 4-monitor drift stack, and GenAI red-teaming.",
+      "category": "ml"
+    },
+    {
+      "name": "research-data-platform",
+      "source": "./research-data-platform",
+      "description": "Make research data collection trustworthy without gatekeeping: ODCS data contracts with CI enforcement, dataset QoS/SLOs, data-product reviews (DAUTNIVS), right-sized governance with steward roles and certification, agent-consumable dataset catalogs, and lakehouse storage architecture for training data.",
+      "category": "data"
     },
     {
       "name": "authoring",
