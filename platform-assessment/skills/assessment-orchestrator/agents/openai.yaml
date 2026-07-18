@@ -1,0 +1,4 @@
+interface:
+  display_name: "Assessment Orchestrator"
+  short_description: "Coordinate permission-scoped maturity increments"
+  default_prompt: "Use $assessment-orchestrator to plan a read-only, permission-scoped platform and ADP maturity assessment with separate outputs."

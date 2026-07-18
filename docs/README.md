@@ -4,7 +4,7 @@ This catalog is generated from the Claude marketplace, plugin manifests, and eac
 
 | Plugin | Category | Focus | Skills | Codex manifest | Perplexity ZIPs |
 |---|---|---|---:|:---:|---:|
-| [`platform-assessment`](plugins/platform-assessment.md) | assessment | Assess an engineering org's platform and agentic readiness: ASDLC maturity scoring, platform ROI scorecard, org design, security/governance playbook, industry… | 8 | Yes | 8 |
+| [`platform-assessment`](plugins/platform-assessment.md) | assessment | Assess an engineering org's platform and agentic readiness: ASDLC maturity scoring, platform ROI scorecard, org design, security/governance playbook, industry… | 9 | Yes | 9 |
 | [`adp-enablement`](plugins/adp-enablement.md) | platform | Engineer the Agentic Developer Portal: CNCF platform-maturity benchmark with industry percentiles, MCP servers over platform APIs, agent identity (no standing secrets,… | 6 | Yes | 6 |
 | [`gpu-research-platform`](plugins/gpu-research-platform.md) | platform | Operate GPU research workloads on managed Kubernetes (Lambda-class clouds): GPU sharing (MIG/MPS/time-slicing), KEDA autoscaling on DCGM metrics, cost chargeback,… | 7 | Yes | 7 |
 | [`model-training-ops`](plugins/model-training-ops.md) | ml | Run model creation and training as a product: training pipeline architecture (Argo/Kubeflow, trigger taxonomy), MLflow experiment/registry standards,… | 6 | Yes | 6 |
