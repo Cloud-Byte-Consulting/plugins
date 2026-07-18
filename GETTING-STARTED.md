@@ -1,6 +1,6 @@
 # Getting Started
 
-You installed 9 skills. Don't try to use all of them this week. This guide gives you a starting point, a growth path, and a quarterly rhythm — each stage produces something useful on its own and feeds the next.
+If you installed `platform-assessment` and `authoring`, you now have 9 skills. Don't try to use all of them this week. This guide gives you a starting point, a growth path, and a quarterly rhythm — each stage produces something useful on its own and feeds the next. The separate `prompt-workflows` plugin has its own [guide](prompt-workflows/README.md).
 
 ## Which skill do I need right now?
 

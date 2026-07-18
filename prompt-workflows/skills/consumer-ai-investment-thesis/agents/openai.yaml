@@ -1,0 +1,4 @@
+interface:
+  display_name: "Consumer AI Investment Thesis"
+  short_description: "Evaluate a consumer AI investment thesis"
+  default_prompt: "Use $consumer-ai-investment-thesis to evaluate a consumer AI investment thesis."

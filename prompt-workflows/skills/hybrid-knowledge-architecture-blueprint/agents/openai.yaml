@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hybrid Knowledge Architecture Blueprint"
+  short_description: "Design a hybrid wiki and structured knowledge system"
+  default_prompt: "Use $hybrid-knowledge-architecture-blueprint to design a hybrid wiki and structured knowledge system."

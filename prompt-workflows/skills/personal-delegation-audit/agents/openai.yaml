@@ -1,0 +1,4 @@
+interface:
+  display_name: "Personal Delegation Audit"
+  short_description: "Identify work that should be delegated to agents"
+  default_prompt: "Use $personal-delegation-audit to identify work that should be delegated to agents."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dark Code Audit"
+  short_description: "Audit AI-generated code for comprehension risk"
+  default_prompt: "Use $dark-code-audit to audit AI-generated code for comprehension risk."

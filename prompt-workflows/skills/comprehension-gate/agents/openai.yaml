@@ -1,0 +1,4 @@
+interface:
+  display_name: "Comprehension Gate"
+  short_description: "Test whether maintainers understand critical code"
+  default_prompt: "Use $comprehension-gate to test whether maintainers understand critical code."

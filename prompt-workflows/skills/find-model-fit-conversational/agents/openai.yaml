@@ -1,0 +1,4 @@
+interface:
+  display_name: "Find Model Fit — Conversational"
+  short_description: "Find a model fit through a guided interview"
+  default_prompt: "Use $find-model-fit-conversational to find a model fit through a guided interview."

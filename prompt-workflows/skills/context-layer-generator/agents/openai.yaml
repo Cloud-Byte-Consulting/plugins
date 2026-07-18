@@ -1,0 +1,4 @@
+interface:
+  display_name: "Context Layer Generator"
+  short_description: "Generate context that makes unfamiliar code explainable"
+  default_prompt: "Use $context-layer-generator to generate context that makes unfamiliar code explainable."

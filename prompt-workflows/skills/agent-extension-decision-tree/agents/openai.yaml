@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Extension Decision Tree"
+  short_description: "Choose prompt, skill, plugin, or MCP packaging"
+  default_prompt: "Use $agent-extension-decision-tree to choose prompt, skill, plugin, or MCP packaging."

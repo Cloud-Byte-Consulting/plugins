@@ -1,0 +1,4 @@
+interface:
+  display_name: "Judge Architecture Reviewer"
+  short_description: "Review an agent system's judge architecture"
+  default_prompt: "Use $judge-architecture-reviewer to review an agent system's judge architecture."

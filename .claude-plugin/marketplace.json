@@ -4,8 +4,8 @@
     "name": "Cloud Byte Consulting"
   },
   "metadata": {
-    "description": "Platform engineering skill suites: agentic-readiness assessment and research authoring.",
-    "version": "1.0.0"
+    "description": "Portable Agent Skills for platform assessment, AI operations, engineering, authoring, career development, and reusable prompt workflows.",
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -37,6 +37,12 @@
       "source": "./ai-engineering",
       "description": "Ship production LLM apps: eval engineering (tracing, RAG metrics, LLM-as-judge, guardrails) and deployment (containers, cloud rollout, vector-store tuning).",
       "category": "engineering"
+    },
+    {
+      "name": "prompt-workflows",
+      "source": "./prompt-workflows",
+      "description": "Thirty-five reusable workflows for model routing, personal productivity, code comprehension, knowledge systems, agent evaluation, consumer AI strategy, and Office documents.",
+      "category": "productivity"
     }
   ]
 }

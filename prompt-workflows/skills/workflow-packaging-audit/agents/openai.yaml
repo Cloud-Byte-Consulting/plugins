@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workflow Packaging Audit"
+  short_description: "Decide whether a workflow should become a skill"
+  default_prompt: "Use $workflow-packaging-audit to decide whether a workflow should become a skill."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Action Surface Audit"
+  short_description: "Map agent actions and prioritize judge boundaries"
+  default_prompt: "Use $action-surface-audit to map agent actions and prioritize judge boundaries."

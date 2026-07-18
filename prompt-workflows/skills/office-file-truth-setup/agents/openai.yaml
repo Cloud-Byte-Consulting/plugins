@@ -1,0 +1,4 @@
+interface:
+  display_name: "Office File Truth Setup"
+  short_description: "Prepare a verified truth layer for office files"
+  default_prompt: "Use $office-file-truth-setup to prepare a verified truth layer for office files."

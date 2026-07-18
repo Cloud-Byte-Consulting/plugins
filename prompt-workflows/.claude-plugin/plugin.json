@@ -1,0 +1,17 @@
+{
+  "name": "prompt-workflows",
+  "version": "1.0.0",
+  "description": "Thirty-five reusable workflows for model routing, personal productivity, code comprehension, knowledge systems, agent evaluation, consumer AI strategy, and Office documents.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "keywords": [
+    "prompt-workflows",
+    "productivity",
+    "model-routing",
+    "knowledge-management",
+    "agent-evaluation",
+    "office-documents"
+  ]
+}

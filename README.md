@@ -1,6 +1,6 @@
 # Cloud Byte Consulting — Agent Skill Plugins
 
-Reusable agent skills in the open [Agent Skills](https://agentskills.io) format (`SKILL.md`), packaged as two plugins. Compatible with Claude (Claude Code, claude.ai), GitHub Copilot, OpenAI Codex, and Google Gemini/Antigravity — no format conversion required.
+Reusable agent skills in the open [Agent Skills](https://agentskills.io) format (`SKILL.md`), packaged as installable plugins. Compatible with Claude (Claude Code, claude.ai), GitHub Copilot, OpenAI Codex, and Google Gemini/Antigravity — no format conversion required. Perplexity-compatible workflows also ship as upload-ready ZIPs.
 
 **New here? Read [GETTING-STARTED.md](GETTING-STARTED.md)** — what to run first, a staged growth path (baseline → measure → report → iterate), and copy-paste first prompts.
 
@@ -51,6 +51,22 @@ Production LLM app practices, sourced from public educational materials.
 | `llm-evals-engineer` | Tracing, RAG metric suites, LLM-as-judge, guardrails, prompt versioning, budget gateways |
 | `llm-app-deployer` | Prototype → production: service extraction, container recipe, cloud rollout, vector-store tuning |
 
+### `prompt-workflows`
+Thirty-five reusable workflows imported from the Cloud Byte Document Hub.
+
+| Group | Skills |
+|---|---:|
+| Model fit and routing | 4 |
+| Personal productivity | 5 |
+| Code comprehension | 4 |
+| Knowledge systems | 5 |
+| Agent evaluation and packaging | 7 |
+| Consumer AI strategy | 5 |
+| Office documents | 5 |
+
+See [`prompt-workflows/README.md`](prompt-workflows/README.md) for the group summary and Perplexity packaging workflow.
+See [`prompt-workflows/PROVENANCE.md`](prompt-workflows/PROVENANCE.md) for publication and third-party-source handling.
+
 ## Install
 
 ### Claude Code / claude.ai (plugin marketplace)
@@ -58,13 +74,14 @@ Production LLM app practices, sourced from public educational materials.
 claude plugin marketplace add Cloud-Byte-Consulting/plugins
 claude plugin install platform-assessment@cloud-byte-plugins
 claude plugin install authoring@cloud-byte-plugins
+claude plugin install prompt-workflows@cloud-byte-plugins
 ```
 
 ### GitHub Copilot
 Copilot loads skills from `.github/skills/`, `.claude/skills/`, or `.agents/skills/` in your project. Copy the skill folders in:
 
 ```bash
-npx skills add Cloud-Byte-Consulting/plugins -a github-copilot
+npx skills add Cloud-Byte-Consulting/plugins --full-depth -a github-copilot
 ```
 
 or manually:
@@ -76,9 +93,19 @@ cp -R <clone>/platform-assessment/skills/* .github/skills/
 
 ### OpenAI Codex
 ```bash
-npx skills add Cloud-Byte-Consulting/plugins -a codex
+npx skills add Cloud-Byte-Consulting/plugins --full-depth -a codex
 ```
 or copy skill folders into `.agents/skills/` (repo) / `~/.agents/skills/` (user).
+
+### Perplexity Computer
+
+Download an individual ZIP from [`prompt-workflows/perplexity/`](prompt-workflows/perplexity/)
+and upload it as a Computer Skill. Each archive contains `SKILL.md` at its root and
+is limited to 10 MB. Rebuild the full set after edits with:
+
+```bash
+python3 prompt-workflows/scripts/package_perplexity.py
+```
 
 ### Microsoft 365 Copilot (declarative agents)
 Different surface from GitHub Copilot: M365 Copilot doesn't load SKILL.md. The path is a **declarative agent** (Agent Builder or Teams Toolkit) whose plain-English *Instructions* are derived from a skill body, with knowledge grounding (SharePoint/Graph connectors) and MCP tools as *Actions*. Instructions have a size cap, so a skill must be condensed to its Workflow + Guardrails core. Not included in this repo yet — see [Copilot Developer Camp](https://microsoft.github.io/copilot-camp/) for the build pattern.
@@ -92,13 +119,19 @@ or copy skill folders into `.agents/skills/` or `.gemini/skills/`.
 ## Layout
 
 ```
-.claude-plugin/marketplace.json     # marketplace manifest (both plugins)
+.claude-plugin/marketplace.json     # Claude plugin marketplace manifest
 platform-assessment/
 ├── .claude-plugin/plugin.json
 └── skills/<name>/SKILL.md          # 6 assessment skills
 authoring/
 ├── .claude-plugin/plugin.json
 └── skills/<name>/SKILL.md          # 2 authoring skills
+prompt-workflows/
+├── .claude-plugin/plugin.json
+├── .codex-plugin/plugin.json
+├── skills/<name>/SKILL.md           # 35 portable workflows
+├── perplexity/<name>.zip            # upload-ready packages
+└── scripts/package_perplexity.py
 ```
 
 Each `SKILL.md` is self-contained (frameworks, rubrics, formulas, and checklists inline) and carries `[bracketed]` placeholders to fill in before use. Skills cross-reference sibling skills by name; installing a full plugin keeps those links resolvable.

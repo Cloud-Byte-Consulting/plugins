@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workbook Doctor"
+  short_description: "Diagnose workbook logic, structure, and trust"
+  default_prompt: "Use $workbook-doctor to diagnose workbook logic, structure, and trust."

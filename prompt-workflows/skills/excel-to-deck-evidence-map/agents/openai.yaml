@@ -1,0 +1,4 @@
+interface:
+  display_name: "Excel-to-Deck Evidence Map"
+  short_description: "Map workbook evidence into a defensible deck"
+  default_prompt: "Use $excel-to-deck-evidence-map to map workbook evidence into a defensible deck."

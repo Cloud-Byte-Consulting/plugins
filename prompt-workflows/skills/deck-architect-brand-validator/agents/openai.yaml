@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deck Architect + Brand Validator"
+  short_description: "Design decks and validate them against brand rules"
+  default_prompt: "Use $deck-architect-brand-validator to design decks and validate them against brand rules."

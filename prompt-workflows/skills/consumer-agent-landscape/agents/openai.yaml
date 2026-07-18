@@ -1,0 +1,4 @@
+interface:
+  display_name: "Consumer Agent Landscape"
+  short_description: "Map the consumer agent competitive landscape"
+  default_prompt: "Use $consumer-agent-landscape to map the consumer agent competitive landscape."
