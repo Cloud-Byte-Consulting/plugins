@@ -24,6 +24,8 @@ The book recommends practitioner interviews, standardized group sensing sessions
 
 The Markdown research added useful discovery mechanics: separate static scans from runtime/API observations and computed cross-references; distinguish unmatched live resources from configuration drift; reconcile findings as confirmed, contradicted, or gap-filled; design survey questions as CONFIRM or GAP-FILL; compare platform staff, platform users, security/operations, and leadership as separate cohorts; and validate agent instructions and tool inventories for coverage, completeness, freshness, and observed use rather than file presence.
 
+The `assessment-orchestrator` applies those mechanics through permission-scoped increments, a canonical assessment state plus parallel delta files, and role-based handoffs. Its bundled survey is an original instrument aligned to the repository's three separate readings; it does not reproduce the source report or translate survey response bands directly into maturity levels.
+
 The report's proposed unified Level 0–4 platform-and-agent maturity score was deliberately not adopted. It conflicts with this repository's three-part model, which reports CNCF-aligned platform maturity, ASDLC path maturity, and Agentic Developer Portal readiness gates separately. Vendor scorecards, product comparisons, numeric cutoffs, volatile industry statistics, legal conclusions, and draft security thresholds were not imported.
 
 Terminology in this repository distinguishes the human-facing **Internal Developer Portal**, the backend **Internal Developer Platform**, and the broader **Agentic Developer Portal (ADP)** that supports both human and agent users.

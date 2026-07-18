@@ -1,6 +1,6 @@
 {
   "name": "platform-assessment",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Discover and assess platform-engineering and Agentic Developer Portal maturity.",
   "author": {
     "name": "Cloud Byte Consulting",
@@ -9,7 +9,14 @@
   "homepage": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/platform-assessment",
   "repository": "https://github.com/Cloud-Byte-Consulting/plugins",
   "license": "Apache-2.0",
-  "keywords": ["platform-engineering", "assessment", "idp", "adp", "roi", "governance"],
+  "keywords": [
+    "platform-engineering",
+    "assessment",
+    "idp",
+    "adp",
+    "roi",
+    "governance"
+  ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Platform Assessment",
@@ -17,7 +24,9 @@
     "longDescription": "Discover organizational signals across communications, meetings, work, code, infrastructure, and sentiment; assess platform and agent maturity; and design an evidence-backed Agentic Developer Portal roadmap.",
     "developerName": "Cloud Byte Consulting",
     "category": "Developer Tools",
-    "capabilities": ["Interactive"],
+    "capabilities": [
+      "Interactive"
+    ],
     "websiteURL": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/platform-assessment",
     "defaultPrompt": [
       "Discover our platform and ADP readiness from organizational evidence.",

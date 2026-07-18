@@ -4,18 +4,19 @@
 
 Assess an engineering org's platform and agentic readiness: ASDLC maturity scoring, platform ROI scorecard, org design, security/governance playbook, industry benchmarking, and IDP/ADP target architecture.
 
-- Version: `1.2.0`
+- Version: `1.3.0`
 - Category: `assessment`
-- Skills: 8
+- Skills: 9
 - Claude plugin: yes
 - Codex plugin manifest: yes
-- Perplexity packages: 8
+- Perplexity packages: 9
 
 ## Skills
 
 | Skill | Purpose | Perplexity |
 |---|---|:---:|
 | [`asdlc-maturity-assessment`](../../platform-assessment/skills/asdlc-maturity-assessment/SKILL.md) | Assess where an organization sits across the five levels (0–4) of the Agentic Software Development Lifecycle (ASDLC) — from fully human-driven to fully autonomous — by scoring all eight delivery paths, and produce an… | [ZIP](../../platform-assessment/perplexity/asdlc-maturity-assessment.zip) |
+| [`assessment-orchestrator`](../../platform-assessment/skills/assessment-orchestrator/SKILL.md) | Coordinate a platform-engineering and Agentic Developer Portal maturity assessment as permission-scoped increments run by different organizational roles, then merge the evidence into one auditable assessment state with… | [ZIP](../../platform-assessment/perplexity/assessment-orchestrator.zip) |
 | [`idp-adp-architect`](../../platform-assessment/skills/idp-adp-architect/SKILL.md) | Design, evolve, or audit an Internal Developer Platform and its human-facing Internal Developer Portal into an Agentic Developer Portal (ADP) that lets AI coding agents consume organizational context and platform… | [ZIP](../../platform-assessment/perplexity/idp-adp-architect.zip) |
 | [`platform-assessment-reporter`](../../platform-assessment/skills/platform-assessment-reporter/SKILL.md) | Turn platform and agentic-readiness assessment results into evidence-backed reports and executive visuals, including separate cited radar/spider maturity profiles for platform aspects, ASDLC paths, and Agentic… | [ZIP](../../platform-assessment/perplexity/platform-assessment-reporter.zip) |
 | [`platform-industry-brief`](../../platform-assessment/skills/platform-industry-brief/SKILL.md) | ALWAYS use this skill when the user asks how platform engineering looks in a specific industry or vertical — automotive, mobility, gaming, healthcare, logistics, freight, finance, real estate, classifieds, retail, or… | [ZIP](../../platform-assessment/perplexity/platform-industry-brief.zip) |
