@@ -1,0 +1,23 @@
+{
+  "name": "model-training-ops",
+  "version": "1.0.0",
+  "description": "Operationalize model training on managed Kubernetes with an OSS stack: training-pipeline architecture (Argo Workflows/Kubeflow, trigger taxonomy, step caching, spot economics), MLflow experiment and registry conventions, distributed-training topology selection (Ray/Dask/Spark, allreduce vs parameter server), Ray on K8s via KubeRay, the notebook-to-production golden path, and prompt/RAG/PEFT/fine-tune strategy with LoRA workflows and evaluation protocol.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "keywords": [
+    "mlops",
+    "training-pipelines",
+    "mlflow",
+    "model-registry",
+    "distributed-training",
+    "ray",
+    "kuberay",
+    "fine-tuning",
+    "lora",
+    "kubernetes",
+    "argo-workflows",
+    "kubeflow"
+  ]
+}

@@ -10,6 +10,14 @@ from pathlib import Path
 
 SEMVER = re.compile(r"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+CROSS_TOOL_PLUGINS = (
+    "prompt-workflows",
+    "gpu-research-platform",
+    "model-training-ops",
+    "inference-testing",
+    "research-data-platform",
+    "adp-enablement",
+)
 
 
 def load_json(path: Path) -> dict:
@@ -77,10 +85,15 @@ def validate_marketplace() -> None:
         validate_plugin_manifest(plugin_root / ".claude-plugin" / "plugin.json", name)
 
 
-def validate_prompt_workflows() -> None:
-    plugin_root = REPOSITORY_ROOT / "prompt-workflows"
+def validate_cross_tool_plugin(plugin_name: str) -> None:
+    plugin_root = REPOSITORY_ROOT / plugin_name
     manifest_path = plugin_root / ".codex-plugin" / "plugin.json"
-    manifest = validate_plugin_manifest(manifest_path, "prompt-workflows")
+    manifest = validate_plugin_manifest(manifest_path, plugin_name)
+    claude_manifest = validate_plugin_manifest(
+        plugin_root / ".claude-plugin" / "plugin.json", plugin_name
+    )
+    if manifest["version"] != claude_manifest["version"]:
+        raise ValueError(f"{plugin_root}: Claude and Codex versions differ")
     skills_value = require_text(manifest, "skills", manifest_path)
     skills_root = (plugin_root / skills_value).resolve()
     try:
@@ -93,11 +106,14 @@ def validate_prompt_workflows() -> None:
     for skill_dir in skill_dirs:
         if not (skill_dir / "SKILL.md").is_file():
             raise ValueError(f"{skill_dir}: missing SKILL.md")
+        if not (skill_dir / "agents" / "openai.yaml").is_file():
+            raise ValueError(f"{skill_dir}: missing agents/openai.yaml")
 
 
 def main() -> None:
     validate_marketplace()
-    validate_prompt_workflows()
+    for plugin_name in CROSS_TOOL_PLUGINS:
+        validate_cross_tool_plugin(plugin_name)
     print("Repository plugin validation passed")
 
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Model Release Gate"
+  short_description: "Help with Model Release Gate tasks"
+  default_prompt: "Use $model-release-gate to guide this research-platform task."

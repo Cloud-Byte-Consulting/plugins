@@ -1,0 +1,4 @@
+interface:
+  display_name: "MCP Platform API Author"
+  short_description: "Help with MCP Platform API Author tasks"
+  default_prompt: "Use $mcp-platform-api-author to guide this research-platform task."

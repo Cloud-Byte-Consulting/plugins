@@ -1,0 +1,4 @@
+interface:
+  display_name: "Golden Path Designer"
+  short_description: "Help with Golden Path Designer tasks"
+  default_prompt: "Use $golden-path-designer to guide this research-platform task."

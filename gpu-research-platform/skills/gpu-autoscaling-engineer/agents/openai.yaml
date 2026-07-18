@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gpu Autoscaling Engineer"
+  short_description: "Help with Gpu Autoscaling Engineer tasks"
+  default_prompt: "Use $gpu-autoscaling-engineer to guide this research-platform task."

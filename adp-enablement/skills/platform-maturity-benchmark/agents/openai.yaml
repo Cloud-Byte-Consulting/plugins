@@ -1,0 +1,4 @@
+interface:
+  display_name: "Platform Maturity Benchmark"
+  short_description: "Help with Platform Maturity Benchmark tasks"
+  default_prompt: "Use $platform-maturity-benchmark to guide this research-platform task."

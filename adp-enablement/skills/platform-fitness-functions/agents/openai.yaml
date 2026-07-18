@@ -1,0 +1,4 @@
+interface:
+  display_name: "Platform Fitness Functions"
+  short_description: "Help with Platform Fitness Functions tasks"
+  default_prompt: "Use $platform-fitness-functions to guide this research-platform task."

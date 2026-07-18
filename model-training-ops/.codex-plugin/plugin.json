@@ -1,0 +1,28 @@
+{
+  "name": "model-training-ops",
+  "version": "1.0.0",
+  "description": "Build reproducible and cost-aware model-training operations on Kubernetes.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "homepage": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/model-training-ops",
+  "repository": "https://github.com/Cloud-Byte-Consulting/plugins",
+  "license": "Apache-2.0",
+  "keywords": ["mlops", "training", "ray", "mlflow", "fine-tuning"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Model Training Operations",
+    "shortDescription": "Reproducible training pipelines and distributed ML.",
+    "longDescription": "Design training pipelines, experiment standards, distributed topologies, Ray operations, notebook promotion, and fine-tuning strategy.",
+    "developerName": "Cloud Byte Consulting",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive"],
+    "websiteURL": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/model-training-ops",
+    "defaultPrompt": [
+      "Design a reproducible model-training pipeline.",
+      "Choose a distributed-training topology.",
+      "Plan a safe fine-tuning experiment."
+    ]
+  }
+}

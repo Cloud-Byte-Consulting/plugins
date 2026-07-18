@@ -1,0 +1,23 @@
+{
+  "name": "research-data-platform",
+  "version": "1.0.0",
+  "description": "Research data platform suite for ML/AI research divisions running on Kubernetes: author and validate data contracts (ODCS) for training and eval datasets, design dataset QoS SLOs, review datasets against data-product criteria (DAUTNIVS), right-size data governance for research velocity, design the dataset catalog/knowledge layer for human and agent discovery, and architect the lakehouse storage substrate (Iceberg-class table formats on MinIO/S3) with training-run reproducibility. Built for the knowledge layer of an Agentic Developer Portal.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "keywords": [
+    "data-contracts",
+    "odcs",
+    "data-quality",
+    "data-mesh",
+    "data-governance",
+    "data-catalog",
+    "lakehouse",
+    "iceberg",
+    "training-data",
+    "dataset-versioning",
+    "mlops",
+    "kubernetes"
+  ]
+}

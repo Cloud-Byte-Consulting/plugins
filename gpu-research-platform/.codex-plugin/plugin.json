@@ -1,0 +1,28 @@
+{
+  "name": "gpu-research-platform",
+  "version": "1.0.0",
+  "description": "Operate secure, cost-aware GPU research workloads on managed Kubernetes.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "homepage": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/gpu-research-platform",
+  "repository": "https://github.com/Cloud-Byte-Consulting/plugins",
+  "license": "Apache-2.0",
+  "keywords": ["kubernetes", "gpu", "ml-platform", "gitops", "finops"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "GPU Research Platform",
+    "shortDescription": "Secure GPU platform operations for research teams.",
+    "longDescription": "Design and operate GPU tenancy, sharing, autoscaling, chargeback, GitOps, security baselines, and troubleshooting on managed Kubernetes.",
+    "developerName": "Cloud Byte Consulting",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive"],
+    "websiteURL": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/gpu-research-platform",
+    "defaultPrompt": [
+      "Design a secure GPU research tenancy.",
+      "Troubleshoot this pending GPU workload.",
+      "Review GPU utilization and cost controls."
+    ]
+  }
+}

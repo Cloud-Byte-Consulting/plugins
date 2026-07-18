@@ -1,0 +1,27 @@
+{
+  "name": "gpu-research-platform",
+  "version": "1.0.0",
+  "description": "GPU research platform suite for managed Kubernetes (Lambda and similar GPU clouds): GPU sharing strategy (MIG/MPS/time-slicing), KEDA+node-pool autoscaling for inference and training, Kubecost/OpenCost chargeback and spot-with-checkpointing cost optimization, researcher namespace/quota/JupyterHub tenancy vending, Argo CD app-of-apps GitOps bootstrap, CIS-derived security baseline scoped to the customer side of the shared-responsibility line, and decision-tree GPU workload troubleshooting. Provider-agnostic patterns with explicit flags on cloud-specific machinery and what to ask the managed-K8s provider.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "keywords": [
+    "kubernetes",
+    "gpu",
+    "mig",
+    "time-slicing",
+    "keda",
+    "autoscaling",
+    "kubecost",
+    "finops",
+    "multi-tenancy",
+    "jupyterhub",
+    "argocd",
+    "gitops",
+    "cis-benchmark",
+    "lambda-cloud",
+    "ml-platform",
+    "adp"
+  ]
+}

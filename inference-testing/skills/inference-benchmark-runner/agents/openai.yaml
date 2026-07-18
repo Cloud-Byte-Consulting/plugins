@@ -1,0 +1,4 @@
+interface:
+  display_name: "Inference Benchmark Runner"
+  short_description: "Help with Inference Benchmark Runner tasks"
+  default_prompt: "Use $inference-benchmark-runner to guide this research-platform task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Training Storage Architect"
+  short_description: "Help with Training Storage Architect tasks"
+  default_prompt: "Use $training-storage-architect to guide this research-platform task."
