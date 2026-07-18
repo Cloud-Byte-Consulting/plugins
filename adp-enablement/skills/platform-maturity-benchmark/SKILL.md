@@ -15,6 +15,8 @@ description: >-
 ## Purpose
 Turn "how good is our platform?" into a scored, percentile-positioned diagnosis. Score the organization on the CNCF Platform Engineering Maturity Model's 4×5 grid, place each score against a source-versioned industry distribution, cross-check with three secondary maturity axes, and emit a gap register the roadmap can consume. This is the platform-side twin of the sibling `asdlc-maturity-assessment` skill (platform-assessment plugin), which scores agent adoption; an Agentic Developer Portal engagement needs both readings, because agents amplify whatever platform maturity exists.
 
+If a reliable evidence catalog does not exist, start with the platform-assessment plugin's `platform-maturity-discovery` skill. It owns cross-system organizational discovery; this skill owns platform maturity scoring.
+
 ## Core model to hold in your head
 
 ### The CNCF 4×5 grid with a versioned benchmark
@@ -63,6 +65,20 @@ Layer these to catch cases where the CNCF grid under- or over-reads the org:
 2. **Golden Path maturity, 3 levels:** No golden path (teams own their DevOps) → Clone-and-forget (central templates, cloned then divergent) → Golden paths as products (integrated, versioned, upgradable). The sharpest single probe for the Interfaces aspect; hand remediation to the sibling `golden-path-designer` skill.
 3. **Cloud Native maturity, 5 levels:** Build (containerize, basic orchestration, pre-prod) → Operate (production-ready, RBAC, monitoring, secrets) → Scale (standardization, cost optimization, extended automation) → Improve (security/policy/governance, policy-as-code like OPA) → Adapt (continuous optimization, feedback loops). **Gate: IDPs typically start becoming effective at the Scale stage.** An org at Build/Operate asking for an IDP — let alone an ADP — gets a foundations-first roadmap, not a platform buildout.
 
+### Enterprise operating-model cross-check
+
+The 4×5 score can look healthy while the platform still behaves like a project. Cross-check five product-and-service conditions:
+
+| Condition | Evidence | Maturity warning |
+|---|---|---|
+| Capability portfolio | Named capabilities, users, owners, lifecycle states | Duplicate tools or portal entries with no accountable backend owner |
+| Product discovery | User research and support themes change priorities | Backlog driven only by executive requests or tool upgrades |
+| Service contract | SLI/SLO, support route, compatibility and deprecation policy | “Self-service” with no reliability or migration commitment |
+| Sourcing discipline | Reuse/buy/assemble/build decisions include lifecycle cost and exit | Custom building commodity capability without a differentiated need |
+| Outcome chain | Adoption and DevEx connect to delivery/operational and business outcomes | Activity counts presented as platform value |
+
+Record each **healthy / fragile / absent** with evidence. An **Absent** finding caps the related CNCF aspect at Operational unless exceptional evidence explains why: portfolio/discovery constrain Investment and Adoption; service contracts constrain Interfaces and Operations; outcome chains constrain Measurement. This is a cross-check, not a new averaged maturity score.
+
 ### From scores to gap register
 Each aspect gap becomes a register entry: aspect, current stage, current percentile, target stage (usually +1; never +2 in one roadmap horizon), the blocking evidence, and the owning enablement skill:
 - Interfaces / Adoption gaps → `golden-path-designer`.
@@ -73,16 +89,18 @@ Each aspect gap becomes a register entry: aspect, current stage, current percent
 
 ## Workflow
 1. **Interview per aspect.** For [YOUR ORGANIZATION / CLIENT], walk the five aspect questions and collect evidence, not aspiration: budget lines and team charters (Investment), adoption telemetry and mandate policies (Adoption), how the last five infra requests were actually fulfilled (Interfaces), the platform team's backlog source (Operations), what metrics exist and who reads them (Measurement). Prefer artifacts over self-report — for a managed-K8s research context: namespace request tickets, GPU quota processes, cluster onboarding docs.
-2. **Score the 4×5 grid.** One stage per aspect, one line of evidence per score. Where evidence conflicts, score low and note the conflict.
+2. **Score the 4×5 grid.** One stage per aspect. For each aspect, record the applicable rubric checks, checks met, and partial/contradicted/unobserved checks with stable evidence citations. Where evidence conflicts, score low and note the conflict. Report `criteria met / applicable` only when the rubric checks are explicitly enumerated; otherwise report evidence coverage rather than inventing a ratio.
 3. **Version the benchmark, then position.** Retrieve the latest report, record its volume/date/sample/filter, transcribe and cross-check one complete distribution, and only then compute cumulative percentiles. If current source data is unavailable, omit percentile claims and present stage-only scoring; do not silently fall back to the historical table.
 4. **Run structural diagnostics.** Portal-trap check, 3-tier mapping, pipeline-vs-graph backend reading against developer headcount.
-5. **Triangulate with secondary axes.** DOMM level, Golden Path level, Cloud Native level. Apply the "IDP effective at Scale" gate explicitly and say so if the org fails it.
-6. **Apply the self-report discount.** Compare the Measurement score against all other aspects; flag any aspect scored 2+ stages above Measurement as unverified.
-7. **Emit the gap register.** Table: aspect | current stage | percentile | target | blocking evidence | owning skill | sequence. Measurement first; then the aspect where one stage of movement crosses the largest share in the source-versioned current distribution.
-8. **Output.** A benchmark report: the highlighted 4×5 table, per-aspect percentile narrative, secondary-axis triangulation, structural red flags, the gap register, and an explicit statement of whether the org clears the IDP-at-Scale gate and (with the ASDLC reading from `asdlc-maturity-assessment`) is fit to start ADP enablement.
+5. **Run the enterprise operating-model cross-check.** Score the five conditions and apply the aspect caps where evidence is absent.
+6. **Triangulate with secondary axes.** DOMM level, Golden Path level, Cloud Native level. Apply the "IDP effective at Scale" gate explicitly and say so if the org fails it.
+7. **Apply the self-report discount.** Compare the Measurement score against all other aspects; flag any aspect scored 2+ stages above Measurement as unverified.
+8. **Emit the gap register.** Table: aspect | current stage | percentile | target | blocking evidence | owning skill | sequence. Measurement first; then the aspect where one stage of movement crosses the largest share in the source-versioned current distribution.
+9. **Output.** A benchmark report: the highlighted 4×5 table; a per-aspect evaluation ledger (stage, criteria met/applicable or evidence coverage, partial/contradicted/unobserved checks, confidence, citations, benchmark version); per-aspect percentile narrative; enterprise operating-model cross-check; secondary-axis triangulation; structural red flags; the gap register; and an explicit statement of whether the org clears the IDP-at-Scale gate and (with the ASDLC reading from `asdlc-maturity-assessment`) is fit to start ADP enablement.
 
 ## Guardrails
 - Score aspects independently — never average into a single "maturity number" (a numeric index, if wanted, is `platform-fitness-functions`' MMI-style construction, built transparently).
+- Treat criteria counts as an evidence-justification ledger, not as a substitute maturity model or a value to average across aspects.
 - Never accept a self-reported stage the Measurement score cannot support. If the selected report discusses self-report bias, cite that source and version rather than treating the historical wording as timeless.
 - Quote exact percentages only with the report volume, publication date, sample/filter, and source link. Historical embedded values must never be described as current.
 - Demand exceptional evidence before awarding Optimizing; quantify its rarity only from the selected source-versioned distribution.

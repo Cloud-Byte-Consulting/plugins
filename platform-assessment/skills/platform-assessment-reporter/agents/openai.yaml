@@ -1,0 +1,4 @@
+interface:
+  display_name: "Platform Assessment Reporter"
+  short_description: "Turn platform evidence into clear reporting"
+  default_prompt: "Use $platform-assessment-reporter to create an evidence-backed assessment report."

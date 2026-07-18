@@ -1,20 +1,25 @@
 ---
 name: idp-adp-architect
-description: Design, evolve, or audit an organization's Internal Developer Platform (IDP) into an Agentic Development Platform (ADP) — the layered architecture that lets AI coding agents operate safely and productively alongside engineers. Use whenever the user wants to design or review a platform reference architecture, select an IDP tool stack on AWS, Azure, GCP, or any cloud, design golden paths or abstraction layers, build an AI/ML or data platform (MLOps/LLMOps, feature stores, model registries, GPU scheduling), manage Kubernetes clusters or cluster fleets at scale, design platform observability, plan a sovereign / exit-ready / air-gapped platform, or add AI agents to their internal platform with identity, sandboxing, and guardrails. Also fires on "IDP," "ADP," "developer platform," "platform engineering," "platform orchestrator," "golden path design," "reference architecture," "fleet management," "digital sovereignty," or "platform architecture for AI agents" — even if the user doesn't use those exact terms.
+description: Design, evolve, or audit an Internal Developer Platform and its human-facing Internal Developer Portal into an Agentic Developer Portal (ADP) that lets AI coding agents consume organizational context and platform capabilities safely alongside engineers. Use to design or review platform reference architecture, cloud tool stacks, portal experiences, golden paths, abstraction layers, AI/ML or data platforms, Kubernetes fleets, platform observability, sovereign or exit-ready platforms, or agent identity, sandboxing, evaluation, and guardrails. Also fires on "Internal Developer Portal," "Internal Developer Platform," "ADP," "Agentic Developer Portal," "platform engineering," "platform orchestrator," "golden path design," "reference architecture," "fleet management," "digital sovereignty," or "platform architecture for AI agents."
 ---
 
-# IDP → ADP Architect
+# Platform → ADP Architect
 
 ## Purpose
-Take an organization's current platform (or lack of one) and produce a concrete architecture: what to build, in what order, to let both human developers and AI coding agents work safely and productively on the same platform. Covers the full range: generic service platforms, AI/ML platform extensions, cluster-fleet operations, observability design, and sovereign/exit-ready variants. For the security and governance control design this platform must enforce, pair with the sibling `platform-security-playbook` skill.
+Take the evidence catalog from `platform-maturity-discovery` and produce a concrete architecture: what to build, in what order, to let both human developers and AI coding agents work safely and productively through an Agentic Developer Portal over shared platform capabilities. Covers generic service platforms, portal interfaces, AI/ML extensions, cluster-fleet operations, observability design, and sovereign/exit-ready variants. For security and governance control design, pair with `platform-security-playbook`.
 
 ## Core model to hold in your head
 
-### What an IDP is
-An Internal Developer Platform (IDP) is a product built by a platform engineering team to standardize the repeatable parts of software delivery, so engineers focus on judgment and craft rather than plumbing. It owns coordination, compliance, and repeatability — never the creative work itself. Historically it serves one user type: the human developer. Note the multi-platform reality: large enterprises typically run up to four platform types (backend/frontend services, data/AI, mobile, sometimes split FE/BE); design each deliberately rather than pretending one platform serves all.
+### Portal, platform, and ADP
+
+- An **Internal Developer Portal** is a human-facing interface for discovery and consumption: catalog, search, documentation, scorecards, templates, and self-service entry points. It is a subset of the experience, not the backend platform.
+- An **Internal Developer Platform** standardizes the repeatable parts of software delivery through APIs, orchestration, infrastructure, policy, identity, observability, and support. It owns coordination, compliance, and repeatability — never the creative work itself.
+- An **Agentic Developer Portal (ADP)** expands the portal into a governed human-and-agent interaction surface over the platform. Agents need machine-consumable context and capabilities plus identity, execution boundaries, evaluation, audit, and feedback.
+
+Avoid using “IDP” alone because it is commonly expanded as either portal or platform. Write the intended term in full. Note the multi-platform reality: large enterprises may run separate service, data/AI, mobile, and frontend platforms; align their interfaces rather than pretending one backend serves all workloads.
 
 ### The five-plane reference model
-An IDP is organized around five planes. Think planes, not layers: layers imply strict hierarchy and sequential dependencies; planes are parallel concerns that intersect and can each be evolved or swapped independently.
+An Internal Developer Platform is organized around five planes. Think planes, not layers: layers imply strict hierarchy and sequential dependencies; planes are parallel concerns that intersect and can each be evolved or swapped independently.
 
 1. **Developer control plane** — how developers declare intent: IDE/CDE, copilots/agents/LLM interfaces, portal, CLI. Rule: code as truth, interface as enabler — portals, chat, and CLIs are access layers, but every change is logged and versioned as code; Git is the single source of truth and complete system record.
 2. **Integration & delivery plane** — version control, workload spec, IaC, CI, image registry, platform orchestrator, CD. The orchestrator models the estate as a graph (which app connects to what resource in which environment), owns central RBAC, and consumes CI metadata to trigger and manage deployments.
@@ -57,6 +62,22 @@ Per-cloud tool mapping (vendors are EXAMPLES filling category slots):
 4. **Observability by default** — every component emits metrics/logs/traces by default, in standardized formats, centrally aggregated; SLOs per platform capability with alerts tied to error budgets.
 5. **AI-augmented, CLI-first** — copilots/LLMs/agents in IDEs, CLIs, and portals automate config writing, pipeline debugging, and doc generation, and analyze telemetry to predict issues. Hard rule: when an LLM goes beyond code assistance to trigger infra/environment changes, the action must execute through a trusted CLI or the orchestrator API — never direct console or raw cloud-API mutation — so every AI-driven action stays governed, RBAC-enforced, and auditable.
 
+### Capability portfolio and sourcing discipline
+Treat the platform as a portfolio of internal products, not one giant implementation project. Each capability — service scaffolding, environment creation, deployment, secrets, observability, data access, model serving — needs a named user segment, owner, value hypothesis, consumption interface, reliability target, cost-to-serve, and lifecycle state. A portal entry without an owned backend capability is catalog theater.
+
+For every capability, make the **reuse / buy / assemble / build** decision explicitly:
+
+| Choice | Prefer when | Evidence required |
+|---|---|---|
+| Reuse an existing enterprise service | It already meets the user need and control boundary | Fit-gap, integration cost, service owner and SLO |
+| Buy a managed product | The capability is commodity and operating it is not differentiating | Total cost, portability/exit path, security and data-boundary review |
+| Assemble open components | The interfaces are stable but local integration creates value | Integration ownership, upgrade plan, compatibility tests |
+| Build custom | The workflow is materially differentiating or no option meets a hard constraint | User evidence, full lifecycle cost, staffing, support and deprecation plan |
+
+Default to the least custom option that satisfies the requirement. “We can build it” is not a reason; custom code creates a permanent product, support, upgrade, and security obligation. Record decisions in a capability register with: user/problem, selected option, rejected alternatives, owner, API/interface, SLI/SLO, dependencies, unit cost, adoption signal, version policy, exit plan, and review date.
+
+Every production capability also needs an internal service contract. At minimum define the measured indicator, target objective, support and incident path, maintenance expectations, compatibility window, and exception process. The contract turns self-service from an interface promise into an operable service.
+
 ### Abstraction layers & golden paths (how humans/agents actually consume the platform)
 A **golden path** is the intended, low-friction way to accomplish a task — a paved road codifying tribal knowledge into repeatable self-service, with security, compliance, and observability built in, plus "break-out" flexibility for novel cases. Abstraction layers make golden paths possible:
 
@@ -93,7 +114,7 @@ Judge every telemetry stream against the four-part quality rubric:
 Backbone: OpenTelemetry semantic conventions (shared vocabulary and resource attributes like `service.name`, `cloud.region` — without them, conflicting labels break queries and dashboards) + the OTel Collector as the platform's telemetry router and policy engine (sample high-volume traces, redact sensitive fields, drop debug logs — all without touching application code) + the OTel Operator for auto-instrumentation. Cross-signal correlation is the payoff: metric alert → the specific slow trace → the correlated log lines naming the deployment at fault. Treat dashboards and alert rules as code (YAML in Git, PR-reviewed, deployed via CI — e.g., with Perses), never hand-edited in a UI. Design telemetry to answer specific failure-mode questions, not "instrument everything."
 
 ### AI/ML platform extension: the sixth plane
-A generic services IDP will not cut it for data/AI/ML workloads: they add specialized infrastructure (GPUs), a distinct tool landscape, and a broader user base (data scientists, ML engineers, data engineers, BI analysts). Extend the model:
+A generic services platform will not cover data/AI/ML workloads: they add specialized infrastructure (GPUs), a distinct tool landscape, and a broader user base (data scientists, ML engineers, data engineers, BI analysts). Extend the model:
 
 - **Sixth plane — Data & Model Management**: metadata store capturing lineage and artifacts from every pipeline run; feature store providing consistent feature definitions for batch training AND real-time inference (kills train-serve skew); model registry with versioning, aliasing (staging/production), and **model cards** (purpose, performance, training data, ethical considerations, usage guidelines) for governance and reproducibility.
 - **Dual-orchestrator pattern**: the platform orchestrator (e.g., Humanitec) handles platform-level configuration and environments; a specialized ML workflow orchestrator (e.g., Kubeflow Pipelines) manages the multi-step graphs of training, evaluation, and validation. Both consume from the same artifact registry. Add CT (continuous testing) to CI/CD.
@@ -112,10 +133,10 @@ When jurisdiction risk or regulation (GDPR, NIS2, DORA) is in scope, treat **jur
 - **Validate provider claims** with hard questions: does the provider hold regional sovereignty certifications (e.g., SecNumCloud, BSI C5)? Is data physically stored exclusively in the designated jurisdiction? Is the provider corporately immune to extraterritorial data requests? Is the orchestrator framework-agnostic (deploys to sovereign AND global providers without vendor-specific plugins)? Are keys, secrets, and IAM self-hosted rather than cloud-native managed? Are AI assistants hosted on local/sovereign infra with explicit no-training guarantees? Segment workloads: sensitive/regulated → sovereign providers; non-sensitive elastic → hyperscalers treated as pure commodity behind abstract IaC.
 
 ### What changes when agents join
-Coding agents are not autocomplete — they become actors across the lifecycle: retrieving context, writing code, opening PRs, validating output, responding to signals. That breaks the assumptions an IDP was built on (one human per step, human-speed pacing, human judgment at every gate). Agents act fast, in parallel, don't tire, and don't exercise judgment — so a platform that isn't ready will amplify chaos, not throughput. **A shaky IDP does not get better when you add agents — it gets worse, faster.** Do not attempt to build an ADP on top of an immature IDP; fix the foundation first.
+Coding agents are not autocomplete — they become actors across the lifecycle: retrieving context, writing code, opening PRs, validating output, responding to signals. That breaks the assumptions a human-only portal and platform were built on (one human per step, human-speed pacing, human judgment at every gate). Agents act fast, in parallel, don't tire, and don't exercise judgment — so a platform that isn't ready will amplify chaos, not throughput. **A shaky platform does not get better when you add agents — it gets worse, faster.** Do not build an ADP over an immature platform; fix the foundation first.
 
 ### What an ADP is
-An Agentic Development Platform (ADP) is the evolved form of the IDP: it lets agents consume the same paths humans do, at whatever autonomy level the organization has decided to allow. Where the IDP assumes a human triggers and reviews everything, the ADP supports a spectrum from human-triggered to fully autonomous execution.
+An Agentic Developer Portal is the evolved interaction and orchestration surface over the Internal Developer Platform: it lets agents consume organizational context and the same governed capabilities humans use, at whatever autonomy level the organization permits. Where a conventional Internal Developer Portal assumes a human navigates and triggers every path, the ADP supports both human and machine entry points across a spectrum of supervised execution.
 
 The ADP has three layers:
 
@@ -126,12 +147,12 @@ The ADP has three layers:
    - **Hybrid** — a loop: probabilistic step → deterministic gate → retry with enriched context until it passes. **This loop is where the actual productivity gains live** — treat a first-pass agent failure as expected, not as a defect, and design the retry loop rather than trying to make agents right on the first try.
 3. **Agent infrastructure (bottom)** — the constant substrate under everything, made of seven components: **identity** (who is acting), **context** (what it knows), **capability** (what it's allowed to do), **execution** (where it runs — sandboxed, ephemeral workspaces), **evaluation** (is the output acceptable), **security** (guardrails against misuse), **observability** (what happened, auditable after the fact).
 
-Deterministic paths can run on the tooling layer alone and don't need agent infrastructure — that's intentional. You apply autonomy where judgment creates value, and keep determinism where determinism already wins (the same way a factory keeps conveyor belts even when it adds robots). Note how the ADP's agent needs land on the IDP's existing principles: GitOps-first gives every agent action a PR-shaped audit trail, and the CLI-first rule gives agents a governed execution channel — an org that built those in already has the ADP's spine.
+Deterministic paths can run on the tooling layer alone and don't need agent infrastructure — that's intentional. Apply autonomy where judgment creates value, and keep determinism where it already wins. The ADP's agent needs land on the platform's existing principles: GitOps-first gives every agent action a PR-shaped audit trail, and the CLI-first rule gives agents a governed execution channel — an organization that built those in already has the ADP's spine.
 
 ## Workflow
 
-1. **Intake.** For [YOUR ORGANIZATION / CLIENT], ask the user (or infer from what they've shared):
-   - What exists today: do they have an IDP at all? Which of the five planes are mature vs. missing?
+1. **Intake.** Consume the discovery charter, evidence catalog, maturity readings, and ADP readiness gates from `platform-maturity-discovery`. If they do not exist, run that discovery first. Then establish:
+   - What exists today: which Internal Developer Portal interfaces and Internal Developer Platform capabilities exist? Which of the five planes are mature vs. missing?
    - Systems of record: work tracker (GitHub Issues/Projects, Jira, Azure Boards), repo host (GitHub, Azure Repos) and its branch protections/rulesets, and CI/CD (GitHub Actions; Azure DevOps Pipelines — note YAML vs. Classic mix, since Classic UI-defined pipelines are not version-controlled and are a governance liability for the deterministic gates agents depend on). For a full audit checklist of these sources, use the `asdlc-maturity-assessment` skill's "Evidence sources & audit playbook."
    - Cloud/infra context: hyperscaler(s), Kubernetes or not, cluster count and fleet shape (single cluster? tens? edge/sovereign locations?), regulated industry or not.
    - Workload mix: standard services only, or data/AI/ML workloads too (training, serving, notebooks, GPUs)? If AI/ML, plan the sixth plane and dual orchestrators.
@@ -139,10 +160,11 @@ Deterministic paths can run on the tooling layer alone and don't need agent infr
    - Current AI agent usage: none / autocomplete only / agents opening PRs / agents running unsupervised.
    - Team size and platform team size/maturity.
    - What's motivating this now (cost, incidents, developer complaints, a mandate to "adopt AI agents").
+   - Capability portfolio: which platform services exist, who owns and supports each, how users consume them, what they cost, and which are duplicated or ownerless.
 2. **Diagnose.** State plainly which of these is true and why:
-   - *No real IDP yet* → recommend building the IDP first (five planes, golden paths for the top 3–5 recurring developer requests). Do not scope ADP work yet.
-   - *Solid IDP, no/limited agent usage* → this is the ADP greenfield case. Proceed to step 3.
-   - *Agents already in use ad hoc (IDE assistants, unmanaged agent tools)* → flag the gap explicitly: this is IDP-adjacent risk (no identity, no sandboxing, no audit trail) even if it looks like just "better autocomplete."
+   - *No real Internal Developer Platform yet* → build the platform foundation first (five planes, golden paths for the top recurring developer requests). A portal UI does not close this gap.
+   - *Solid platform and conventional portal, no/limited agent usage* → this is the ADP greenfield case. Proceed to step 3.
+   - *Agents already in use ad hoc* → flag the gap explicitly: the organization has agentic behavior without an ADP control surface (identity, sandboxing, evaluation, and audit), even if it looks like just "better autocomplete."
    - Also diagnose the resource plane: if >30–50% of clusters are hand-managed snowflakes with no declarative blueprints, fleet lifecycle work belongs in phase one.
 3. **Design the platform**, plane by plane and layer by layer:
    - Map every plane's category slots to concrete tools using the per-cloud table — category first, vendor as example; keep the stack internally consistent per cloud; verify the five design principles are structurally enforced (GitOps trail, orchestrator brain, policy-as-code defaults, telemetry by default, CLI-first AI actions).
@@ -151,17 +173,20 @@ Deterministic paths can run on the tooling layer alone and don't need agent infr
    - Agent infrastructure: for each of the seven components, name the concrete implementation choice (e.g., identity = short-lived scoped service accounts per agent session; execution = ephemeral sandboxed workspace per session; observability = agent action log distinct from human audit log).
    - If AI/ML is in scope: add the Data & Model Management plane, the ML workflow orchestrator, notebook golden paths, model scanning gates, and drift/data-quality observability.
    - If sovereignty is in scope: run the validation questions, mark which slots must be self-hosted, and specify the exit test (can the platform be reconstructed on a different provider from Git alone?).
+   - For each proposed capability, record the reuse/buy/assemble/build decision, lifecycle owner, service contract, unit-cost measure, compatibility policy, and exit/deprecation plan before selecting a product.
 4. **Sequence it.** Never propose everything at once — sequence by the four levels of agentic maturity (see the `asdlc-maturity-assessment` skill for the full rubric): most orgs should build for Level 2 next (dispatch path + validation loop + agent identity + sandboxing) regardless of long-term ambition, because that's the hardest and highest-leverage jump. For platform-side work: golden paths for the top recurring requests first, then fleet/lifecycle automation, then AI/ML extension — security and observability as Day-1 properties of each phase, never retrofits.
-5. **Output.** Produce an architecture brief with: current-state diagnosis, target design plane-by-plane (with the tool-mapping table filled in for their cloud(s)), the golden paths and abstraction layers needed, ADP layers if in scope, a phased build sequence with fleet/observability maturity metrics to track, and explicit call-outs of what NOT to build yet.
+5. **Output.** Produce an architecture brief with: current-state diagnosis, target design plane-by-plane (with the tool-mapping table filled in for their cloud(s)), a capability register and sourcing decision log, internal service contracts, the golden paths and abstraction layers needed, ADP layers if in scope, a phased build sequence with fleet/observability maturity metrics to track, and explicit call-outs of what NOT to build yet.
 
 ## Guardrails
 - Never recommend agent autonomy features (auto-merge, unsupervised background execution) without the identity/sandboxing/evaluation infrastructure underneath them being explicit in the plan.
-- If the org doesn't have a working IDP, say so directly and scope down — an ADP is not a fix for a missing platform.
+- If the organization lacks a working Internal Developer Platform, say so directly and scope down — an ADP interface is not a fix for missing platform capabilities.
 - Keep the abstraction-layer guidance honest: flag if a proposed "portal" would be an illusion (hiding detail that still matters) rather than a real abstraction.
 - Hold the CLI-first line: any LLM- or agent-triggered infra/environment change must route through a trusted CLI or the orchestrator API with RBAC and audit. If a design lets a conversational interface mutate infrastructure directly, call it out as a defect.
 - Architecture is category slots, not vendors: when recommending a stack, name the category first and present vendors as swappable examples; double-check that every pick is native to the target cloud (no cross-cloud service leakage into a stack).
-- Don't bolt AI/ML workloads onto a generic services IDP — if training/serving/notebooks are in scope, the sixth plane and the ML workflow orchestrator are structural requirements, not add-ons.
+- Don't bolt AI/ML workloads onto a generic services platform — if training, serving, or notebooks are in scope, the sixth plane and the ML workflow orchestrator are structural requirements, not add-ons.
 - On sovereignty claims, distinguish data residency from data sovereignty; a foreign-jurisdiction control plane over local data centers is only partial sovereignty, and an exit strategy that has never been tested is a document, not a capability.
+- Never approve custom build work without a differentiated user need, full lifecycle owner, operating cost, and exit/deprecation plan.
+- Never call a capability self-service until its reliability, support, compatibility, and exception expectations are explicit.
 
 ## Suggested effort
 Medium–high — this produces a multi-section architecture document, not a quick answer.

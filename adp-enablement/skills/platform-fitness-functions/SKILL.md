@@ -12,7 +12,7 @@ description: >-
 # Platform Fitness Functions
 
 ## Purpose
-What can be measured can be governed — and 44.67% of organizations measure nothing, which makes instrumentation the cheapest competitive move on any platform roadmap. This skill turns roadmap intentions into executable governance: every milestone becomes a fitness-function promotion (a threshold tightening from warning to error), every claim of progress becomes a metric with a pipeline behind it, and every division-specific "what should we even measure?" becomes a GQM tree. A fitness function is a unit/integration test for architecture — an objective, quantifiable assessment of an architectural characteristic, run continually so degradation cannot creep in silently. Pairs with `platform-maturity-benchmark` (whose gap register this instruments) and consumes check inventories from every other skill in this plugin.
+What can be measured can be governed. This skill turns roadmap intentions into executable governance: every milestone becomes a fitness-function promotion (a threshold tightening from warning to error), every claim of progress becomes a metric with a pipeline behind it, and every division-specific "what should we even measure?" becomes a GQM tree. A fitness function is a unit/integration test for architecture — an objective, quantifiable assessment of an architectural characteristic, run continually so degradation cannot creep in silently. Pairs with `platform-maturity-benchmark` (whose gap register this instruments) and consumes check inventories from every other skill in this plugin.
 
 ## Core model to hold in your head
 
@@ -52,7 +52,7 @@ Don't buy a metrics product to start; the four keys derive from three raw event 
 - Change failure rate = failed deployments / total (define "failure" explicitly and publish the definition).
 - Failed-deployment recovery time = resolved_ts − detected_ts.
 
-Benchmarks for positioning (2023 cohort): **Elite** = on-demand deploys, <1 day lead time, 5% CFR, <1h recovery (18% of orgs); **High** ≈ daily-to-weekly, <1 week, 10%, <1 day (31%); **Medium** (33%); **Low** (17%). Only 37.3% of platform orgs measure DORA at all — having these four numbers already differentiates.
+For external positioning, retrieve the current DORA report or primary documentation at engagement time and record the publication year, cohort, definitions, and source link. Do not reuse an embedded performance-band table across report generations: metric names, thresholds, and analysis evolve. If the source cannot be verified, report the organization's own baseline and trend without a percentile or performance label.
 
 Operating rules:
 - Improve in balance: throughput gains that degrade stability are not gains — the four move as a set.
@@ -60,6 +60,18 @@ Operating rules:
 - Primary audience is the delivery teams themselves — they're who can change the numbers; executives get rolled-up, read-only views and come down to the teams for detail.
 - **Conversation, not control:** the metrics start discussions ("where did this queue form?"), never individual performance reviews — weaponized metrics get gamed into uselessness.
 - K8s shortcut: deployment-observability tooling (e.g., Keptn-style annotations) emits deploy events with app/env/version dimensions out of the box.
+
+### Service levels and metric lifecycle
+
+For each platform capability, connect three levels:
+
+- **SLI:** the observed measure, with source, query, dimensions, and data-quality checks.
+- **SLO:** the internal target and evaluation window that drives operational decisions and an error budget.
+- **SLA or service commitment:** the explicit promise to consumers, including support, exclusions, and what happens when the promise is missed.
+
+Do not create an SLA before the underlying SLI is trustworthy or an SLO has been exercised. A dashboard is not a service contract, and an SLI with no target does not guide action.
+
+Every metric also needs a decision contract: owner, consumer, decision it informs, trigger/threshold, review cadence, and retirement condition. At review time ask whether the metric still answers the original question, whether behavior has been gamed, and whether a paired metric is needed to expose a trade-off. Retire or replace metrics that no longer drive a decision; preserving them forever creates dashboard debt and can turn yesterday's proxy into today's target.
 
 ### GQM: deriving the division-specific metrics
 For everything the standard frameworks don't cover ("are researchers actually faster?", "is agent-generated CI load sustainable?"), run **Goal–Question–Metric** — a hierarchical tree:
@@ -85,17 +97,17 @@ The index is a communication device; the FF suite underneath is the governance �
 - **Vanity metrics:** activity counts (PRs, suggestions, tickets closed) presented as outcomes; adoption spikes without retention. The survey's warning applies: orgs "have a much better image of themselves than the reality."
 - **The portal trap, measurement edition:** instrumenting the portal's clicks while the backend paths have no telemetry — measure path outcomes, not interface activity.
 - **Local optimization:** individual output up, org lead time flat — find where the queue moved (usually review/validation) instead of celebrating.
-- **The 44.67% default:** measuring nothing. Any consistent baseline, however manual, beats it — manual capture first is fine and normal.
+- **No-baseline default:** measuring nothing. Any consistent baseline, however manual, beats it — manual capture first is fine and normal.
 
 ## Workflow
 1. **Intake the roadmap.** Take the gap register from `platform-maturity-benchmark` (and the ASDLC roadmap from the platform-assessment plugin's `asdlc-maturity-assessment`, if present) for [YOUR ORGANIZATION / CLIENT]; list every milestone that claims progress.
-2. **Instrument DORA first:** locate the three event streams, define failure/incident explicitly, stand up the minimal viable dashboard with open raw data; baseline against the Elite/High/Medium/Low table.
+2. **Instrument DORA first:** locate the three event streams, define failure/incident explicitly, stand up the minimal viable dashboard with open raw data; use an external performance band only after retrieving and versioning the current primary source.
 3. **Run a GQM workshop** for the division's top 2–3 goals; prune the trees; produce the collection plan with owners.
-4. **Author the FF suite:** for each roadmap milestone and each category-checklist row, write context + metric + executable test; classify on the six axes; place in pipeline stages; collect existing checks from sibling skills (policy gates, contract suites, scorecards, selection tests, identity sweeps) into one registry with owners.
+4. **Author the FF suite:** for each roadmap milestone and each category-checklist row, write context + metric + executable test; classify on the six axes; place in pipeline stages; collect existing checks from sibling skills (policy gates, contract suites, scorecards, selection tests, identity sweeps) into one registry with owners. Add SLI/SLO/service commitments for user-facing platform capabilities.
 5. **Define the promotion schedule:** per FF, the warning threshold, tightening steps, and error date; map every roadmap milestone to its promotion set — this mapping IS the instrumented roadmap.
 6. **Add temporal FFs:** dependency currency, cert/credential expiry, license-change detection.
 7. **Construct the index** (if wanted): areas, criteria, scoring instructions, weights — all published before first scoring.
-8. **Output.** An instrumentation pack: DORA pipeline + dashboard spec, GQM trees with collection plans, the FF registry (classification, test, stage, threshold, owner), the milestone→promotion map, temporal-FF schedule, index definition, and an anti-pattern audit of any existing metrics.
+8. **Output.** An instrumentation pack: DORA pipeline + dashboard spec, GQM trees with collection plans, the FF registry (classification, test, stage, threshold, owner), capability service-level definitions, metric decision/retirement register, the milestone→promotion map, temporal-FF schedule, index definition, and an anti-pattern audit of any existing metrics.
 
 ## Guardrails
 - No metric without a consumer and a decision it informs; no FF without an executable test — otherwise it's theater.
@@ -105,6 +117,7 @@ The index is a communication device; the FF suite underneath is the governance �
 - Keep the four keys together — never report throughput without stability alongside.
 - A maturity index without published criteria and evidence-cited scores is astrology; refuse to produce one.
 - Business-value/ROI framing of these same numbers → sibling `platform-roi-scorecard` (platform-assessment plugin); this skill owns the technical instrumentation.
+- No SLA or executive promise may outrun the measured SLI and exercised SLO beneath it.
 
 ## Suggested effort
 High — the DORA baseline plus one GQM workshop is a focused week; the full FF registry and promotion map is an ongoing program artifact the roadmap lives by.

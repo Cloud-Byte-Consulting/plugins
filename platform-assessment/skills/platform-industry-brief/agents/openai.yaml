@@ -1,0 +1,4 @@
+interface:
+  display_name: "Platform Industry Brief"
+  short_description: "Contextualize platform strategy by industry"
+  default_prompt: "Use $platform-industry-brief to build a source-versioned industry brief."

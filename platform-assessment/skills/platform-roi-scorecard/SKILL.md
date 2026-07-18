@@ -45,6 +45,24 @@ Every metric in the scorecard comes from one of two sources, and neither is suff
 ### The five dimensions for selecting which metrics matter
 Don't try to measure everything. Pick metrics across **velocity, security, quality, people, and cost**, and let business strategy decide the weighting (e.g., a go-to-market strategy demanding high release frequency selects velocity + quality first). Accept that this is a trade-off — document what you are choosing not to prioritize and why.
 
+### Capability-to-outcome chain
+
+Do not jump from “we launched a portal” to “the platform created revenue.” Build an auditable chain for each funded capability:
+
+**Capability shipped → user behavior changed → delivery/operational outcome changed → business outcome changed.**
+
+Example shape: a production-ready service golden path → teams voluntarily use it and complete it without tickets → onboarding and lead time fall while change-failure rate stays within bounds → features reach customers sooner and engineering capacity shifts from plumbing to product work. Every arrow needs evidence; if one is missing, report the value as a hypothesis rather than realized ROI.
+
+Maintain a capability scorecard with:
+
+- owner, target users, baseline and adoption/retention;
+- time-to-first-success and completion/bypass rate;
+- service SLI/SLO, support demand, reliability and security outcomes;
+- cost-to-serve and unit cost per successful completion;
+- downstream product or business KPI, attribution method, and confidence tier.
+
+This prevents local optimization: faster provisioning is not a win if ticket volume, failure rate, cognitive load, or cost moves elsewhere. Pair developer-experience evidence with operational evidence, then connect both to the business metric.
+
 ### AI-workload extension: when the platform serves AI/ML workloads
 Platforms increasingly serve data scientists and ML engineers alongside app developers. Treat models, datasets, and inference endpoints as **versioned, deployable artifacts moving through build/test/production behind golden paths** — the same rigor as microservices — and extend the scorecard with a 6-metric AI velocity set:
 1. **Time to first inference** — project kickoff to first production inference request.
@@ -113,13 +131,14 @@ Track adoption on an S-curve: slow initial uptake → rapid ramp → saturation.
 ## Workflow
 
 1. **Audit measurement maturity first.** Determine if a real baseline exists at [YOUR ORGANIZATION / CLIENT]. If not, scope the deliverable down to "observation plan" rather than "ROI scorecard" and say so.
-2. **Select metrics** across the five dimensions (velocity, security, quality, people, cost), explicitly tied to the org's stated business strategy — ask what the business is optimizing for if not stated. Pair every system-derived metric with a survey counterpart per the measurement doctrine — the scorecard needs both views.
-3. **Choose the right framework mix** by platform stage: MVP metrics if <3 months old, SPACE + emerging DORA if establishing, full DORA + SPACE if mature — plus the 6-metric AI velocity set if the platform serves AI/ML workloads.
-4. **Design the data collection**: a practitioner survey built to the design rules (survey doers not executives, 20–25 minutes max, every 4–6 months, log-scale frequency options) paired with system data pulled via first-party connectors (see below), graded on the three C's. Plan up front to investigate any survey-vs-system divergence as a debugging signal.
-5. **Build the ROI calculation**: enumerate every cost category above (don't let the user skip salary allocation or opportunity cost), then convert each value driver to dollars with the formulas above, showing the math. Sanity-check budget and salary assumptions against the benchmark calibration table.
-6. **Add the adoption view**: current position on the S-curve, voluntary vs. mandated %, and an intervention recommendation if off-curve.
-7. **Tailor the write-up to audience**: for executives, lead with the dollar ROI number, use external benchmarks, tie to strategic goals (time-to-market, retention), keep it visual and concise. For dev teams, lead with workflow/pain-point improvements and concrete before/after numbers, not dollars.
-8. **Output.** A scorecard with: measurement-maturity finding, selected metrics + why, the survey + system-data collection plan, the ROI calculation with full cost/value breakdown, adoption S-curve position, and two versions of the summary (exec framing / dev-team framing).
+2. **Map capability-to-outcome chains.** For each funded capability, name the target user behavior, delivery/operational outcome, business outcome, attribution method, and confidence tier. Mark broken arrows as hypotheses.
+3. **Select metrics** across the five dimensions (velocity, security, quality, people, cost), explicitly tied to the org's stated business strategy — ask what the business is optimizing for if not stated. Pair every system-derived metric with a survey counterpart per the measurement doctrine — the scorecard needs both views.
+4. **Choose the right framework mix** by platform stage: MVP metrics if <3 months old, SPACE + emerging DORA if establishing, full DORA + SPACE if mature — plus the 6-metric AI velocity set if the platform serves AI/ML workloads.
+5. **Design the data collection**: a practitioner survey built to the design rules (survey doers not executives, 20–25 minutes max, every 4–6 months, log-scale frequency options) paired with system data pulled via first-party connectors (see below), graded on the three C's. Plan up front to investigate any survey-vs-system divergence as a debugging signal.
+6. **Build the ROI calculation**: enumerate every cost category above (don't let the user skip salary allocation or opportunity cost), then convert each value driver to dollars with the formulas above, showing the math. Include capability cost-to-serve and unit economics; sanity-check budget and salary assumptions against the benchmark calibration table.
+7. **Add the adoption view**: current position on the S-curve, voluntary vs. mandated %, and an intervention recommendation if off-curve.
+8. **Tailor the write-up to audience**: for executives, lead with the dollar ROI number, use external benchmarks, tie to strategic goals (time-to-market, retention), keep it visual and concise. For dev teams, lead with workflow/pain-point improvements and concrete before/after numbers, not dollars.
+9. **Output.** A scorecard with: measurement-maturity finding, capability-to-outcome chains, selected metrics + why, the survey + system-data collection plan, the ROI calculation with full cost/value breakdown, adoption S-curve position, and two versions of the summary (exec framing / dev-team framing).
 
 ### System-data collection via first-party connectors
 When pulling system data, prefer vendor-owned (first-party) MCP servers over hand-built exports — they inherit the org's existing auth and permission trimming. Map scorecard inputs to connectors (examples; the structure is tool-agnostic):
@@ -136,6 +155,7 @@ Caveats to state in the scorecard's methodology notes: several of these connecto
 - Be explicit when illustrative benchmark numbers are being used for shape/pattern rather than as a promised outcome for this specific org.
 - Never build the case on system data alone or surveys alone — the measurement doctrine requires both; investigate divergence between them instead of averaging it away.
 - Don't survey executives as a proxy for practitioner reality, and don't import vendor case-study or AI-productivity claims as evidence — require a measured before/after baseline.
+- Never claim business value from a platform activity metric alone; show the complete capability-to-outcome chain and its attribution confidence.
 
 ## Suggested effort
 Max — this is a full business-case document, not a single number.

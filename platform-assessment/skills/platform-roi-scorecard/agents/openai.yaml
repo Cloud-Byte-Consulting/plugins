@@ -1,0 +1,4 @@
+interface:
+  display_name: "Platform ROI Scorecard"
+  short_description: "Build an evidence-backed platform value case"
+  default_prompt: "Use $platform-roi-scorecard to map platform capabilities to measurable business outcomes."

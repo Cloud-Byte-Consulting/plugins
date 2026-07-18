@@ -1,0 +1,4 @@
+interface:
+  display_name: "IDP to ADP Architect"
+  short_description: "Design an enterprise developer platform"
+  default_prompt: "Use $idp-adp-architect to design our platform capability portfolio and target architecture."

@@ -72,6 +72,8 @@ Reading: a dedicated platform leadership line is now the single most common patt
 
 Hiring filter that applies to all seven: hire for **platform empathy** — willingness to inherit imperfect internal code gracefully, own on-call for an internal product, and treat developers as customers. "Us vs. them" posture in a platform engineer is a culture defect that outweighs technical strength; curiosity compounds and can't be coached.
 
+**Executive sponsorship is a responsibility, not an eighth delivery role.** Name one senior sponsor who secures resources, resolves cross-functional conflicts, and can explain the platform's business value. The HOPE owns strategy and execution; the sponsor creates organizational air cover. If both responsibilities sit with one person, state that explicitly and check that the person has enough authority and time for both.
+
 ### 3. AI-era additions
 
 **Who owns AI.** Ownership of AI platform responsibilities (industry survey, 2025): platform engineering team **36.7%**; shared across multiple teams 25%; no clear ownership yet 15%; dedicated AI-infrastructure/MLOps team 11.7%; data science/ML team 10%; external vendor 1.7%. Default recommendation: platform-team ownership with named interfaces to data science (only ~11% of orgs have fully integrated joint ownership; ~34% report limited collaboration and ~16% none — that seam is where AI initiatives die). Escalate to a dedicated AI-platform team only at scale (multiple GPU-backed products, dedicated model serving) — otherwise it recreates the DevOps-silo mistake.
@@ -109,15 +111,27 @@ This skill's framework for where humans sit in an agent-heavy org, derived from 
 
 **Evidence-based trust escalation.** Trust is granted on observed output, stepwise: good delivered work → assigned tasks of larger scope → standing permissions → ownership/vision influence. Apply the same ladder to **new hires and agents alike**: an agent (or vendor agent platform) earns wider scope the same way a new contributor earns commit rights — through a visible track record, with each rung recorded and revocable. Never grant scope on capability claims; only on trace evidence. This ladder is the mechanism that makes the L2→L3→L4 progression in §4 safe.
 
+### 6. Platform-team operating health
+
+An org chart does not make a high-performing team. Audit five operating conditions alongside role coverage:
+
+1. **Listen** — recurring user research, practitioner interviews, support themes, and team retrospectives change the backlog.
+2. **Delegate** — clear decision rights let engineers own outcomes rather than wait for permission; accountability follows the delegated boundary.
+3. **Align** — strategy, roadmap, service objectives, and trade-offs are visible enough that teams can act without constant coordination.
+4. **Trust** — psychological safety supports dissent, blameless learning, and bounded experimentation; production authority still follows the evidence ladder.
+5. **Enable** — teams receive the tooling, training, documentation, time, and sustainable on-call model needed to operate what they own.
+
+Score each condition **healthy / fragile / absent** and cite one artifact or observed behavior. Treat persistent overload, silent dissent, roadmap churn, and unowned support as operating-model gaps even when every named role is staffed. Do not turn the score into individual performance evaluation; it evaluates the system around the team.
+
 ## Workflow
 
 When invoked, run this sequence. State which step you're on.
 
-**Step 1 — Org scan.** Establish the current structure. Collect: reporting line (map against the §1 distribution); funding model and budget band; role coverage against the seven roles (§2) — who exists, who's fractional, who's absent; product mindset (dedicated PPM / engineer-level mindset / none — locate them in the 36.6%-PPM vs 25.4%-none split); adoption model (mandated 36.6% / intrinsic pull / participatory / erratic 16.9%); AI ownership (map against the §3 split); developer population and platform headcount (compute the capacity ratio against the 10–20% heuristic and the 100–150-developer inflection point).
+**Step 1 — Org scan.** Establish the current structure. Collect: reporting line (map against the §1 distribution); named executive sponsor and decision authority; funding model and budget band; role coverage against the seven roles (§2) — who exists, who's fractional, who's absent; product mindset (dedicated PPM / engineer-level mindset / none — locate them in the 36.6%-PPM vs 25.4%-none split); adoption model (mandated 36.6% / intrinsic pull / participatory / erratic 16.9%); AI ownership (map against the §3 split); developer population and platform headcount (compute the capacity ratio against the 10–20% heuristic and the 100–150-developer inflection point); and the five operating-health conditions (§6).
 
 **Step 2 — Maturity cross-check.** Pull or run **asdlc-maturity-assessment** for the current autonomy level and platform maturity. Verify claimed level against observed practice (the per-PR-review test in §4). Note contradictions explicitly — orgs routinely self-report one level higher than evidence supports.
 
-**Step 3 — Gap analysis vs target autonomy level.** For the org's *target* level (ask if unstated; default to current + 1): list the roles, review structures, transparency channels, and trust-ladder mechanics that level requires (§4, §5) and diff against Step 1. Classify each gap: staffing, structure (reporting/ownership), process (review/eval), or instrumentation (traces/rationale channels).
+**Step 3 — Gap analysis vs target autonomy level.** For the org's *target* level (ask if unstated; default to current + 1): list the roles, review structures, transparency channels, trust-ladder mechanics, and operating-health conditions that level requires (§4–§6) and diff against Step 1. Classify each gap: staffing, structure (reporting/ownership), process (review/eval), culture/enablement, or instrumentation (traces/rationale channels).
 
 **Step 4 — Recommendation with trade-offs.** Deliver: (a) a target org sketch — reporting line, teams, the seven roles marked hire/fractional/defer with sequencing; (b) the operating-model changes (review cadence, dispatch ownership, sandbox vs. production lanes, trust-ladder rungs); (c) a cost delta to hand to **platform-roi-scorecard**; (d) explicit trade-offs — always present at least two viable structures (e.g., platform-owned AI vs. dedicated AI team; single platform group vs. federated multi-platform) with the conditions under which each wins. Never present one structure as universally correct; every benchmark above shows the industry itself is split.
 

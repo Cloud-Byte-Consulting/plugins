@@ -1,6 +1,16 @@
 ---
 name: agent-ops-governance
-description: Operate and govern a fleet of AI agents like managed labor, not shelfware. Use when someone asks "who owns this agent", when AI spend exploded or token costs are climbing, when there is agent sprawl or too many prototypes nobody maintains, before an AI vendor renewal or license negotiation, when planning agent maintenance, or when it is time to prune agent tools. Covers the seven-surface maintenance loop (job, diet, memory, tools, reach, proof, value), tool-pruning doctrine, three-lane token measurement, budget burn signals, nine traits of a fair agent license plus renewal question buckets, a four-state prototype ladder with promotion and demotion rules, and one accountable named owner per consequential agent. Triggers: agent ownership, AI budget blown early, cost per completed unit of work, prototype graveyard, agent meters vs seats, keep/change/pause/retire decisions. For security and compliance controls, use platform-security-playbook; for dollar-value ROI and business-case math, platform-roi-scorecard.
+description: >-
+  Operate and govern a fleet of AI agents like managed labor, not shelfware. Use
+  when agent ownership is unclear, AI or token costs are climbing, prototypes
+  have become sprawl, a vendor renewal is approaching, maintenance needs a
+  cadence, or agent tools need pruning. Covers the seven-surface maintenance loop
+  (job, diet, memory, tools, reach, proof, value), tool pruning, three-lane cost
+  measurement, budget signals, fair licensing, a four-state prototype ladder,
+  and one accountable owner per consequential agent. Triggers include agent
+  ownership, cost per completed work unit, prototype graveyards, agent meters
+  versus seats, and keep/change/pause/retire decisions. For security controls,
+  use platform-security-playbook; for ROI math, use platform-roi-scorecard.
 ---
 
 # Agent Ops Governance

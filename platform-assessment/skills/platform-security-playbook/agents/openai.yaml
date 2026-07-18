@@ -1,0 +1,4 @@
+interface:
+  display_name: "Platform Security Playbook"
+  short_description: "Design human and agent platform controls"
+  default_prompt: "Use $platform-security-playbook to assess controls and produce a governance roadmap."
