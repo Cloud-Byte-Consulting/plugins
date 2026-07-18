@@ -1,6 +1,18 @@
 ---
 name: llm-evals-engineer
-description: Evaluate and production-harden LLM applications end to end. Use when the user says "evaluate my LLM app", "add evals", "is my RAG hallucinating", "RAG quality metrics", "LLM-as-judge", "add tracing for my chatbot", "guardrails", "prompt versioning", "rate-limit my LLM spend", "LLM budgets", or "make my LLM app production-ready". Covers tracing architecture (callback handler + decorator instrumentation, trace-per-query spans, session/user propagation), the score data model, Ragas-style metric taxonomy (context precision/recall, context entities recall, noise sensitivity, faithfulness, response relevancy, tool call accuracy), LLM-as-judge pipelines and variable-mapping pitfalls, prompt versioning, chat-history trimming, input guardrails, and gateway controls (version pinning, rpm/tpm, budgets, virtual keys). Tool-agnostic: Langfuse, Ragas, NeMo Guardrails, LiteLLM, Redis are example fills for capability slots. For trust auditing of autonomous agent actions and delegation gates, use agent-trust-auditor.
+description: >-
+  Evaluate and production-harden LLM applications end to end. Use when the user
+  says "evaluate my LLM app", "add evals", "is my RAG hallucinating", "RAG
+  quality metrics", "LLM-as-judge", "add tracing for my chatbot", "guardrails",
+  "prompt versioning", "rate-limit my LLM spend", "LLM budgets", or "make my
+  LLM app production-ready". Covers tracing architecture (callback handler plus
+  decorator instrumentation, trace-per-query spans, session/user propagation),
+  the score data model, Ragas-style metrics (context precision/recall, context
+  entities recall, noise sensitivity, faithfulness, response relevancy, tool call
+  accuracy), LLM-as-judge pipelines, prompt versioning, chat-history trimming,
+  input guardrails, and gateway controls. Langfuse, Ragas, NeMo Guardrails,
+  LiteLLM, and Redis are example capability fills. For trust auditing of
+  autonomous agent actions and delegation gates, use agent-trust-auditor.
 ---
 
 # LLM Evals Engineer

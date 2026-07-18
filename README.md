@@ -4,87 +4,29 @@ Reusable agent skills in the open [Agent Skills](https://agentskills.io) format 
 
 **New here? Read [GETTING-STARTED.md](GETTING-STARTED.md)** — what to run first, a staged growth path (baseline → measure → report → iterate), and copy-paste first prompts.
 
-## Plugins
+## Plugin index
 
-### `platform-assessment`
-Assess an engineering organization's platform and agentic readiness. Evidence-first: skills collect proof via first-party MCP connectors (GitHub, Azure DevOps, Atlassian, Microsoft Work IQ, AWS/Azure/GCP) rather than self-report.
+<!-- BEGIN GENERATED PLUGIN INDEX -->
+Every plugin is registered in the Claude marketplace and contains portable Agent Skills. The manifest and ZIP columns show additional native packaging.
 
-The enterprise operating-model additions are documented in [`PLATFORM-ENGINEERING-SOURCE-NOTES.md`](PLATFORM-ENGINEERING-SOURCE-NOTES.md).
+| Plugin | Category | Focus | Skills | Codex manifest | Perplexity ZIPs |
+|---|---|---|---:|:---:|---:|
+| [`platform-assessment`](docs/plugins/platform-assessment.md) | assessment | Assess an engineering org's platform and agentic readiness: ASDLC maturity scoring, platform ROI scorecard, org design, security/governance playbook, industry… | 8 | Yes | 8 |
+| [`adp-enablement`](docs/plugins/adp-enablement.md) | platform | Engineer the Agentic Developer Portal: CNCF platform-maturity benchmark with industry percentiles, MCP servers over platform APIs, agent identity (no standing secrets,… | 6 | Yes | 6 |
+| [`gpu-research-platform`](docs/plugins/gpu-research-platform.md) | platform | Operate GPU research workloads on managed Kubernetes (Lambda-class clouds): GPU sharing (MIG/MPS/time-slicing), KEDA autoscaling on DCGM metrics, cost chargeback,… | 7 | Yes | 7 |
+| [`model-training-ops`](docs/plugins/model-training-ops.md) | ml | Run model creation and training as a product: training pipeline architecture (Argo/Kubeflow, trigger taxonomy), MLflow experiment/registry standards,… | 6 | Yes | 6 |
+| [`inference-testing`](docs/plugins/inference-testing.md) | ml | Test and release models with evidence: model-level eval harnesses (synthetic ground truth, LLM-as-judge), GPU inference benchmarking (TTFT, tokens/sec, cost), release… | 6 | Yes | 6 |
+| [`research-data-platform`](docs/plugins/research-data-platform.md) | data | Make research data collection trustworthy without gatekeeping: ODCS data contracts with CI enforcement, dataset QoS/SLOs, data-product reviews (DAUTNIVS), right-sized… | 6 | Yes | 6 |
+| [`authoring`](docs/plugins/authoring.md) | writing | Turn research and interviews into publishable deliverables: evidence-first research briefs and interview-based case studies. | 2 | — | — |
+| [`ai-operations`](docs/plugins/ai-operations.md) | operations | Operate AI at work: model selection/routing, work-shape triage (chat/agent/team/nothing), agent output verification, cost/ownership/tool governance, and harness… | 5 | — | — |
+| [`engineering-career`](docs/plugins/engineering-career.md) | career | Engineering career coaching: senior/staff level-up behaviors, org signal reading, behavioral interview prep, AI-era positioning. | 1 | — | — |
+| [`ai-engineering`](docs/plugins/ai-engineering.md) | engineering | Ship production LLM apps: eval engineering (tracing, RAG metrics, LLM-as-judge, guardrails) and deployment (containers, cloud rollout, vector-store tuning). | 2 | — | — |
+| [`prompt-workflows`](docs/plugins/prompt-workflows.md) | productivity | Thirty-five reusable workflows for model routing, personal productivity, code comprehension, knowledge systems, agent evaluation, consumer AI strategy, and Office… | 35 | Yes | 35 |
 
-A fully scored discovery uses both `platform-assessment` and `adp-enablement`: the first gathers evidence and scores agentic delivery maturity; the second supplies the source-versioned platform-maturity benchmark. A standalone `platform-maturity-discovery` ZIP produces an evidence package and ADP gate readout, while marking unavailable formal scores as pending.
+**11 plugins, 84 skills, and 74 upload-ready Perplexity packages.**
 
-| Skill | What it does |
-|---|---|
-| `platform-maturity-discovery` | Discovers platform-engineering and Agentic Developer Portal readiness from privacy-bounded signals across communications, meetings, work items, code, infrastructure, telemetry, and developer sentiment |
-| `asdlc-maturity-assessment` | Scores agentic development maturity on an 8-path × 5-level rubric (L0–L4); demands measurable attribution before scoring L2+ |
-| `platform-roi-scorecard` | Builds a defensible platform ROI case: survey + system data doctrine, cost/value formulas, benchmark calibration, AI-workload velocity metrics |
-| `platform-org-design-advisor` | Diagnoses platform team structure: reporting lines, role coverage (7 platform roles), autonomy-level-driven operating model, agent-transparency design |
-| `platform-security-playbook` | Designs and audits governance for human+agent development: 5 control responsibilities, privilege-separation patterns, regulatory mapping, vulnerability management, sovereignty overlay |
-| `platform-industry-brief` | Produces industry-contextualized briefs: benchmark databank + vertical pattern library (automotive, gaming, classifieds, healthcare, freight) |
-| `idp-adp-architect` | Designs Internal Developer Platform capabilities and an Agentic Developer Portal target architecture: five-plane model, human and machine interfaces, golden paths, AI/ML sixth plane, sovereign variant |
-| `platform-assessment-reporter` | Generates cited assessment reports with separate platform, ASDLC, and ADP radar profiles, per-domain evaluation ledgers, production-system/value visuals, contradictions, confidence, and an evidence appendix |
-
-### `authoring`
-Turn research and interviews into publishable deliverables. Method skills — they generalize beyond platform engineering.
-
-| Skill | What it does |
-|---|---|
-| `research-brief-writer` | Dense, evidence-first research briefs from reports and multi-source material |
-| `interview-case-study-writer` | Interview transcripts → expert features and company case studies |
-
-### `ai-operations`
-Operate AI at work — routing, triage, verification, governance, harness. Frameworks distilled from practitioner literature (2025–2026).
-
-| Skill | What it does |
-|---|---|
-| `work-shape-triage` | Decides what work should be a chat, one agent, a team, or nothing — four-estimates rubric + money-dial veto |
-| `model-selection-router` | Routes work across model tiers; personal eval sets, benchmark-interpretation discipline, launch triage |
-| `agent-trust-auditor` | Verifies agent output: judge layers, delegability tests, constitutions, completion-vs-acceptance analytics |
-| `agent-ops-governance` | Ownership cards, tool pruning, token cost measurement, prototype ladder, license/renewal review |
-| `agent-harness-engineer` | Audits and builds the instruction/memory/handoff/knowledge layer around agents |
-
-### `engineering-career`
-| Skill | What it does |
-|---|---|
-| `engineering-career-coach` | Level-up behaviors, junior anti-signals, org signal reading, behavioral interview prep, AI-era positioning |
-
-### `ai-engineering`
-Production LLM app practices, sourced from public educational materials.
-
-| Skill | What it does |
-|---|---|
-| `llm-evals-engineer` | Tracing, RAG metric suites, LLM-as-judge, guardrails, prompt versioning, budget gateways |
-| `llm-app-deployer` | Prototype → production: service extraction, container recipe, cloud rollout, vector-store tuning |
-
-### `prompt-workflows`
-Thirty-five reusable workflows imported from the Cloud Byte Document Hub.
-
-| Group | Skills |
-|---|---:|
-| Model fit and routing | 4 |
-| Personal productivity | 5 |
-| Code comprehension | 4 |
-| Knowledge systems | 5 |
-| Agent evaluation and packaging | 7 |
-| Consumer AI strategy | 5 |
-| Office documents | 5 |
-
-See [`prompt-workflows/README.md`](prompt-workflows/README.md) for the group summary and Perplexity packaging workflow.
-See [`prompt-workflows/PROVENANCE.md`](prompt-workflows/PROVENANCE.md) for publication and third-party-source handling.
-
-### Research division suites
-
-Thirty-one operational skills for AI research platforms, imported from the Cloud Byte research-division bundle and hardened for publication.
-
-| Plugin | Skills | Focus |
-|---|---:|---|
-| `gpu-research-platform` | 7 | GPU tenancy, sharing, autoscaling, FinOps, GitOps, security, troubleshooting |
-| `model-training-ops` | 6 | Training pipelines, experiment standards, distributed training, Ray, fine-tuning |
-| `inference-testing` | 6 | Evaluation, benchmarking, release gates, rollout, drift, authorized red-teaming |
-| `research-data-platform` | 6 | Data contracts, SLOs, governance, catalogs, reproducible training storage |
-| `adp-enablement` | 6 | Platform maturity, MCP APIs, agent identity, API contracts, golden paths, fitness functions |
-
-See [`RESEARCH-DIVISION-PROVENANCE.md`](RESEARCH-DIVISION-PROVENANCE.md) for source history, review scope, and publication notes.
+Browse the [plugin and skill documentation](docs/README.md) for the complete per-plugin inventories.
+<!-- END GENERATED PLUGIN INDEX -->
 
 ## Install
 
@@ -92,13 +34,16 @@ See [`RESEARCH-DIVISION-PROVENANCE.md`](RESEARCH-DIVISION-PROVENANCE.md) for sou
 ```bash
 claude plugin marketplace add Cloud-Byte-Consulting/plugins
 claude plugin install platform-assessment@cloud-byte-plugins
-claude plugin install authoring@cloud-byte-plugins
-claude plugin install prompt-workflows@cloud-byte-plugins
+claude plugin install adp-enablement@cloud-byte-plugins
 claude plugin install gpu-research-platform@cloud-byte-plugins
 claude plugin install model-training-ops@cloud-byte-plugins
 claude plugin install inference-testing@cloud-byte-plugins
 claude plugin install research-data-platform@cloud-byte-plugins
-claude plugin install adp-enablement@cloud-byte-plugins
+claude plugin install authoring@cloud-byte-plugins
+claude plugin install ai-operations@cloud-byte-plugins
+claude plugin install engineering-career@cloud-byte-plugins
+claude plugin install ai-engineering@cloud-byte-plugins
+claude plugin install prompt-workflows@cloud-byte-plugins
 ```
 
 ### GitHub Copilot
@@ -153,6 +98,9 @@ or copy skill folders into `.agents/skills/` or `.gemini/skills/`.
 
 ```
 .claude-plugin/marketplace.json     # Claude plugin marketplace manifest
+docs/
+├── README.md                       # generated plugin catalog
+└── plugins/<plugin>.md             # generated skill inventory per plugin
 platform-assessment/
 ├── .claude-plugin/plugin.json
 ├── .codex-plugin/plugin.json
@@ -179,3 +127,11 @@ gpu-research-platform/              # same cross-tool shape for each research su
 ```
 
 Each `SKILL.md` is self-contained (frameworks, rubrics, formulas, and checklists inline) and carries `[bracketed]` placeholders to fill in before use. Skills cross-reference sibling skills by name; installing a full plugin keeps those links resolvable.
+
+Regenerate and verify the documentation after changing marketplace entries,
+plugin manifests, or skill frontmatter:
+
+```bash
+python3 scripts/generate_plugin_docs.py
+python3 scripts/generate_plugin_docs.py --check
+```

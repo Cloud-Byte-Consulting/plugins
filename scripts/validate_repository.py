@@ -7,6 +7,8 @@ import json
 import re
 from pathlib import Path
 
+from generate_plugin_docs import check as check_plugin_documentation
+
 
 SEMVER = re.compile(r"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -115,6 +117,7 @@ def main() -> None:
     validate_marketplace()
     for plugin_name in CROSS_TOOL_PLUGINS:
         validate_cross_tool_plugin(plugin_name)
+    check_plugin_documentation()
     print("Repository plugin validation passed")
 
 

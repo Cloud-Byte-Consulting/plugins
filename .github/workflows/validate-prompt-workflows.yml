@@ -4,12 +4,20 @@ on:
   pull_request:
     paths:
       - ".claude-plugin/marketplace.json"
+      - "README.md"
+      - "docs/**"
+      - "platform-assessment/**"
       - "prompt-workflows/**"
       - "gpu-research-platform/**"
       - "model-training-ops/**"
       - "inference-testing/**"
       - "research-data-platform/**"
       - "adp-enablement/**"
+      - "authoring/**"
+      - "ai-operations/**"
+      - "engineering-career/**"
+      - "ai-engineering/**"
+      - "scripts/generate_plugin_docs.py"
       - "scripts/validate_repository.py"
       - "scripts/package_research_perplexity.py"
       - ".github/workflows/validate-prompt-workflows.yml"
@@ -18,12 +26,20 @@ on:
       - main
     paths:
       - ".claude-plugin/marketplace.json"
+      - "README.md"
+      - "docs/**"
+      - "platform-assessment/**"
       - "prompt-workflows/**"
       - "gpu-research-platform/**"
       - "model-training-ops/**"
       - "inference-testing/**"
       - "research-data-platform/**"
       - "adp-enablement/**"
+      - "authoring/**"
+      - "ai-operations/**"
+      - "engineering-career/**"
+      - "ai-engineering/**"
+      - "scripts/generate_plugin_docs.py"
       - "scripts/validate_repository.py"
       - "scripts/package_research_perplexity.py"
       - ".github/workflows/validate-prompt-workflows.yml"
@@ -62,9 +78,9 @@ jobs:
           node-version: "24"
       - name: Discover nested skills with the pinned installer
         run: npx --yes skills@1.5.19 add . --list --full-depth > available-skills.txt
-      - name: Require every cross-tool skill
+      - name: Require every documented skill
         run: |
-          for plugin_dir in prompt-workflows gpu-research-platform model-training-ops inference-testing research-data-platform adp-enablement; do
+          for plugin_dir in platform-assessment adp-enablement gpu-research-platform model-training-ops inference-testing research-data-platform authoring ai-operations engineering-career ai-engineering prompt-workflows; do
             for skill_dir in "$plugin_dir"/skills/*; do
               skill_name="$(basename "$skill_dir")"
               grep -Fq "$skill_name" available-skills.txt
