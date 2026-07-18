@@ -32,7 +32,7 @@ Per-cloud tool mapping (vendors are EXAMPLES filling category slots):
 | Category slot | AWS example | Azure example | GCP example |
 | --- | --- | --- | --- |
 | Portal | Backstage | Backstage | Backstage |
-| Copilot / agent | Claude Code | GitHub Copilot | Claude Code |
+| Coding agent | Claude Code | GitHub Copilot | Claude Code |
 | VCS + CI | GitHub + GitHub Actions | GitHub + GitHub Actions | GitHub + GitHub Actions |
 | Workload spec | Score | Score | Score |
 | Platform IaC | Terraform / OpenTofu | Terraform / OpenTofu | Terraform / OpenTofu |

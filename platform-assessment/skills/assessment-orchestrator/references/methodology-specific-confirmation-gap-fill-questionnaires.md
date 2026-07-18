@@ -208,7 +208,7 @@ stage from this questionnaire alone.
 |---|---|---|---|---|
 | AGENTMD-1 | Does this repository have documented build/test/lint commands anywhere (even outside a formal AGENT.md file)? *(Yes, in AGENT.md or AGENTS.md / Yes, but only in README/wiki / No, it's tribal knowledge)* | MC | GAP-FILL | Presence equivalence check |
 | AGENTMD-2 | If an AGENT.md/AGENTS.md file exists, when was it last verified against the actual current build/test process? *(Within the last month / 1-6 months ago / Longer than 6 months / Never verified)* | MC | CONFIRM | Freshness |
-| AGENTMD-3 | Have AI coding agents (Claude Code, Cursor, Copilot) working in this repo actually followed the documented conventions, in your experience? *(Consistently / Sometimes / Rarely or never used the file)* | MC | CONFIRM | Content quality / actual utility |
+| AGENTMD-3 | Have AI coding agents (Claude Code, Cursor, GitHub Copilot) working in this repo actually followed the documented conventions, in your experience? *(Consistently / Sometimes / Rarely or never used the file)* | MC | CONFIRM | Content quality / actual utility |
 | AGENTMD-4 | [Open] What's missing from this repo's agent-facing documentation that causes agents to make repeated mistakes? | Open | GAP-FILL | Content-gap detection for remediation |
 
 **Scoring guidance:** A "Present-complete" file that's never actually followed by agents (AGENTMD-3 = "rarely/never") should be down-scored to "Present-partial" — presence and freshness alone overstate maturity if agents demonstrably ignore the file.
