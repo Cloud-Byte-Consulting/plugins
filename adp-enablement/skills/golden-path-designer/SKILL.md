@@ -55,6 +55,18 @@ Agents execute the same paths humans do — which forces properties that also ma
 - **Definition of done per path:** explicit, checkable completion criteria (repo exists, CI green, claim bound, endpoint healthy) so an agent — or a human — knows the path finished. This is the same definition-of-done discipline the ASDLC demands for every path agents touch (`asdlc-maturity-assessment`, platform-assessment plugin).
 - **Identity-aware:** path execution requires the caller's scoped identity (`agent-identity-engineer`); an agent scaffolding an experiment does so as a named session, within quota, on the audit plane.
 
+### Path service contract and lifecycle
+
+A golden path is an internal product backed by an operable service, not a template handed over once. Before launch, publish a compact contract:
+
+- **Users and outcome:** target cohort, job to be done, value hypothesis, and explicit non-goals.
+- **Interface contract:** typed inputs/outputs, compatibility window, versioning policy, and definition of done for human and agent callers.
+- **Service contract:** owner/on-call route, SLI and SLO, support response expectation, maintenance windows, dependency status, and escalation path.
+- **Economics:** cost shown to the requester where actionable, plus platform cost-to-serve per successful path completion.
+- **Change policy:** upgrade channel, migration assistance, deprecation notice, rollback, and an observable exception/break-out route.
+
+Review the contract with early adopters before promoting the path. Reassess it on a fixed cadence using completion failures, support themes, bypass reasons, satisfaction, and unit cost. Expand when demand and outcomes justify it; repair when users struggle; deprecate when a better path replaces it or maintained usage no longer justifies the cost.
+
 ### Adoption KPIs by lifecycle phase
 KPIs only mean something against the platform's declared lifecycle phase — declare the phase, then read the numbers:
 
@@ -70,12 +82,12 @@ Core adoption set: adoption rate (% of target users on the path), active users, 
 1. **Locate the org** on the 3-level model per workflow area (scaffolding, CI/CD, observability, deploy) for [YOUR ORGANIZATION / CLIENT]; feed the reading to `platform-maturity-benchmark`.
 2. **Score candidate paths** (frequency × pain × ease) against the research division's real workflows; pick ONE for the TVP.
 3. **Write the hypothesis** with a measurable target and a named validation cohort of early adopters.
-4. **Design the path:** user journey (human AND agent variants), Backstage template parameter schema, Crossplane XRD/composition boundary (exposed knobs vs. secure defaults), and the break-out route for novel cases.
+4. **Design the path and contract:** user journey (human AND agent variants), Backstage template parameter schema, Crossplane XRD/composition boundary (exposed knobs vs. secure defaults), the break-out route for novel cases, owner, service objective, compatibility window, unit-cost measure, and deprecation policy.
 5. **Design the gates:** KubeLinter/OPA/Kyverno check set, scorecard tiers, warn→block promotion schedule.
 6. **Make it machine-consumable:** API surface per step, definition of done, identity/scope requirements; hand the tool-card design to `mcp-platform-api-author`.
 7. **Instrument** the lifecycle-phase KPI set before launch (baseline included); register path-health fitness functions with `platform-fitness-functions`.
 8. **Validate, then expand:** run the cohort, test the hypothesis honestly, productize (versioning, upgrade channel, ownership) before starting path #2.
-9. **Output.** A path product spec: maturity reading, scored candidate table, hypothesis, journey maps, template + composition design, gate definitions, KPI plan with phase segmentation, and the expansion sequence.
+9. **Output.** A path product spec: maturity reading, scored candidate table, hypothesis, journey maps, template + composition design, service contract, gate definitions, KPI plan with phase segmentation, lifecycle review cadence, and the expansion sequence.
 
 ## Guardrails
 - One TVP path validated before any catalog is designed; a platform announced as a catalog of unbuilt paths is the portal trap's cousin.
@@ -85,6 +97,7 @@ Core adoption set: adoption rate (% of target users on the path), active users, 
 - Gates start as warnings with a published promotion date; springing blocking gates on existing teams burns the adoption the path exists to earn.
 - Declare the lifecycle phase before reporting KPIs; numbers without phase context mislead in both directions.
 - Break-out routes stay open and observable — a golden path is the easiest way, never the only way.
+- A template without an owner, service objective, compatibility policy, support route, and deprecation plan is not a productized golden path.
 
 ## Suggested effort
 High — a full path product spec spans discovery, design, gating, and measurement; the TVP slice alone is a focused multi-session effort.

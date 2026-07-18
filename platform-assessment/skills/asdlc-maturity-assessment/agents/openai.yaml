@@ -1,0 +1,4 @@
+interface:
+  display_name: "ASDLC Maturity Assessment"
+  short_description: "Assess agentic software-delivery maturity"
+  default_prompt: "Use $asdlc-maturity-assessment to score our evidence and build the next-level roadmap."

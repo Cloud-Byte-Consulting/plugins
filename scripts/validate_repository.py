@@ -11,6 +11,7 @@ from pathlib import Path
 SEMVER = re.compile(r"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 CROSS_TOOL_PLUGINS = (
+    "platform-assessment",
     "prompt-workflows",
     "gpu-research-platform",
     "model-training-ops",

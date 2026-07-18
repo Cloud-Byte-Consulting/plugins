@@ -1,0 +1,28 @@
+{
+  "name": "platform-assessment",
+  "version": "1.1.0",
+  "description": "Assess platform-engineering maturity, value, organization, architecture, and governance.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "homepage": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/platform-assessment",
+  "repository": "https://github.com/Cloud-Byte-Consulting/plugins",
+  "license": "Apache-2.0",
+  "keywords": ["platform-engineering", "assessment", "idp", "adp", "roi", "governance"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Platform Assessment",
+    "shortDescription": "Evidence-based platform engineering assessment.",
+    "longDescription": "Assess platform and agent readiness, design IDP-to-ADP architecture, evaluate organization and security, and build evidence-backed value and maturity roadmaps.",
+    "developerName": "Cloud Byte Consulting",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive"],
+    "websiteURL": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/platform-assessment",
+    "defaultPrompt": [
+      "Assess our platform-engineering maturity.",
+      "Design our IDP-to-ADP target architecture.",
+      "Build an evidence-backed platform value case."
+    ]
+  }
+}

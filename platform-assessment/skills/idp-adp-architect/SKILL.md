@@ -57,6 +57,22 @@ Per-cloud tool mapping (vendors are EXAMPLES filling category slots):
 4. **Observability by default** — every component emits metrics/logs/traces by default, in standardized formats, centrally aggregated; SLOs per platform capability with alerts tied to error budgets.
 5. **AI-augmented, CLI-first** — copilots/LLMs/agents in IDEs, CLIs, and portals automate config writing, pipeline debugging, and doc generation, and analyze telemetry to predict issues. Hard rule: when an LLM goes beyond code assistance to trigger infra/environment changes, the action must execute through a trusted CLI or the orchestrator API — never direct console or raw cloud-API mutation — so every AI-driven action stays governed, RBAC-enforced, and auditable.
 
+### Capability portfolio and sourcing discipline
+Treat the platform as a portfolio of internal products, not one giant implementation project. Each capability — service scaffolding, environment creation, deployment, secrets, observability, data access, model serving — needs a named user segment, owner, value hypothesis, consumption interface, reliability target, cost-to-serve, and lifecycle state. A portal entry without an owned backend capability is catalog theater.
+
+For every capability, make the **reuse / buy / assemble / build** decision explicitly:
+
+| Choice | Prefer when | Evidence required |
+|---|---|---|
+| Reuse an existing enterprise service | It already meets the user need and control boundary | Fit-gap, integration cost, service owner and SLO |
+| Buy a managed product | The capability is commodity and operating it is not differentiating | Total cost, portability/exit path, security and data-boundary review |
+| Assemble open components | The interfaces are stable but local integration creates value | Integration ownership, upgrade plan, compatibility tests |
+| Build custom | The workflow is materially differentiating or no option meets a hard constraint | User evidence, full lifecycle cost, staffing, support and deprecation plan |
+
+Default to the least custom option that satisfies the requirement. “We can build it” is not a reason; custom code creates a permanent product, support, upgrade, and security obligation. Record decisions in a capability register with: user/problem, selected option, rejected alternatives, owner, API/interface, SLI/SLO, dependencies, unit cost, adoption signal, version policy, exit plan, and review date.
+
+Every production capability also needs an internal service contract. At minimum define the measured indicator, target objective, support and incident path, maintenance expectations, compatibility window, and exception process. The contract turns self-service from an interface promise into an operable service.
+
 ### Abstraction layers & golden paths (how humans/agents actually consume the platform)
 A **golden path** is the intended, low-friction way to accomplish a task — a paved road codifying tribal knowledge into repeatable self-service, with security, compliance, and observability built in, plus "break-out" flexibility for novel cases. Abstraction layers make golden paths possible:
 
@@ -139,6 +155,7 @@ Deterministic paths can run on the tooling layer alone and don't need agent infr
    - Current AI agent usage: none / autocomplete only / agents opening PRs / agents running unsupervised.
    - Team size and platform team size/maturity.
    - What's motivating this now (cost, incidents, developer complaints, a mandate to "adopt AI agents").
+   - Capability portfolio: which platform services exist, who owns and supports each, how users consume them, what they cost, and which are duplicated or ownerless.
 2. **Diagnose.** State plainly which of these is true and why:
    - *No real IDP yet* → recommend building the IDP first (five planes, golden paths for the top 3–5 recurring developer requests). Do not scope ADP work yet.
    - *Solid IDP, no/limited agent usage* → this is the ADP greenfield case. Proceed to step 3.
@@ -151,8 +168,9 @@ Deterministic paths can run on the tooling layer alone and don't need agent infr
    - Agent infrastructure: for each of the seven components, name the concrete implementation choice (e.g., identity = short-lived scoped service accounts per agent session; execution = ephemeral sandboxed workspace per session; observability = agent action log distinct from human audit log).
    - If AI/ML is in scope: add the Data & Model Management plane, the ML workflow orchestrator, notebook golden paths, model scanning gates, and drift/data-quality observability.
    - If sovereignty is in scope: run the validation questions, mark which slots must be self-hosted, and specify the exit test (can the platform be reconstructed on a different provider from Git alone?).
+   - For each proposed capability, record the reuse/buy/assemble/build decision, lifecycle owner, service contract, unit-cost measure, compatibility policy, and exit/deprecation plan before selecting a product.
 4. **Sequence it.** Never propose everything at once — sequence by the four levels of agentic maturity (see the `asdlc-maturity-assessment` skill for the full rubric): most orgs should build for Level 2 next (dispatch path + validation loop + agent identity + sandboxing) regardless of long-term ambition, because that's the hardest and highest-leverage jump. For platform-side work: golden paths for the top recurring requests first, then fleet/lifecycle automation, then AI/ML extension — security and observability as Day-1 properties of each phase, never retrofits.
-5. **Output.** Produce an architecture brief with: current-state diagnosis, target design plane-by-plane (with the tool-mapping table filled in for their cloud(s)), the golden paths and abstraction layers needed, ADP layers if in scope, a phased build sequence with fleet/observability maturity metrics to track, and explicit call-outs of what NOT to build yet.
+5. **Output.** Produce an architecture brief with: current-state diagnosis, target design plane-by-plane (with the tool-mapping table filled in for their cloud(s)), a capability register and sourcing decision log, internal service contracts, the golden paths and abstraction layers needed, ADP layers if in scope, a phased build sequence with fleet/observability maturity metrics to track, and explicit call-outs of what NOT to build yet.
 
 ## Guardrails
 - Never recommend agent autonomy features (auto-merge, unsupervised background execution) without the identity/sandboxing/evaluation infrastructure underneath them being explicit in the plan.
@@ -162,6 +180,8 @@ Deterministic paths can run on the tooling layer alone and don't need agent infr
 - Architecture is category slots, not vendors: when recommending a stack, name the category first and present vendors as swappable examples; double-check that every pick is native to the target cloud (no cross-cloud service leakage into a stack).
 - Don't bolt AI/ML workloads onto a generic services IDP — if training/serving/notebooks are in scope, the sixth plane and the ML workflow orchestrator are structural requirements, not add-ons.
 - On sovereignty claims, distinguish data residency from data sovereignty; a foreign-jurisdiction control plane over local data centers is only partial sovereignty, and an exit strategy that has never been tested is a document, not a capability.
+- Never approve custom build work without a differentiated user need, full lifecycle owner, operating cost, and exit/deprecation plan.
+- Never call a capability self-service until its reliability, support, compatibility, and exception expectations are explicit.
 
 ## Suggested effort
 Medium–high — this produces a multi-section architecture document, not a quick answer.

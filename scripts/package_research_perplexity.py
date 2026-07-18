@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build or verify Perplexity ZIPs for the research-division plugins."""
+"""Build or verify Perplexity ZIPs for cross-tool platform plugins."""
 
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ from types import ModuleType
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 PLUGIN_NAMES = (
+    "platform-assessment",
     "gpu-research-platform",
     "model-training-ops",
     "inference-testing",
@@ -46,7 +47,7 @@ def main() -> None:
             total += len(packager.build(skills_dir, output_dir))
 
     verb = "Verified" if args.check else "Built"
-    print(f"{verb} {total} research-division Perplexity skill packages")
+    print(f"{verb} {total} cross-tool Perplexity skill packages")
 
 
 if __name__ == "__main__":

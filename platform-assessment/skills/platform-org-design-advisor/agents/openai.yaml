@@ -1,0 +1,4 @@
+interface:
+  display_name: "Platform Org Design Advisor"
+  short_description: "Design platform teams and operating models"
+  default_prompt: "Use $platform-org-design-advisor to assess our team structure and operating health."

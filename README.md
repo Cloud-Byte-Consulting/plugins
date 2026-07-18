@@ -9,6 +9,8 @@ Reusable agent skills in the open [Agent Skills](https://agentskills.io) format 
 ### `platform-assessment`
 Assess an engineering organization's platform and agentic readiness. Evidence-first: skills collect proof via first-party MCP connectors (GitHub, Azure DevOps, Atlassian, Microsoft Work IQ, AWS/Azure/GCP) rather than self-report.
 
+The enterprise operating-model additions are documented in [`PLATFORM-ENGINEERING-SOURCE-NOTES.md`](PLATFORM-ENGINEERING-SOURCE-NOTES.md).
+
 | Skill | What it does |
 |---|---|
 | `asdlc-maturity-assessment` | Scores agentic development maturity on an 8-path × 5-level rubric (L0–L4); demands measurable attribution before scoring L2+ |
@@ -121,6 +123,7 @@ or copy skill folders into `.agents/skills/` (repo) / `~/.agents/skills/` (user)
 Download an individual ZIP from a plugin's `perplexity/` directory and upload it as a Computer Skill. Each archive contains `SKILL.md` at its root and is limited to 10 MB. The available collections are:
 
 - [`prompt-workflows/perplexity/`](prompt-workflows/perplexity/)
+- [`platform-assessment/perplexity/`](platform-assessment/perplexity/)
 - [`gpu-research-platform/perplexity/`](gpu-research-platform/perplexity/)
 - [`model-training-ops/perplexity/`](model-training-ops/perplexity/)
 - [`inference-testing/perplexity/`](inference-testing/perplexity/)
@@ -149,7 +152,11 @@ or copy skill folders into `.agents/skills/` or `.gemini/skills/`.
 .claude-plugin/marketplace.json     # Claude plugin marketplace manifest
 platform-assessment/
 ├── .claude-plugin/plugin.json
-└── skills/<name>/SKILL.md          # 6 assessment skills
+├── .codex-plugin/plugin.json
+├── skills/<name>/
+│   ├── SKILL.md                    # 7 assessment skills
+│   └── agents/openai.yaml
+└── perplexity/<name>.zip
 authoring/
 ├── .claude-plugin/plugin.json
 └── skills/<name>/SKILL.md          # 2 authoring skills

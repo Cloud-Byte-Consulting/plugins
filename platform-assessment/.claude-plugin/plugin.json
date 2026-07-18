@@ -1,6 +1,6 @@
 {
   "name": "platform-assessment",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Platform engineering assessment suite: ASDLC maturity scoring (8-path x 5-level rubric), platform ROI scorecard, org design advisor, security & agent-governance playbook, industry benchmarking brief, IDP-to-ADP reference architecture, and evidence-backed reporting visuals (quadrant, value radar, path coverage) with explicit confidence tiers. Evidence-first: collects proof via first-party MCP connectors (GitHub, Azure DevOps, Atlassian, Work IQ, cloud providers) rather than self-report.",
   "author": {
     "name": "Cloud Byte Consulting",
