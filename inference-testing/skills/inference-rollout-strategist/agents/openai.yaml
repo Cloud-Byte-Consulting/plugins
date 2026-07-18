@@ -1,0 +1,4 @@
+interface:
+  display_name: "Inference Rollout Strategist"
+  short_description: "Help with Inference Rollout Strategist tasks"
+  default_prompt: "Use $inference-rollout-strategist to guide this research-platform task."

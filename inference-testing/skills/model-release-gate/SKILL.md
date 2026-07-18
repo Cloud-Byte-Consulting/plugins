@@ -1,6 +1,6 @@
 ---
 name: model-release-gate
-description: The promotion gate a model must clear before it enters the registry's production stage — the go/no-go checkpoint for research inference testing. Use when the user says "release gate", "promotion gate", "model promotion checklist", "is this model safe to release", "pre-release audit", "explainability report", "SHAP/LIME for release", "fairness audit", "bias check before release", "adversarial robustness battery", "FGSM/C&W/PGD test", "robustness evaluation", "failure taxonomy", "hallucination/sycophancy/leakage triage", or "sign-off criteria". Covers an explanation report (SHAP/LIME method selection + compute-cost caveats), a fairness audit (metrics + counterfactual probes + pre/in/post mitigation selection), an adversarial-robustness battery (attack types, defenses, evaluation procedure), failure-taxonomy triage (hallucination, sycophancy, data leakage, cost/performance), and a gate checklist with pass/fail criteria and severity levels. For a research division on Lambda managed Kubernetes; OSS-first (SHAP, Fairlearn/AIF360, ART, Evidently). Consumes llm-eval-harness and inference-benchmark-runner results; sits before inference-rollout-strategist.
+description: Produce an evidence-based go or no-go model-release decision from quality, performance, fairness, explainability, authorized red-team, and empirical robustness results. Use for model promotion, release checklists, SHAP/LIME or fairness audits, white-box FGSM/PGD/C&W evaluation, hosted-LLM adversarial tests, failure triage, severity assignment, sign-off criteria, or rollback thresholds.
 ---
 
 # Model Release Gate
@@ -57,7 +57,7 @@ Run attacks, apply defenses, measure the accuracy-vs-attack-strength curve. Libr
 | Attack | Nature | Note |
 |---|---|---|
 | **FGSM** | Single-step gradient-sign perturbation | Fast; sweep `eps` for the strength curve |
-| **PGD** | Iterative first-order adversary | Robustness vs PGD ⇒ robustness vs any first-order attack — the benchmark attack |
+| **PGD** | Iterative first-order adversary | Strong empirical baseline only when the threat model, restarts, step size, iterations, and defense adaptation are documented |
 | **C&W (L∞)** | Optimization-based, minimal perturbation | Least detectable; tiny perturbation, large accuracy drop |
 | **BIM** | Iterative FGSM | Used to generate examples for adversarial training |
 | **Adversarial patch** | Universal, targeted, printable | Robust and hard to defend; needs detection/transformer defense |
@@ -66,7 +66,7 @@ Defenses (five families: preprocessing, training, detection, transformer, postpr
 - **Spatial smoothing** (preprocessing, median filter) — recovers a chunk of attacked accuracy cheaply.
 - **Adversarial training** (`AdversarialTrainer`, `ratio` = fraction adversarial, generate with PGD/BIM) — most effective, but yields *empirical* not *certifiable* robustness and costs some clean accuracy.
 
-**Evaluation procedure:** pick an attack (FGSM for speed), sweep a range of `eps` values including `eps=0` (clean baseline), regenerate adversarial examples against *each* candidate, record accuracy at each strength, and plot **accuracy vs attack strength** for base vs defended. Use a test-set *sample* — attacks/defenses/eval are resource-intensive. Report the eps range where the defended model wins and where it doesn't.
+**Evaluation procedure:** apply gradient attacks only to differentiable models with authorized white-box access; they do not directly evaluate an API-hosted LLM. Define the threat model, sweep `eps` including `eps=0`, use multiple random restarts and defense-adaptive attacks, regenerate examples against each candidate, and plot accuracy vs attack strength. Add a diverse suite such as AutoAttack where applicable. Report empirical robustness only against the evaluated suite—never generalize one PGD result to “all first-order attacks.” Use prompt-level adversarial tests for hosted LLM APIs.
 
 For LLMs specifically, the "attack battery" also includes the prompt-level adversarial suite from `genai-red-team` (injection, jailbreak); the ML-taxonomy view (training-time/causative vs exploratory, targeted vs indiscriminate) lives there — the gate consumes its critical-findings verdict.
 

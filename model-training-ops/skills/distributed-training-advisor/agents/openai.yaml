@@ -1,0 +1,4 @@
+interface:
+  display_name: "Distributed Training Advisor"
+  short_description: "Help with Distributed Training Advisor tasks"
+  default_prompt: "Use $distributed-training-advisor to guide this research-platform task."

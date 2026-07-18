@@ -1,0 +1,4 @@
+interface:
+  display_name: "Drift Monitor Designer"
+  short_description: "Help with Drift Monitor Designer tasks"
+  default_prompt: "Use $drift-monitor-designer to guide this research-platform task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dataset Qos Slo Designer"
+  short_description: "Help with Dataset Qos Slo Designer tasks"
+  default_prompt: "Use $dataset-qos-slo-designer to guide this research-platform task."

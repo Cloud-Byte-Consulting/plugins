@@ -88,10 +88,12 @@ Signature: **`Initialized: False` with "gpu resource not registered"** — the i
 Node-monitoring agents surface granular conditions; **`AcceleratedHardwareReady: False`** = GPU hardware failure, typically remediated fast (Karpenter Node Auto Repair force-replaces after 10 min vs 30 for generic conditions). Evidence gathering:
 ```
 kubectl describe node <node> | grep -A12 Conditions
-kubectl debug node/<node> -it --image=nvidia/cuda:12.4.1-base-ubuntu22.04 -- nvidia-smi   # if permitted
+kubectl debug node/<node> -it --image=<approved-registry>/nvidia-cuda@sha256:<approved-digest> -- nvidia-smi
 # DCGM: check DCGM_FI_DEV_XID_ERRORS, DCGM_FI_DEV_GPU_TEMP in Prometheus
 ```
 On managed K8s, failed GPU hardware is the provider's to replace: cordon/drain the node, open a ticket with Lambda including node name, XID errors, and timestamps; verify auto-repair/replacement behavior with them. Unhealthy-GPU pods often show as stuck ContainerCreating or CrashLoop *despite* the node looking Ready — trust DCGM/XID over the Ready condition.
+
+`kubectl debug node` is a privileged host-debug path. Use it only with incident approval, provider authorization, a digest-pinned image from an approved registry, and audit logging. Prefer provider diagnostics/DCGM first, and do not run host-debug sessions on shared production nodes unless the incident requires it and the node has been isolated.
 
 ### 4. Scheduled, but CrashLoopBackOff / restarts during model load
 ```

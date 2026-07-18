@@ -1,0 +1,28 @@
+{
+  "name": "research-data-platform",
+  "version": "1.0.0",
+  "description": "Design governed and reproducible data products for AI research.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "homepage": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/research-data-platform",
+  "repository": "https://github.com/Cloud-Byte-Consulting/plugins",
+  "license": "Apache-2.0",
+  "keywords": ["data-contracts", "governance", "catalog", "lakehouse", "training-data"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Research Data Platform",
+    "shortDescription": "Governed research datasets and reproducible inputs.",
+    "longDescription": "Author data contracts and SLOs, review data products, design governance and catalogs, and build reproducible training-storage architecture.",
+    "developerName": "Cloud Byte Consulting",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive"],
+    "websiteURL": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/research-data-platform",
+    "defaultPrompt": [
+      "Design a research data contract.",
+      "Review this dataset as a data product.",
+      "Plan reproducible training-data storage."
+    ]
+  }
+}

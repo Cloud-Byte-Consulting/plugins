@@ -1,24 +1,12 @@
 ---
 name: agent-api-contract-designer
 description: >-
-  Design platform APIs that AI agents can consume reliably - contract-first
-  OpenAPI, the Richardson maturity ladder, versioning for uncoupled consumers
-  (tolerant reader, expansion changes, semver), consumer-driven contracts as
-  CI fitness functions, error design agents can recover from,
-  backend-for-frontend (BFF) per agent class, and API security with STRIDE
-  plus a seven-point API threat checklist that treats the agent as an
-  untrusted caller. Use whenever the user wants to design or review an API for
-  agents or machine consumers, write or audit an OpenAPI spec, decide REST
-  maturity level, plan API versioning or deprecation without breaking
-  consumers, set up contract testing or Pact-style consumer-driven contracts,
-  design error responses, choose API keys vs OAuth2, threat model an API,
-  harden endpoints against prompt-injected or compromised agents, or asks
-  "make our API AI-ready", "agent-friendly API", "API contract", "breaking
-  change policy", or "BFF for agents". Disambiguation - sibling
-  mcp-platform-api-author builds the MCP tool surface ON TOP of these
-  contracts; this skill designs the underlying API contract itself.
-  Identity and credentials for callers belong to sibling
-  agent-identity-engineer.
+  Design secure, contract-first platform APIs for AI agents and machine
+  consumers using OpenAPI, tolerant versioning, consumer-driven tests,
+  recoverable errors, BFF boundaries, and STRIDE-based threat modeling. Use
+  for agent-friendly APIs, OpenAPI review, REST maturity, breaking-change and
+  deprecation policy, Pact-style tests, OAuth2 versus API keys, error schemas,
+  prompt-injected callers, or an API contract beneath an MCP tool surface.
 ---
 
 # Agent API Contract Designer

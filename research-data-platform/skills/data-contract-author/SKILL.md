@@ -1,6 +1,6 @@
 ---
 name: data-contract-author
-description: Draft, review, and validate data contracts for research training and eval datasets — select a spec (ODCS/Bitol vs datacontract.com vs plain JSON Schema), author an ODCS YAML contract section by section, wire Data Contract CLI validation into CI, and enforce a semantic-versioning breaking-change policy. Use whenever the user asks to write a data contract, dataset contract, ODCS contract, Bitol contract, contract YAML, schema agreement between dataset producer and consumer, dataset handoff spec, or PII/sensitivity tagging of dataset fields; to compare data contract specifications or tooling (Data Contract CLI, datacontract.com, Open Data Contract Standard); to decide where contracts belong in a collection→curation→training pipeline; or to define what counts as a breaking change for a versioned corpus. For choosing the SLO numbers that go in the contract's quality/SLA sections, use the sibling dataset-qos-slo-designer skill — this skill authors the contract artifact; that one designs the service levels it encodes.
+description: Draft, review, and validate contracts for research training and evaluation datasets using ODCS, Data Contract CLI, or JSON Schema, with field-level sensitivity classification and semantic versioning. Use for dataset handoffs, contract YAML, schema agreements, breaking-change policy, PII tagging, contract CI, source licenses, or reproducibility metadata linking snapshots to materialized artifact manifests.
 ---
 
 # Data Contract Author
@@ -44,7 +44,7 @@ Author in this order; the file is YAML in a Git repo — reviewable, diffable, C
 5. **Stakeholders / team** — the human lineage: `username`, `role`, `dateIn`, `dateOut`, `replacedByUsername`. Researchers rotate; this section is who to ask when the labeler heuristics are undocumented.
 6. **Roles** — access roles per consumption mode (read curated, read raw, PII-clear).
 7. **Service-level agreements** — the SLIs/SLOs the producer commits to (frequency of update, latency, retention, time-to-detect/notify/repair, end-of-support).
-8. **Custom properties** — key-value escape hatch. Research-division staples: `trainedCheckpoints` (checkpoint IDs consuming this version), `sourceLicense`, `collectionMethod`, `evalFrozen: true`, `icebergSnapshotId`.
+8. **Custom properties** — key-value escape hatch. Research-division staples: `trainedCheckpoints`, `sourceLicense`, `collectionMethod`, `evalFrozen: true`, `icebergSnapshotId`, and `materializedArtifactManifest` (URI + digest). A snapshot identifies logical table state; reproducibility also requires hashes for the materialized shards plus transform/image/loader versions, ordering, and seed.
 
 ### Worked example (curated instruction-tuning corpus, ODCS v3 excerpt)
 ```yaml
@@ -91,6 +91,8 @@ slaProperties:
 customProperties:
   - property: icebergSnapshotId
     value: "8412370493812"
+  - property: materializedArtifactManifest
+    value: "s3://ml-artifacts/manifests/instr-tuning-2.1.0.json#sha256=<digest>"
   - property: evalFrozen
     value: false
 ```
@@ -112,8 +114,8 @@ Run in the dataset repo's pipeline (Argo Workflows/GitHub Actions on the K8s pla
 4. `datacontract export` — generate consumer artifacts: JSON Schema, pydantic models for loaders, dbt models, SQL DDL, HTML catalog page. Consumers code against generated artifacts, never hand-copied schemas.
 
 ### PII and sensitivity tagging
-Two orthogonal annotations on every applicable field, both machine-readable so policy engines and the ADP's agents can act on them:
-- **Sensitivity classification** — `public | internal | confidential | restricted`; drives access roles, masking, and which zones the field may reach. Enforce presence ("every string column carries a class") as a lint rule.
+Two orthogonal annotations on every field, including nested fields, both machine-readable so policy engines and the ADP's agents can act on them:
+- **Sensitivity classification** — `public | internal | confidential | restricted | not-sensitive`; drives access roles, masking, and which zones the field may reach. Enforce presence for every field regardless of type—dates, numeric identifiers, coordinates, booleans, and structures can be sensitive. Define how container classifications inherit to nested fields and reject ambiguous overrides.
 - **Semantic tagging** — schema.org URLs (`birthDate`, `email`, `postalCode`, `identifier`) to say *what the field is*, independent of storage type. This doubles as the RAG/agent-retrieval hook: agents resolve meaning from the ontology, not column names.
 Research corpora scraped from the web contain incidental PII — the contract must state the scrubbing guarantee (e.g., "email-pattern redaction ≥ 99.5%") as a quality rule, not a hope. Disambiguate overloaded terms ("curated", "gold", "labeled") with bounded contexts: define the term per domain in `authoritativeDefinitions` rather than fighting for one global definition.
 

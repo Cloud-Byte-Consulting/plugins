@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent API Contract Designer"
+  short_description: "Help with Agent API Contract Designer tasks"
+  default_prompt: "Use $agent-api-contract-designer to guide this research-platform task."

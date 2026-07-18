@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM Eval Harness"
+  short_description: "Help with LLM Eval Harness tasks"
+  default_prompt: "Use $llm-eval-harness to guide this research-platform task."

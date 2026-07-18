@@ -67,6 +67,20 @@ Thirty-five reusable workflows imported from the Cloud Byte Document Hub.
 See [`prompt-workflows/README.md`](prompt-workflows/README.md) for the group summary and Perplexity packaging workflow.
 See [`prompt-workflows/PROVENANCE.md`](prompt-workflows/PROVENANCE.md) for publication and third-party-source handling.
 
+### Research division suites
+
+Thirty-one operational skills for AI research platforms, imported from the Cloud Byte research-division bundle and hardened for publication.
+
+| Plugin | Skills | Focus |
+|---|---:|---|
+| `gpu-research-platform` | 7 | GPU tenancy, sharing, autoscaling, FinOps, GitOps, security, troubleshooting |
+| `model-training-ops` | 6 | Training pipelines, experiment standards, distributed training, Ray, fine-tuning |
+| `inference-testing` | 6 | Evaluation, benchmarking, release gates, rollout, drift, authorized red-teaming |
+| `research-data-platform` | 6 | Data contracts, SLOs, governance, catalogs, reproducible training storage |
+| `adp-enablement` | 6 | Platform maturity, MCP APIs, agent identity, API contracts, golden paths, fitness functions |
+
+See [`RESEARCH-DIVISION-PROVENANCE.md`](RESEARCH-DIVISION-PROVENANCE.md) for source history, review scope, and publication notes.
+
 ## Install
 
 ### Claude Code / claude.ai (plugin marketplace)
@@ -75,6 +89,11 @@ claude plugin marketplace add Cloud-Byte-Consulting/plugins
 claude plugin install platform-assessment@cloud-byte-plugins
 claude plugin install authoring@cloud-byte-plugins
 claude plugin install prompt-workflows@cloud-byte-plugins
+claude plugin install gpu-research-platform@cloud-byte-plugins
+claude plugin install model-training-ops@cloud-byte-plugins
+claude plugin install inference-testing@cloud-byte-plugins
+claude plugin install research-data-platform@cloud-byte-plugins
+claude plugin install adp-enablement@cloud-byte-plugins
 ```
 
 ### GitHub Copilot
@@ -99,12 +118,20 @@ or copy skill folders into `.agents/skills/` (repo) / `~/.agents/skills/` (user)
 
 ### Perplexity Computer
 
-Download an individual ZIP from [`prompt-workflows/perplexity/`](prompt-workflows/perplexity/)
-and upload it as a Computer Skill. Each archive contains `SKILL.md` at its root and
-is limited to 10 MB. Rebuild the full set after edits with:
+Download an individual ZIP from a plugin's `perplexity/` directory and upload it as a Computer Skill. Each archive contains `SKILL.md` at its root and is limited to 10 MB. The available collections are:
+
+- [`prompt-workflows/perplexity/`](prompt-workflows/perplexity/)
+- [`gpu-research-platform/perplexity/`](gpu-research-platform/perplexity/)
+- [`model-training-ops/perplexity/`](model-training-ops/perplexity/)
+- [`inference-testing/perplexity/`](inference-testing/perplexity/)
+- [`research-data-platform/perplexity/`](research-data-platform/perplexity/)
+- [`adp-enablement/perplexity/`](adp-enablement/perplexity/)
+
+Rebuild the packages after edits with:
 
 ```bash
 python3 prompt-workflows/scripts/package_perplexity.py
+python3 scripts/package_research_perplexity.py
 ```
 
 ### Microsoft 365 Copilot (declarative agents)
@@ -132,6 +159,13 @@ prompt-workflows/
 ├── skills/<name>/SKILL.md           # 35 portable workflows
 ├── perplexity/<name>.zip            # upload-ready packages
 └── scripts/package_perplexity.py
+gpu-research-platform/              # same cross-tool shape for each research suite
+├── .claude-plugin/plugin.json
+├── .codex-plugin/plugin.json
+├── skills/<name>/
+│   ├── SKILL.md
+│   └── agents/openai.yaml
+└── perplexity/<name>.zip
 ```
 
 Each `SKILL.md` is self-contained (frameworks, rubrics, formulas, and checklists inline) and carries `[bracketed]` placeholders to fill in before use. Skills cross-reference sibling skills by name; installing a full plugin keeps those links resolvable.

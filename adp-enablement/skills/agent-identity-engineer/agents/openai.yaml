@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Identity Engineer"
+  short_description: "Help with Agent Identity Engineer tasks"
+  default_prompt: "Use $agent-identity-engineer to guide this research-platform task."

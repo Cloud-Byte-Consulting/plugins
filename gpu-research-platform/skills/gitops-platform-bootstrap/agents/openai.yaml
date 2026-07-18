@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gitops Platform Bootstrap"
+  short_description: "Help with Gitops Platform Bootstrap tasks"
+  default_prompt: "Use $gitops-platform-bootstrap to guide this research-platform task."

@@ -1,6 +1,6 @@
 ---
 name: inference-benchmark-runner
-description: Benchmark model inference performance on GPU Kubernetes — measure and compare serving speed, latency, throughput, and efficiency, not answer quality. Use when the user says "benchmark this model", "measure TTFT", "time to first token", "tokens per second", "p95/p99 latency", "throughput at concurrency", "load test the endpoint", "concurrency sweep", "GPU utilization", "DCGM", "VRAM footprint", "cost per 1k tokens", "performance per parameter", "warm vs cold start", or "which checkpoint serves faster". Covers metric definitions (TTFT, tokens/sec, inter-token latency, p95/p99, throughput-at-concurrency, perf-per-billion-params, VRAM, cost-per-1k-tokens), load-test design (concurrency sweeps, warm vs cold), GPU-utilization correlation via DCGM, batching effects, a comparison-report format, and pitfalls (utilization is not app performance). For a research division on Lambda managed Kubernetes (GPU cloud); OSS-first (Prometheus, DCGM exporter, k6/locust, KServe-class serving). Sibling to llm-eval-harness (quality) — this skill is the performance axis of inference testing.
+description: Benchmark model-inference latency, throughput, GPU efficiency, and cost on Kubernetes without conflating performance with answer quality. Use for TTFT, tokens per second, inter-token latency, p95/p99, concurrency sweeps, warm versus cold starts, DCGM utilization, VRAM, cost per 1,000 tokens, batching, k6/Locust load tests, or checkpoint performance comparisons.
 ---
 
 # Inference Benchmark Runner

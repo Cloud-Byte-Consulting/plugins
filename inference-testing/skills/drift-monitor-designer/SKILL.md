@@ -1,6 +1,6 @@
 ---
 name: drift-monitor-designer
-description: Design the post-deployment monitoring stack that catches a model degrading in production on GPU Kubernetes — the four-monitor drift stack for research inference testing. Use when the user says "drift detection", "model monitoring", "data drift", "concept drift", "prediction drift", "model quality monitor", "bias drift", "feature attribution drift", "SHAP drift", "monitoring baseline", "drift threshold", "when should I alert", "Evidently", or "monitor spec". Covers the four monitors (data-quality, model-quality, bias-drift, feature-attribution/SHAP drift) with per-monitor baseline selection, schedule, thresholds, and alert wiring; the drift typology (instantaneous/gradual/periodic/temporary, concept vs data); OSS tool mapping (Evidently, Prometheus, custom K8s jobs); and a monitor-spec output format. For a research division on Lambda managed Kubernetes; OSS-first, translating SageMaker Model Monitor / Azure ML patterns to Evidently + Prometheus on K8s. Consumes model-release-gate baselines and inference-rollout-strategist deployment; closes the loop back to llm-eval-harness.
+description: Design privacy-safe post-deployment monitoring for data, concept, prediction, bias, and feature-attribution drift on Kubernetes. Use for drift detection, model monitoring, SHAP drift, baseline and threshold selection, delayed-label joins, Evidently, Prometheus, alerting, or a monitor specification that connects production signals to rollback and evaluation workflows.
 ---
 
 # Drift Monitor Designer
@@ -12,7 +12,9 @@ A model that passed every gate still rots in production as the world shifts unde
 
 ### First, capture the data
 Nothing is monitorable that isn't recorded. Stand up **data capture** at the serving layer:
-- Log model **inputs** (features/prompts) and **outputs** (predictions/responses) to cluster object storage.
+- Start with a privacy and threat-model gate: classify the traffic, identify regulated data and secrets, document the lawful purpose, and obtain required security/privacy approval before capture.
+- Minimize by default. Prefer derived metrics, hashes, feature summaries, or redacted samples over raw prompts and responses. Never export regulated or tenant-confidential content to an external judge without explicit authorization and an approved data-processing path.
+- When raw model **inputs** or **outputs** are necessary, redact PII/secrets before persistence; encrypt in transit and at rest; enforce tenant-scoped least-privilege access; record access; and set tested retention, deletion, and legal-hold rules.
 - Set a **sampling rate** — 100% for low-volume research traffic, a fraction at scale.
 - Enable it as part of the rollout, not after — a monitor with no captured history has no baseline to compare against on day one.
 
@@ -79,14 +81,14 @@ Distributional distance is what every drift monitor ultimately computes. Match t
 - Grafana dashboards visualize baseline-vs-current per monitor. This is the OSS translation of SageMaker Model Monitor / Azure ML monitoring signals.
 
 ### Closing the loop
-Every confirmed drift alarm feeds two places — drift detection that only pages a human and stops there is half a loop:
-- **Rollback triggers** in `inference-rollout-strategist` — a firing monitor can halt an in-progress rollout or roll back a live model automatically.
+Every confirmed drift alarm feeds two places—drift detection that only pages a human and stops there is half a loop:
+- **Rollout controls** in `inference-rollout-strategist` — data or attribution drift halts expansion and pages by default. Automatic rollback is reserved for sustained quality, safety, bias, or performance harm that is correlated with candidate exposure against the incumbent over a documented confirmation window.
 - **Eval dataset** in `llm-eval-harness` — the drifted inputs become new eval/regression cases so the next candidate is tested against exactly the distribution that broke the incumbent.
 
 A confirmed concept-drift alarm additionally justifies a retraining trigger; a bias-drift alarm justifies re-running the release-gate fairness audit before any retrain, because retraining naively on drifted data can deepen the bias rather than fix it.
 
 ## Workflow
-1. **Confirm data capture** is on at the serving layer (inputs + outputs, sampled to object storage).
+1. **Confirm safe capture**: approved purpose, classification, minimization/redaction, encrypted storage, identity-aware access, audit trail, retention/deletion, and restrictions on external judges.
 2. **Classify the expected drift.** Which typology (data/concept/prediction/attribution) and temporal pattern matter for this research workload? This sizes windows and thresholds.
 3. **Set baselines from upstream.** Training-set stats (data quality), eval floors (model quality), gate fairness results (bias), gate SHAP ranking (attribution) — reuse, don't recompute.
 4. **Design each of the four monitors:** baseline, schedule (respecting label delay for model-quality/bias), threshold (conservative first), alert action.
@@ -95,7 +97,7 @@ A confirmed concept-drift alarm additionally justifies a retraining trigger; a b
 7. **Tune.** Start wide, tighten as normal variance is learned; suppress periodic-pattern false positives with window design.
 
 ## Output spec
-Deliver a **Monitor Spec**: (1) data-capture config — what's logged, sampling rate, storage location; (2) drift-typology assessment for this workload with the temporal patterns expected; (3) a per-monitor table — for each of the four: signal, baseline source, schedule (with label-delay offset where relevant), metric + threshold, alert action; (4) the OSS wiring diagram (Evidently CronJob → Prometheus → Alertmanager → Grafana, plus label-join Jobs); (5) the threshold-tuning plan (conservative start, tightening criteria); (6) the loop-closure map — each alarm → rollback trigger in `inference-rollout-strategist` and → eval-case feedback in `llm-eval-harness`. Note the Lambda managed-Kubernetes / OSS context throughout: Evidently + Prometheus + custom K8s jobs replace the managed SageMaker/Azure monitors; monitors run in-cluster on captured data.
+Deliver a **Monitor Spec**: (1) safe data-capture config — purpose, classification, minimization/redaction, sampling, encrypted storage, access, audit, retention/deletion, and judge restrictions; (2) drift-typology assessment for this workload with the temporal patterns expected; (3) a per-monitor table — for each of the four: signal, baseline source, schedule (with label-delay offset where relevant), metric + threshold, alert action; (4) the OSS wiring diagram (Evidently CronJob → Prometheus → Alertmanager → Grafana, plus label-join Jobs); (5) the threshold-tuning plan (conservative start, tightening criteria); (6) the loop-closure map — each alarm → rollback trigger in `inference-rollout-strategist` and → eval-case feedback in `llm-eval-harness`. Note the Lambda managed-Kubernetes / OSS context throughout: Evidently + Prometheus + custom K8s jobs replace the managed SageMaker/Azure monitors; monitors run in-cluster on approved captured data.
 
 ## Siblings
 `model-release-gate` (supplies the fairness and attribution baselines) · `inference-rollout-strategist` (consumes drift signals as rollback triggers) · `llm-eval-harness` (receives drifted inputs as new eval cases) · `inference-benchmark-runner` (performance metrics like TTFT/throughput can also be monitored for drift).

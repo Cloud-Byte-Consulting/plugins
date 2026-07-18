@@ -1,33 +1,26 @@
 ---
 name: platform-maturity-benchmark
 description: >-
-  Score an organization's platform-engineering maturity on the CNCF Platform
-  Engineering Maturity Model (4 stages x 5 aspects) and position every score
-  against industry distribution percentages, then layer secondary axes (DOMM,
-  Golden Path maturity, Cloud Native maturity) and produce a
-  percentile-positioned gap register that feeds a platform roadmap. Use
-  whenever the user asks for a platform maturity assessment, CNCF maturity
-  model scoring, platform engineering benchmark, industry percentile
-  comparison, "how mature is our platform", "how do we compare to other
-  platform teams", DevOps maturity (DOMM) rating, cloud native maturity level,
-  whether their org is ready for an IDP, or wants survey-calibrated evidence
-  that their platform investment, adoption, interfaces, operations, or
-  measurement are ahead of or behind the market. Disambiguation - the sibling
-  platform-assessment plugin's asdlc-maturity-assessment skill scores
-  AGENT-ADOPTION maturity (8-path x 5-level ASDLC rubric); this skill
-  benchmarks PLATFORM-ENGINEERING maturity against the CNCF model and industry
-  data. Run both for a full ADP engagement.
+  Score platform-engineering maturity on the CNCF four-stage, five-aspect
+  model and compare it with a source-versioned industry distribution before
+  producing a gap register. Use for platform maturity assessments, CNCF or
+  DOMM scoring, industry percentile comparisons, Golden Path and Cloud Native
+  maturity, IDP readiness, platform investment or adoption evidence, and
+  current-versus-historical benchmark analysis. This evaluates platform
+  maturity, not agent-adoption maturity.
 ---
 
 # Platform Maturity Benchmark
 
 ## Purpose
-Turn "how good is our platform?" into a scored, percentile-positioned diagnosis. Score the organization on the CNCF Platform Engineering Maturity Model's 4×5 grid, place each score against the industry distribution (so "we're at Operational" becomes "we're with the 43% majority, and one stage from the top 12%"), cross-check with three secondary maturity axes, and emit a gap register the roadmap can consume. This is the platform-side twin of the sibling `asdlc-maturity-assessment` skill (platform-assessment plugin), which scores agent adoption; an Agentic Developer Portal engagement needs both readings, because agents amplify whatever platform maturity exists.
+Turn "how good is our platform?" into a scored, percentile-positioned diagnosis. Score the organization on the CNCF Platform Engineering Maturity Model's 4×5 grid, place each score against a source-versioned industry distribution, cross-check with three secondary maturity axes, and emit a gap register the roadmap can consume. This is the platform-side twin of the sibling `asdlc-maturity-assessment` skill (platform-assessment plugin), which scores agent adoption; an Agentic Developer Portal engagement needs both readings, because agents amplify whatever platform maturity exists.
 
 ## Core model to hold in your head
 
-### The CNCF 4×5 grid with industry distribution (the benchmark table)
-Four stages — **Provisional → Operational → Scalable → Optimizing** — evaluated across five aspects. The percentages are the industry distribution from the State of Platform Engineering survey (281 platform professionals; respondents without a platform team filtered out). Score each aspect independently; orgs are almost never at one stage across the board.
+### The CNCF 4×5 grid with a versioned benchmark
+Four stages — **Provisional → Operational → Scalable → Optimizing** — evaluated across five aspects. Before calculating any percentile, retrieve the latest State of Platform Engineering report from `https://weaveintelligence.io/research/`, record the report volume, publication date, sample and filters, and use that report's table. Never mix percentages across volumes.
+
+The table below is a **historical Volume 3 snapshot** (281 platform professionals; respondents without a platform team filtered out). It is retained as a worked calculation example, not as a current industry benchmark. Volume 4 is already published and later volumes may supersede it; refresh the values before client use. Score each aspect independently because organizations are almost never at one stage across the board.
 
 | Aspect (question it answers) | Provisional | Operational | Scalable | Optimizing |
 |---|---|---|---|---|
@@ -47,7 +40,7 @@ Percentile mechanics: an org's position on an aspect = the cumulative share of o
 | Operations | Scalable | 50.0% | 10.7% | With the 38.9% plurality |
 | Measurement | Provisional | 0% | 57.5% | The anchor dragging every other claim down |
 
-Calibration anchors from the same survey (quote these to keep scores honest):
+Historical calibration anchors from the same Volume 3 survey (label them with the volume if used):
 - **44.67% of organizations measure nothing at all**; 37.3% use DORA; 11.5% measure time-to-market. A claimed Scalable/Optimizing Measurement score should stand out against a market where near-half measure zero.
 - Only 22.1% report significant metric improvements since introducing platform engineering; 26.6% don't know whether anything improved.
 - Self-reported maturity runs ahead of reality — the survey itself flags the contradiction between high Operations self-scores (user-need focused) and dismal Measurement scores (not measuring users). If Measurement lands two stages below Operations, distrust the Operations self-report.
@@ -73,7 +66,7 @@ Layer these to catch cases where the CNCF grid under- or over-reads the org:
 ### From scores to gap register
 Each aspect gap becomes a register entry: aspect, current stage, current percentile, target stage (usually +1; never +2 in one roadmap horizon), the blocking evidence, and the owning enablement skill:
 - Interfaces / Adoption gaps → `golden-path-designer`.
-- Measurement gaps → `platform-fitness-functions` (and sequence these FIRST — you cannot demonstrate any other gap closed without instrumentation, and the 44.67%-measure-nothing market makes it the cheapest differentiation available).
+- Measurement gaps → `platform-fitness-functions` and sequence these first—you cannot demonstrate any other gap closed without instrumentation. Use the current report, if available, to quantify the market comparison.
 - Agent-facing Interfaces gaps → `mcp-platform-api-author` + `agent-api-contract-designer`.
 - Identity prerequisites → `agent-identity-engineer`.
 - Backend architecture gaps → `idp-adp-architect` (platform-assessment plugin).
@@ -81,18 +74,18 @@ Each aspect gap becomes a register entry: aspect, current stage, current percent
 ## Workflow
 1. **Interview per aspect.** For [YOUR ORGANIZATION / CLIENT], walk the five aspect questions and collect evidence, not aspiration: budget lines and team charters (Investment), adoption telemetry and mandate policies (Adoption), how the last five infra requests were actually fulfilled (Interfaces), the platform team's backlog source (Operations), what metrics exist and who reads them (Measurement). Prefer artifacts over self-report — for a managed-K8s research context: namespace request tickets, GPU quota processes, cluster onboarding docs.
 2. **Score the 4×5 grid.** One stage per aspect, one line of evidence per score. Where evidence conflicts, score low and note the conflict.
-3. **Position against industry.** Compute cumulative percentile per aspect from the benchmark table; render the five-row table with the org's cell highlighted and behind/ahead percentages.
+3. **Version the benchmark, then position.** Retrieve the latest report, record its volume/date/sample/filter, transcribe and cross-check one complete distribution, and only then compute cumulative percentiles. If current source data is unavailable, omit percentile claims and present stage-only scoring; do not silently fall back to the historical table.
 4. **Run structural diagnostics.** Portal-trap check, 3-tier mapping, pipeline-vs-graph backend reading against developer headcount.
 5. **Triangulate with secondary axes.** DOMM level, Golden Path level, Cloud Native level. Apply the "IDP effective at Scale" gate explicitly and say so if the org fails it.
 6. **Apply the self-report discount.** Compare the Measurement score against all other aspects; flag any aspect scored 2+ stages above Measurement as unverified.
-7. **Emit the gap register.** Table: aspect | current stage | percentile | target | blocking evidence | owning skill | sequence. Measurement first; then the aspect where one stage of movement crosses the biggest percentile mass (e.g., Operational→Scalable on Investment moves past 43% of the market).
+7. **Emit the gap register.** Table: aspect | current stage | percentile | target | blocking evidence | owning skill | sequence. Measurement first; then the aspect where one stage of movement crosses the largest share in the source-versioned current distribution.
 8. **Output.** A benchmark report: the highlighted 4×5 table, per-aspect percentile narrative, secondary-axis triangulation, structural red flags, the gap register, and an explicit statement of whether the org clears the IDP-at-Scale gate and (with the ASDLC reading from `asdlc-maturity-assessment`) is fit to start ADP enablement.
 
 ## Guardrails
 - Score aspects independently — never average into a single "maturity number" (a numeric index, if wanted, is `platform-fitness-functions`' MMI-style construction, built transparently).
-- Never accept a self-reported stage the Measurement score can't support; the survey's own finding is that orgs "have a much better image of themselves than the reality."
-- Quote the exact industry percentages; the credibility of the benchmark is the survey data, not the consultant's judgment.
-- Optimizing is rare by construction (9–17% per aspect) — demand exceptional evidence before awarding it.
+- Never accept a self-reported stage the Measurement score cannot support. If the selected report discusses self-report bias, cite that source and version rather than treating the historical wording as timeless.
+- Quote exact percentages only with the report volume, publication date, sample/filter, and source link. Historical embedded values must never be described as current.
+- Demand exceptional evidence before awarding Optimizing; quantify its rarity only from the selected source-versioned distribution.
 - Don't recommend ADP enablement work to an org below Cloud Native Scale or with a No-golden-path reading; foundations first.
 - This skill benchmarks; it does not design. Architecture → `idp-adp-architect`; agent-adoption scoring → `asdlc-maturity-assessment` (both in the platform-assessment plugin).
 

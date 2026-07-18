@@ -1,0 +1,4 @@
+interface:
+  display_name: "Finetuning Strategy Advisor"
+  short_description: "Help with Finetuning Strategy Advisor tasks"
+  default_prompt: "Use $finetuning-strategy-advisor to guide this research-platform task."

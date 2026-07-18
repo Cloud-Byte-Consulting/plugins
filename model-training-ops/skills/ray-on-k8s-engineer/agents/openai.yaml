@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ray On K8s Engineer"
+  short_description: "Help with Ray On K8s Engineer tasks"
+  default_prompt: "Use $ray-on-k8s-engineer to guide this research-platform task."

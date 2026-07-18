@@ -1,6 +1,6 @@
 ---
 name: inference-rollout-strategist
-description: Choose and design how a released model reaches production traffic on GPU Kubernetes — the deployment-strategy decision for research inference testing. Use when the user says "how should I roll out this model", "canary vs blue-green", "shadow deployment", "traffic split", "A/B test two models", "multi-armed bandit rollout", "progressive model rollout", "versioned model endpoints", "model-selector API", "model caching", "rollback triggers", "batch vs real-time inference", or "autoscaling for the new model". Covers the batch-vs-real-time decision, the shadow -> canary -> blue/green -> A/B -> bandit ladder with a when-each table, progressive rollout on K8s (versioned endpoints, model-selector APIs, model caching, SLM-in-dev/LLM-in-prod), rollback triggers wired to eval metrics, and asymmetric GPU autoscaling policy pairing. For a research division on Lambda managed Kubernetes; OSS-first (KServe-class serving, KEDA/HPA, Prometheus). Consumes model-release-gate output; pairs with drift-monitor-designer for live signals.
+description: Choose and design a safe production rollout for model inference on GPU Kubernetes, including shadow, canary, blue-green, A/B, and bandit strategies. Use for traffic splitting, progressive delivery, versioned endpoints, batch-versus-real-time decisions, model selectors and caching, rollback triggers, KServe-style serving, or asymmetric KEDA/HPA autoscaling.
 ---
 
 # Inference Rollout Strategist
@@ -63,18 +63,19 @@ Implement the ladder with **production variants**: multiple model versions behin
 For fine-grained routing (by header, region, or user cohort) put a load balancer in front and route to variants explicitly rather than by weight.
 
 ### Rollback triggers wired to eval metrics
-A rollout is only safe if it retreats automatically. Wire triggers to the same thresholds the release gate used — the reference-free eval metrics promoted to guardrails by `llm-eval-harness` become live rollback conditions:
-- **Quality:** live faithfulness / answer-relevance guardrail pass-rate drops below the gate floor → halt and roll back.
-- **Performance:** p95 TTFT or end-to-end latency breaches the SLO from `inference-benchmark-runner`; error rate spikes.
-- **Drift:** a `drift-monitor-designer` signal (data-quality, model-quality, bias, or attribution) fires above threshold.
-- **Business/feedback:** the A/B or bandit reward metric regresses.
+A rollout is only safe if it halts automatically and rolls back on confirmed candidate harm. Compare the candidate with the incumbent over a documented confirmation window and require the regression to correlate with candidate exposure:
+- **Quality/safety:** a sustained faithfulness, answer-relevance, or safety regression below the gate floor relative to the incumbent may trigger automatic rollback.
+- **Performance:** a sustained candidate-correlated p95 TTFT, end-to-end latency, or error-rate breach may trigger automatic rollback.
+- **Data or attribution drift:** halt rollout expansion and page by default. These signals can reflect legitimate traffic change that rollback cannot fix; roll back only when a confirmed quality/safety regression is also exposure-correlated.
+- **Model-quality or bias drift:** halt and investigate; automate rollback only when the confirmation window and incumbent comparison attribute harm to the candidate.
+- **Business/feedback:** halt on regression; roll back automatically only when experiment design establishes candidate causality and the minimum-sample rule is met.
 Rollback mechanics differ by strategy:
 - **Blue/green** — fastest rollback: flip 100% of weight back to the idle blue variant.
 - **Canary** — zero the canary weight; the incumbent already carries the majority of traffic.
 - **A/B** — abort the experiment, route 100% to the incumbent variant.
 - **Bandit** — the router already starves a losing variant, but wire an absolute floor that yanks a variant on a hard SLO or safety breach rather than waiting for reward to converge.
 
-Define the trigger, the automated action, and who is paged, *before* shifting the first percent — a rollback path designed during an incident is not a rollback path.
+Define the trigger, confirmation window, incumbent comparison, automated action, and who is paged before shifting the first percent—a rollback path designed during an incident is not a rollback path.
 
 ### Autoscaling policy pairing (asymmetric for GPU)
 GPU serving needs **asymmetric autoscaling — fast scale-out, slow scale-in**. Pair the rollout with:

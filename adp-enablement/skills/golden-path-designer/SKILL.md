@@ -1,23 +1,12 @@
 ---
 name: golden-path-designer
 description: >-
-  Design golden paths (paved roads) as products for platform users - including
-  AI agents as first-class path executors: the 3-level golden-path maturity
-  model with per-level implementation guidance, Thinnest Viable Platform (TVP)
-  scoping via hypothesis-validate-expand, Backstage Software Templates plus
-  Crossplane composite abstractions as the implementation pattern, CI-enforced
-  onboarding scorecards and maturity gates (OPA, Kyverno, KubeLinter),
-  machine-consumable path design, and adoption KPIs segmented by platform
-  lifecycle phase. Use whenever the user wants to design a golden path or
-  paved road, build self-service workflows, scaffold new services or
-  experiments, write Backstage templates or software templates, build
-  Crossplane compositions or platform abstractions, scope an MVP or TVP for a
-  platform, enforce onboarding standards in CI, fight template drift or
-  clone-and-forget, measure platform adoption, or make workflows agents can
-  execute ("agents should be able to spin up an experiment"). Disambiguation -
-  the sibling idp-adp-architect skill (platform-assessment plugin) places
-  golden paths within the five-plane reference architecture; this skill
-  DESIGNS and productizes the individual paths themselves.
+  Design golden paths as versioned products for human and AI-agent users,
+  using maturity levels, Thinnest Viable Platform scoping, Backstage
+  templates, Crossplane abstractions, CI gates, and adoption metrics. Use for
+  paved roads, self-service workflows, service or experiment scaffolds,
+  platform MVP/TVP work, OPA/Kyverno/KubeLinter controls, template drift,
+  clone-and-forget problems, or machine-executable onboarding paths.
 ---
 
 # Golden Path Designer

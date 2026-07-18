@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gpu Cost Optimizer"
+  short_description: "Help with Gpu Cost Optimizer tasks"
+  default_prompt: "Use $gpu-cost-optimizer to guide this research-platform task."

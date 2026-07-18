@@ -1,0 +1,4 @@
+interface:
+  display_name: "Genai Red Team"
+  short_description: "Help with Genai Red Team tasks"
+  default_prompt: "Use $genai-red-team to guide this research-platform task."

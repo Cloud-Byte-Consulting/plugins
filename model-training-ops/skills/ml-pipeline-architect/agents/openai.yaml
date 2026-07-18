@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ml Pipeline Architect"
+  short_description: "Help with Ml Pipeline Architect tasks"
+  default_prompt: "Use $ml-pipeline-architect to guide this research-platform task."

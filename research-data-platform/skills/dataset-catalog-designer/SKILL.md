@@ -1,6 +1,6 @@
 ---
 name: dataset-catalog-designer
-description: Design the dataset catalog / knowledge layer that makes research datasets discoverable by humans AND agents — the three browse dimensions (vertical domains, horizontal lineage, relational graph), catalog metamodel, role model (domain/source/asset/term owners and stewards), glossary governance (free/domain/global), the marketplace-vs-catalog architecture decision (pull vs push metadata, self-registration, two-sided marketplace), search quality (recall/precision), and agent-consumability requirements for an Agentic Developer Portal. Use whenever the user asks to design or evaluate a data catalog, dataset discovery, dataset search, metadata management, business glossary, taxonomy or thesaurus for datasets, a data marketplace, knowledge-graph catalog, dataset metamodel, or "how will agents find our datasets"; or complains that nobody can find datasets, search returns junk, or catalog metadata is stale. This skill designs the discovery/knowledge layer; whether an individual dataset deserves to be in it is judged by the sibling data-product-reviewer skill, and the physical storage it indexes is designed by training-storage-architect.
+description: Design an identity-aware dataset catalog or marketplace that supports human and agent discovery without leaking unauthorized metadata. Use for dataset search, catalog metamodels, knowledge graphs, glossaries and taxonomies, lineage, self-registration, pull-versus-push metadata, semantic search, role assignment, agent APIs, stale catalog data, or recall and precision problems.
 ---
 
 # Dataset Catalog Designer
@@ -52,6 +52,8 @@ Strive for control *and* no-control at once: a fully controlled vocabulary looks
 | Precondition | Works with dumb data sources | Requires datasets to expose standard discovery/observability interfaces (data products) |
 Decision rule: if datasets are becoming products with self-describing APIs (the mesh path), build the **marketplace pattern** — window into the mesh, no metadata duplication. If most sources are passive buckets today, start catalog-style but adopt marketplace properties immediately: self-registration, producer-owned metadata, summaries-plus-links rather than full duplication. Hybrid is the honest state for most research divisions mid-transition.
 
+**Non-leaky discovery is a hard boundary.** Authenticate before retrieval, filtering, ranking, autocomplete, graph traversal, and detail resolution. Partition indexes/embeddings by policy domain or apply identity-aware filters before candidate generation—not after results are ranked. Unauthorized users and agents must not learn asset names, summaries, license/PII flags, lineage, counts, or existence through search, vector similarity, errors, or timing.
+
 ### Search quality (define acceptance before building)
 - **Recall** (find everything relevant) vs **precision** (find only relevant) — dataset discovery is recall-first at the browse stage (missing the one good corpus is costly), precision-first at the ranking stage. Measure both with a benchmark set of ~20 real research queries with known-correct answers.
 - Support the three query patterns:
@@ -68,7 +70,7 @@ The ADP's agents are catalog users with no tolerance for tribal knowledge:
 2. **Addressability**: every asset resolvable by permanent URI to an aggregate root (docs, schema, SLOs, access) — agents chain discovery → contract → access without a human.
 3. **Structured, standards-based metadata**: contracts as metadata source of truth; schema.org semantic tags on fields; sensitivity classes machine-readable so agents can self-filter what they may retrieve.
 4. **Knowledge-graph readiness**: prefer a flexible, visual, extendable, queryable metamodel (knowledge-graph catalogs) so agents traverse relations ("datasets sharing this entity scheme") rather than keyword-match; the mesh-level graph can emerge from per-dataset semantic links instead of central modeling.
-5. **Vectorized summaries** for natural-language search — the producer's 2-paragraph summary is embedded and retrievable; write summaries knowing they are prompts.
+5. **Policy-partitioned vectorized summaries** for natural-language search — embed only approved metadata, bind each vector to enforceable access policy, and filter before similarity retrieval. Never place restricted summaries in a globally searchable index.
 6. **Certification and SLO status inline** in results so agents (and ranking) can filter to trustworthy assets automatically.
 
 ### User groups (design for all three, sized honestly)
@@ -83,8 +85,8 @@ The ADP's agents are catalog users with no tolerance for tribal knowledge:
 3. **Design the metamodel**: entities (domain, dataset, asset, term, person, checkpoint, training run), relations, and the lineage-to-checkpoint edge; prefer an extendable graph metamodel.
 4. **Make the marketplace/catalog call** using the decision table; specify pull vs push per source class and the self-registration flow (summary + links, minutes not weeks).
 5. **Assign roles** per the role model, reconciled with the governance steward roster; define the glossary plan (all three types, owners, promotion path folksonomy → taxonomy → thesaurus).
-6. **Specify search**: query patterns, facets from domain taxonomies, ranking signals (usage, certification, freshness), recall/precision targets against the benchmark set.
-7. **Specify the agent surface**: API list, addressing convention, metadata schemas, auth model for non-human identities.
+6. **Specify authorized search**: identity-aware filtering before retrieval/ranking, index partitioning, non-leaking errors, query patterns, facets, ranking signals, and recall/precision targets measured within each caller's authorized corpus.
+7. **Specify the agent surface**: API list, addressing convention, metadata schemas, non-human identity and authorization model, and tests proving unauthorized metadata cannot enter results or embeddings.
 8. **Pilot with two domains**, run the benchmark queries (human and agent), measure, then scale by self-registration — not by central data entry.
 
 ## Output spec

@@ -1,0 +1,28 @@
+{
+  "name": "inference-testing",
+  "version": "1.0.0",
+  "description": "Evaluate, release, monitor, and red-team model inference safely.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "homepage": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/inference-testing",
+  "repository": "https://github.com/Cloud-Byte-Consulting/plugins",
+  "license": "Apache-2.0",
+  "keywords": ["evaluation", "inference", "red-team", "drift", "release-gate"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Inference Testing",
+    "shortDescription": "Evidence-based model evaluation and release safety.",
+    "longDescription": "Build evaluation harnesses, performance benchmarks, release gates, rollout strategies, drift monitoring, and authorized red-team programs.",
+    "developerName": "Cloud Byte Consulting",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive"],
+    "websiteURL": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/inference-testing",
+    "defaultPrompt": [
+      "Build a model evaluation harness.",
+      "Review this model release gate.",
+      "Design an authorized red-team engagement."
+    ]
+  }
+}

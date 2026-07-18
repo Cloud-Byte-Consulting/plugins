@@ -1,0 +1,4 @@
+interface:
+  display_name: "Researcher Tenancy Provisioner"
+  short_description: "Help with Researcher Tenancy Provisioner tasks"
+  default_prompt: "Use $researcher-tenancy-provisioner to guide this research-platform task."

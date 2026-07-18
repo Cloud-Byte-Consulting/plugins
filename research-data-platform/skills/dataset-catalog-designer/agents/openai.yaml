@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dataset Catalog Designer"
+  short_description: "Help with Dataset Catalog Designer tasks"
+  default_prompt: "Use $dataset-catalog-designer to guide this research-platform task."

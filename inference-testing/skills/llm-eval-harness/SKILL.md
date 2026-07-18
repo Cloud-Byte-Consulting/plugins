@@ -1,7 +1,12 @@
 ---
 name: llm-eval-harness
 description: >-
-  Build model-level evaluation suites for research inference testing — evaluate a model's behavior, correctness, and quality before/after release, not an app's runtime traces. Use when the user says "build an eval harness", "evaluate this model", "model eval suite", "regression eval across model versions", "compare two checkpoints", "golden dataset", "reference answers", "BLEU/ROUGE/sacrebleu", "LLM-as-judge for model quality", "answer faithfulness / hallucination eval", "synthetic ground truth", "eval-as-guardrail", or "promotion threshold". Covers eval-dataset construction (golden + red-team-derived edge cases + synthetic ground truth via Ragas when unlabeled), a metric-selection matrix (deterministic BLEU/ROUGE vs semantic vs LLM-as-judge with judge-bias caveats), component vs end-to-end evaluation, cross-version regression suites, and promoting eval thresholds into runtime guardrails. For a research division on Lambda managed Kubernetes; OSS-first. Disambiguation: sibling ai-engineering:llm-evals-engineer covers APPLICATION-level eval engineering (tracing spans, RAG retriever/generation metric split, prod scoring loops); THIS skill covers MODEL-level inference testing and release gating.
+  Build model-level evaluation suites for correctness, quality, faithfulness,
+  safety, and cross-version regression. Use for model eval harnesses, golden or
+  synthetic datasets, BLEU/ROUGE/semantic metrics, LLM-as-judge calibration,
+  checkpoint comparison, promotion thresholds, or converting red-team cases
+  into durable tests. This skill evaluates model behavior; use the separate
+  application-eval skill for production traces and RAG component telemetry.
 ---
 
 # LLM Eval Harness

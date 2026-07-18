@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gpu Sharing Advisor"
+  short_description: "Help with Gpu Sharing Advisor tasks"
+  default_prompt: "Use $gpu-sharing-advisor to guide this research-platform task."

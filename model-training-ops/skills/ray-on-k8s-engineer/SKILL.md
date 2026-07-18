@@ -1,6 +1,6 @@
 ---
 name: ray-on-k8s-engineer
-description: Stand up and operate Ray on Kubernetes for researchers — the KubeRay operator and its RayCluster/RayJob/RayService CRDs, ephemeral vs permanent cluster decision table, custom Ray images, GPU worker groups and fractional GPUs, autoscaling, Ray Tune hyperparameter-tuning setup (trainable, search space, grid/random/Bayesian search algorithms, ASHA early stopping), MLflow/TensorBoard integration, Prometheus/Grafana observability with ray.util.metrics, and the ingress/auth hardening checklist. Use whenever the user mentions Ray, KubeRay, RayCluster, RayJob, RayService, Ray Serve, Ray Tune, Ray Train, Ray dashboard, Ray autoscaler, head node, worker groups, HPO on a cluster, hyperparameter sweep, distributed tuning, fractional GPU, or asks to deploy/secure/monitor a Ray cluster, submit jobs to Ray, or serve a model with Ray Serve and vLLM; or complains that Ray pods are Pending, GPUs leak, or anyone can hit the Ray endpoint. For whether Ray is the right framework at all use the sibling distributed-training-advisor skill; for the MLflow logging contract Tune trials must satisfy use experiment-registry-standard; for notebook-to-Ray-cluster patterns use notebook-to-production.
+description: Stand up, secure, and operate KubeRay clusters and Ray workloads on GPU Kubernetes, including RayCluster, RayJob, RayService, Tune, autoscaling, MLflow, and Prometheus. Use for Ray deployment, HPO and sweeps, fractional GPUs, custom images, dashboard or Job API exposure, worker groups, pending Ray pods, credential isolation, observability, Ray Serve, or vLLM serving.
 ---
 
 # Ray on K8s Engineer
@@ -72,7 +72,7 @@ Work through all of it; Ray's defaults fail every line:
 2. **TLS on gRPC** is shared-secret-grade (clients hold the key material) — treat it as encryption in transit, not authentication; auth lives at the ingress/network layer.
 3. **NetworkPolicies**: only permitted namespaces (Argo runners, JupyterHub, CI) may reach Ray services.
 4. **Multitenancy is weak**: per-user worker binding reduces accidents, but **named actors are callable from any job on the cluster and cloudpickle ⇒ arbitrary-code paths** — tenant isolation belongs to K8s (namespace + quota + separate clusters), not Ray. Prefer ephemeral per-team clusters over one shared cluster.
-5. **Credentials** via `runtime_env` env vars sourced from K8s Secrets — never hardcoded in job code; scope per job, or per actor via `.options(runtime_env=...)` where one actor needs write access.
+5. **Credentials never travel in `runtime_env`.** Prefer workload identity. Where a secret is unavoidable, inject it into Ray pods from a Kubernetes Secret or CSI-mounted secret with namespace-scoped RBAC; submit only a non-secret capability reference with the job. Ray job metadata, dashboard state, logs, and serialized runtime environments are not secret stores. Separate clusters or worker groups when actors need materially different privileges.
 6. **Image hygiene**: scan Ray images (they have shipped flagged deps); rebuild from source/updated bases when scanners flag bundled libraries; pin versions.
 7. RBAC: researchers get namespace-scoped rights to create RayJobs, not cluster-admin; the operator alone holds CRD-wide powers.
 

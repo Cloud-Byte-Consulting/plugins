@@ -1,0 +1,4 @@
+interface:
+  display_name: "Notebook to Production"
+  short_description: "Help with Notebook to Production tasks"
+  default_prompt: "Use $notebook-to-production to guide this research-platform task."

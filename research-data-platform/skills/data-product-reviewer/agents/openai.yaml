@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Product Reviewer"
+  short_description: "Help with Data Product Reviewer tasks"
+  default_prompt: "Use $data-product-reviewer to guide this research-platform task."

@@ -82,12 +82,14 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: default-deny-ingress
+  name: default-deny
   namespace: proj-vision-lab
 spec:
   podSelector: {}
-  policyTypes: [Ingress]        # add explicit allows for ingress controller, Prometheus scrape
+  policyTypes: [Ingress, Egress]
 ```
+
+Default-deny is only the base. Add narrow, reviewed policies for required flows: cluster DNS, ingress-controller traffic, Prometheus scraping, approved object-store endpoints, Git/registry egress, telemetry, and explicitly approved external services. Prefer namespace selectors plus destination CIDRs or FQDN-aware policy where the CNI supports it; never add unrestricted `0.0.0.0/0` egress as a convenience. Test both cross-namespace and internet denial from a tenant pod before declaring the boundary complete.
 
 Sizing GPU quota: total of all tenants' `requests.nvidia.com/gpu` may exceed physical supply only if you accept queueing; keep hard-guaranteed tenants ≤ node-pool capacity (ask Lambda: GPUs per node type and max pool size). Under time-slicing, quota counts *virtual* GPUs — set numbers accordingly and say so in the tenant docs. The `team`/`project`/`owner`/`env` labels are the chargeback keys gpu-cost-optimizer depends on — non-negotiable.
 
@@ -182,7 +184,7 @@ cull:
 3. Stamp the namespace bundle + Role/RoleBindings from templates; commit to the tenants/ path in Git — the GitOps pipeline applies it (gitops-platform-bootstrap vends this via ApplicationSet).
 4. Map identities: confirm the users/group exist in the cluster's OIDC source; bind group not individuals where possible.
 5. JupyterHub: add users/group to the hub allowlist; confirm the right profiles are visible.
-6. Verify as the tenant: `kubectl auth can-i` matrix; launch a GPU smoke-test pod; confirm quota rejection past the limit; confirm default-deny blocks cross-namespace traffic.
+6. Verify as the tenant: `kubectl auth can-i` matrix; launch a GPU smoke-test pod; confirm quota rejection past the limit; confirm default-deny blocks cross-namespace and unapproved internet traffic while approved DNS/object-store/registry paths still work.
 7. Register the tenant in the cost report (labels flow automatically if step 3 was clean) and record the review date for quota right-sizing.
 
 ## Guardrails

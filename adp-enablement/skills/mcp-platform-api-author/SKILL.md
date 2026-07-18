@@ -1,22 +1,12 @@
 ---
 name: mcp-platform-api-author
 description: >-
-  Design and build MCP (Model Context Protocol) servers that expose internal
-  platform capabilities - job submission, cluster status, GPU quota, dataset
-  catalogs, deploy actions - as tools AI agents can discover, select, and call
-  safely. Use whenever the user wants to build an MCP server, wrap a platform
-  API for agents, expose Kubernetes or cloud capabilities to Claude or LLM
-  agents, choose STDIO vs StreamableHTTP transport, write tool schemas and
-  descriptions, design tool naming conventions, scope permissions per tool,
-  insert guardrails, make agents pick the right tool, handle tool failures
-  with fallbacks and circuit breakers, test or version an MCP server, or asks
-  about FastMCP, tool calling surfaces, "AI-ready APIs", or an agent gateway
-  to the platform. Disambiguation - the sibling idp-adp-architect skill
-  (platform-assessment plugin) decides WHERE the agent interface sits in the
-  five-plane architecture; this skill ENGINEERS the MCP surface itself. For
-  the REST/OpenAPI contract underneath, use sibling
-  agent-api-contract-designer; for the credential the server runs as, use
-  sibling agent-identity-engineer.
+  Design secure MCP servers that expose governed platform capabilities to AI
+  agents through scoped, testable tools. Use for FastMCP or native SDKs,
+  STDIO versus Streamable HTTP, tool names and schemas, server-side
+  authorization, custom metadata, circuit breakers, recoverable errors,
+  Kubernetes or cloud platform gateways, and MCP surfaces backed by existing
+  REST or OpenAPI contracts.
 ---
 
 # MCP Platform API Author
@@ -31,13 +21,13 @@ Classic client-server: the **host** process (the agent application) runs an **MC
 
 | Transport | Use when | Notes |
 |---|---|---|
-| **STDIO** (local subprocess) | Development; tools over local resources (files, kubeconfig) | Inherits the user's local credentials — fine for a researcher's laptop, wrong for shared platform capabilities |
+| **STDIO** (local subprocess) | Development and narrowly scoped local resources | Treat inherited credentials as untrusted-agent exposure. Use brokered/short-lived credentials, namespace confinement, read-only defaults, and explicit approval for mutations; never hand an agent an unrestricted kubeconfig |
 | **StreamableHTTP** (remote) | Production platform surfaces | The default for an ADP: centrally deployed, centrally authenticated (OAuth2 client credentials per agent — see `agent-identity-engineer`), centrally versioned and observable |
 
-Build with the current FastMCP (v2 line) or the language-native MCP SDK; a tool is a typed function + schema + description. The engineering is not the framework — it's the tool design below.
+Pin and test a supported FastMCP v3 release or a language-native MCP SDK version; do not call an unpinned major line “current.” A tool is a typed function plus schema and description. The engineering is not the framework—it's the authorization and tool design below.
 
 ### Tool design rules (design for the selection funnel)
-Agents pick tools through a **selection funnel** with three stages:
+Hosts may pick tools through a **selection funnel** with three conceptual stages; this is a design heuristic, not portable MCP behavior:
 1. **Intent classification** — coarse category filter that prunes the search space.
 2. **Embedding/semantic ranking** — the request is matched against tool name + description + parameter names, discarding candidates below a confidence threshold.
 3. **Deterministic constraint filtering** — type checks, caller permissions, and the tool's historical failure status prune the shortlist to one executable choice.
@@ -46,7 +36,7 @@ Design every tool so the funnel selects it correctly:
 - **Naming:** `verb_object` in the platform's domain vocabulary (`submit_training_job`, `get_gpu_quota`, `list_datasets`, `rollback_endpoint`). One capability per tool; no `do_platform_action(action=...)` dispatchers — they defeat all three funnel stages and make per-tool permissioning impossible.
 - **Descriptions are retrieval documents.** The description is what the embedding stage ranks. Front-load what the tool does, when to use it, and when NOT to ("use `get_job_status` for a single job; use `list_jobs` to search"). Sibling tools must be contrastive, or the funnel coin-flips between them.
 - **Schemas:** strict typed parameters, enums over free strings (`gpu_type: enum[a100, h100, gh200]`), defaults for everything optional, no parameter the agent must guess. Constrained schemas ARE the first guardrail — an invalid call fails at validation, before the platform.
-- **Constraint metadata:** annotate each tool with required scope, read-only vs mutating, cost class, and rate class, so the funnel's third stage (and your gateway) can filter on permissions and failure history without invoking anything.
+- **Constraint metadata:** use standard MCP annotations only as untrusted behavioral hints (`readOnlyHint`, `destructiveHint`, `idempotentHint`, `openWorldHint`). Put custom scope/cost/rate metadata in a documented host-specific extension if useful, but enforce authentication, authorization, quota, rate, and spend controls server-side before invocation. Metadata never grants permission.
 
 ### Error surfaces agents can recover from
 A tool result is context for the next model turn — design errors as instructions, not stack traces. Every error returns a machine-readable code, what was wrong, and what to do next (`QUOTA_EXCEEDED: requested 8xH100, quota 4. Retry with gpus<=4 or call request_quota_increase`). Never leak internals (connection strings, node names, other tenants' jobs) — the non-leaking-errors discipline from the API threat checklist in `agent-api-contract-designer` applies verbatim. Classify failures and wire recovery into the server, not into every agent:

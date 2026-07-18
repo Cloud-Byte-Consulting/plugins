@@ -1,0 +1,4 @@
+interface:
+  display_name: "Experiment Registry Standard"
+  short_description: "Help with Experiment Registry Standard tasks"
+  default_prompt: "Use $experiment-registry-standard to guide this research-platform task."

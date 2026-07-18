@@ -1,6 +1,6 @@
 ---
 name: data-product-reviewer
-description: Judge whether a research dataset qualifies as a data product by scoring it against the eight DAUTNIVS usability attributes (Discoverable, Addressable, Understandable, Trustworthy, Natively accessible, Interoperable, Valuable, Secure) with per-attribute evidence questions, reviewing its affordances (serve/consume/transform/discover/observe/govern APIs), and classifying it source-aligned vs consumer-aligned vs aggregate. Use whenever the user asks for a data product review, dataset readiness review, data-as-a-product assessment, DAUTNIVS or FAIR check, dataset maturity scoring, "is this a data product or just a bucket of files", a gap analysis before publishing a dataset to a marketplace or catalog, or an audit of whether datasets are consumable by ADP agents. This skill scores an existing or proposed dataset and produces gaps + remediation; to design the catalog it will be published into use the sibling dataset-catalog-designer skill, and to fix contract or SLO gaps it finds use data-contract-author and dataset-qos-slo-designer.
+description: Review whether a research dataset qualifies as a secure, usable data product using the DAUTNIVS attributes, evidence, API affordances, and source/consumer/aggregate archetypes. Use for dataset readiness, FAIR or data-as-a-product assessments, marketplace publication, agent consumability, maturity scoring, cold-start tests, gap analysis, or deciding whether an asset is a product, beta, or merely files.
 ---
 
 # Data Product Reviewer
@@ -64,7 +64,7 @@ A dataset scoring 2s on attributes but lacking serve/discover/govern interfaces 
 
 ### Scoring output
 - **Per-attribute score with the evidence cited** (artifact links, API responses, catalog entries).
-- **Verdict bands**: 14–16 = data product, publish; 10–13 = near-product, publish behind "beta" status with gap plan; < 10 = dataset, not product — do not list in the marketplace as a product.
+- **Verdict bands with floors**: 14–16 may publish only when Discoverable, Addressable, Understandable, Trustworthy, and Secure each score at least 1 and Secure has no unresolved hard-stop policy. A zero in any core attribute means beta/non-product regardless of total. Scores 10–13 may publish behind beta only when all hard-stop policies pass; < 10 remains a dataset, not a product.
 - **Top-3 gaps ranked by consumer impact**, each with a remediation, an owner, and the sibling skill that does the work (contract → `data-contract-author`; SLOs → `dataset-qos-slo-designer`; discovery metadata → `dataset-catalog-designer`; storage/versioning mechanics → `training-storage-architect`).
 - **Archetype call** and, for aggregates, the ownership recommendation.
 

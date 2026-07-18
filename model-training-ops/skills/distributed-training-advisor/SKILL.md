@@ -1,6 +1,6 @@
 ---
 name: distributed-training-advisor
-description: Choose the right distributed-training topology and framework on GPU Kubernetes — data parallelism vs model parallelism, allreduce vs parameter server, and the Ray vs Dask vs Spark selector (GPU training → Ray Train/PyTorch DDP; pandas-scale feature prep and batch inference → Dask; existing big-data/JVM estate → Spark), plus the gang-scheduling requirement (Kueue/Volcano) for multi-node jobs, a storage-throughput and data-sharding checklist, and the training cost levers. Use whenever the user asks how to scale training beyond one GPU or one node, mentions distributed training, multi-GPU, multi-node, DDP, FSDP, Horovod, allreduce, parameter server, model sharding, data sharding, gang scheduling, stragglers, "training is I/O bound", GPU utilization is low, spot training, or asks "Ray or Dask or Spark?" / "do I even need to distribute this?"; or when a training job OOMs on model weights or epochs are too slow on the dataset size. For standing up and operating the chosen Ray stack use the sibling ray-on-k8s-engineer skill; for where the training step sits in the pipeline use ml-pipeline-architect; for LoRA/PEFT that avoids multi-node training entirely use finetuning-strategy-advisor.
+description: Choose a distributed-training topology and framework for GPU Kubernetes, including DDP/FSDP, data versus model parallelism, allreduce versus parameter servers, Ray/Dask/Spark selection, storage sharding, cost controls, and proven gang-scheduling integrations. Use for multi-GPU or multi-node training, OOM and scaling problems, low GPU utilization, I/O bottlenecks, spot training, stragglers, Kueue/Volcano design, or Ray-versus-Dask-versus-Spark decisions.
 ---
 
 # Distributed Training Advisor
@@ -55,7 +55,7 @@ Anti-rule: never pick the framework first and shape the problem to it. Classify 
 ### Gang scheduling — the K8s multi-node caveat (external to corpus; current practice)
 - A DDP/allreduce job needs *all* N worker pods up simultaneously; the default K8s scheduler places pods one by one.
 - Failure mode: two half-scheduled 8-pod jobs each hold 4 GPUs forever — deadlock, expensive GPUs burning idle while neither job runs.
-- Therefore multi-node training on K8s needs a gang/batch scheduler: **Kueue** (K8s-native job queueing, quotas, all-or-nothing admission) or **Volcano** (gang scheduling, queues, fair-share). Flag this in *every* multi-node design — it is current practice beyond the source corpus, not optional polish.
+- Therefore multi-node training needs a workload controller with proven all-or-nothing semantics. **Kueue admission alone does not gang-schedule arbitrary pods**: pair it with a supported integration such as JobSet, LeaderWorkerSet, Kubeflow Training Operator, or another controller whose entire pod group is represented as one admitted workload. **Volcano** is an alternative when its scheduler and PodGroup integration own placement. Prove the chosen controller with a contention test; naming Kueue or Volcano without the integration is not a design.
 - Single-node multi-GPU jobs dodge the problem entirely (one pod) — another point for Question 0.
 - With spot nodes, gang semantics also govern restart: lose one worker and the whole gang restarts from the last checkpoint — budget wall-clock for it.
 
@@ -83,12 +83,12 @@ Distributed GPUs are routinely starved by the data path. Check, in order:
 3. **Pick parallelism** (data / FSDP / model) from the memory-vs-throughput diagnosis; pick **communication** (DDP-allreduce default; justify any PS choice).
 4. **Pick framework** from the selector table; record the rule invoked. If Ray: hand cluster standing-up to `ray-on-k8s-engineer`.
 5. **Design the data path** through the storage checklist: shard map, file layout, stream-vs-download, cache layer, and where checkpoints land.
-6. **Flag scheduling**: for multi-node, name Kueue or Volcano, queue/quota design, and gang-restart-from-checkpoint behavior on preemption.
+6. **Prove scheduling**: for multi-node, name the workload-controller plus Kueue/Volcano integration, queue/quota design, all-or-nothing admission test, and restart-from-checkpoint behavior on preemption.
 7. **Plan the scaling test**: 1→2→4 workers, record step time, scaling efficiency, GPU util, loader wait; set the stop rule.
 8. **Output**: a topology decision memo — parallelism + communication + framework with rules invoked, data-path checklist results, gang-scheduling plan, checkpoint/spot policy, cost-lever list, and the scaling-test protocol with acceptance numbers.
 
 ## Guardrails
-- Never propose multi-node training without naming the gang scheduler; note Kueue/Volcano as current practice beyond the source corpus.
+- Never propose multi-node training without naming and testing the workload-controller/scheduler integration; queue admission by itself is not gang scheduling.
 - Never propose spot training without checkpoint-resume proven in a drill.
 - Don't recommend Dask for GPU model training or Spark for greenfield ML — selector rules over familiarity.
 - Model parallelism only after data parallelism + FSDP + memory levers are exhausted; hand-rolled sharding is a last resort.

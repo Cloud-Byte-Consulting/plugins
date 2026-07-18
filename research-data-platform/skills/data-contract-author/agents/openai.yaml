@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Contract Author"
+  short_description: "Help with Data Contract Author tasks"
+  default_prompt: "Use $data-contract-author to guide this research-platform task."

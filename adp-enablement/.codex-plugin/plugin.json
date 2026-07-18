@@ -1,0 +1,28 @@
+{
+  "name": "adp-enablement",
+  "version": "1.0.0",
+  "description": "Engineer secure agent-facing capabilities for developer platforms.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "homepage": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/adp-enablement",
+  "repository": "https://github.com/Cloud-Byte-Consulting/plugins",
+  "license": "Apache-2.0",
+  "keywords": ["adp", "mcp", "platform-engineering", "agent-identity", "golden-path"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "ADP Enablement",
+    "shortDescription": "Secure agentic developer-platform enablement.",
+    "longDescription": "Benchmark platform maturity and engineer MCP APIs, agent identity, API contracts, golden paths, and fitness functions for an Agentic Developer Portal.",
+    "developerName": "Cloud Byte Consulting",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive"],
+    "websiteURL": "https://github.com/Cloud-Byte-Consulting/plugins/tree/main/adp-enablement",
+    "defaultPrompt": [
+      "Benchmark our platform maturity.",
+      "Design a secure MCP platform API.",
+      "Turn this capability into an agentic golden path."
+    ]
+  }
+}

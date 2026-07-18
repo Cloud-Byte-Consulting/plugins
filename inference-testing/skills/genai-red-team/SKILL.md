@@ -1,6 +1,6 @@
 ---
 name: genai-red-team
-description: Adversarially test models and model-backed apps before and after release — find the failures evals miss and feed them back as new test cases. Use when the user says "red team this model", "red teaming", "prompt injection test", "jailbreak", "adversarial testing", "attack surface", "automated red teaming", "adversarial ML taxonomy", "blue team defenses", "prompt probing", "system prompt extraction", "safety testing", or "penetration test for the LLM". Covers attack-surface categories, prompt-injection/jailbreak test batteries, automated red-teaming loops, the adversarial-ML taxonomy (training-time/causative vs exploratory, integrity/availability/privacy, targeted vs indiscriminate), blue-team defense mapping, the findings-to-eval-dataset feedback loop, and an engagement-report format. For a research division on Lambda managed Kubernetes; OSS-first (Giskard LLM scan, custom probe harnesses). Sibling to model-release-gate (supplies the critical-findings verdict) and llm-eval-harness (findings become red-team-derived eval cases).
+description: Design and run an authorized, bounded red-team engagement for models and model-backed applications, then turn findings into defenses and regression cases. Use for prompt injection, jailbreaks, system-prompt extraction, adversarial testing, Giskard scans, attack-surface analysis, safety testing, blue-team mapping, or recurring live-endpoint tests with explicit scope, rate, spend, and stop controls.
 ---
 
 # GenAI Red Team
@@ -48,6 +48,8 @@ Manual probing doesn't scale to a research team's release cadence — automate i
 - Build the plan from OWASP Top 10 for LLM Applications, the AI Incident Database, and the AI Vulnerability Database (AVID).
 
 ### Before-release vs post-release engagements
+Run only with written authorization, named targets, allowed techniques, and an incident contact. Default to staging with synthetic test accounts and data. For any approved live test, set rate/concurrency ceilings, a spend cap, monitoring, a kill switch, and explicit stop conditions; never probe paths that could retrieve or modify real users' data.
+
 The same battery runs in two modes with different goals:
 - **Before release (certification).** Run the full battery against the staging checkpoint; the critical-findings verdict is a hard input to `model-release-gate`. A model with an open critical finding does not promote. This is where the taxonomy severity assignment matters most.
 - **After release (continuous pressure).** Schedule automated scans against the live endpoint; new jailbreaks and injection techniques emerge constantly, so a model that was clean at release can become vulnerable to a newly-published attack. Post-release findings feed `inference-rollout-strategist`'s rollback triggers and reopen the gate for the next version.
@@ -86,7 +88,7 @@ A red-team engagement that ends in a report and nothing else has skipped its mos
 - **`model-release-gate`** — the critical-findings verdict gates the next promotion.
 
 ## Workflow
-1. **Scope the engagement.** Which model / app, which attack-surface categories are in scope, before-release certification or post-release continuous pressure.
+1. **Authorize and scope the engagement.** Record owner approval, exact targets, allowed techniques, test identities/data, environment, rate/concurrency and spend limits, kill switch, incident contact, stop conditions, and whether the work is pre-release or post-release.
 2. **Assemble the battery.** Build the injection/jailbreak/probe set from the categories above plus OWASP/AVID/incident-DB references; wire an automated scanner (Giskard LLM scan) as a K8s Job.
 3. **Attack.** Run manual crafted probes and the automated suite against the endpoint; capture every input, output, and success/fail.
 4. **Classify each finding** on the three taxonomy axes (influence, security goal, specificity) and assign severity.

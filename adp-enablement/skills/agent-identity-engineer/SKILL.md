@@ -1,22 +1,12 @@
 ---
 name: agent-identity-engineer
 description: >-
-  Engineer identity, credentials, and authorization for AI-agent principals on
-  Kubernetes and cloud platforms - no standing secrets, ephemeral short-lived
-  certificates and tokens, Kubernetes ServiceAccount projected tokens with
-  OIDC federation, SPIFFE/SPIRE evaluation, OAuth2 client credentials for
-  agent-to-API calls, least-privilege machine authorization, and a unified
-  human-plus-machine policy and audit plane. Use whenever the user asks about
-  agent identity, machine identity, workload identity, non-human identity,
-  service accounts for agents, API keys vs OAuth2 for machines, secrets
-  management or secret sprawl, short-lived credentials, certificate rotation,
-  Vault, mTLS between services, JWT claims for authorization, confused
-  deputy, over-permissive roles, JIT access breaking automation, zero trust
-  for agents, or how an AI agent should authenticate to the platform.
-  Disambiguation - the sibling platform-security-playbook skill
-  (platform-assessment plugin) designs org-wide governance controls; this
-  skill engineers the identity plumbing itself: who the agent IS, what it may
-  do, and how every action is attributed.
+  Engineer identity, credentials, and authorization for AI-agent principals
+  on Kubernetes and cloud platforms using workload identity, projected tokens,
+  OIDC, SPIFFE/SPIRE, OAuth2 client credentials, and short-lived scoped access.
+  Use for agent or non-human identity, service accounts, API keys versus
+  OAuth2, secret sprawl, mTLS, JWT claims, confused deputies, over-permissive
+  roles, zero trust, JIT automation, attribution, or unified audit policy.
 ---
 
 # Agent Identity Engineer

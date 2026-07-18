@@ -24,7 +24,7 @@ Stand up the delivery backbone of the research platform: every platform add-on a
 
 ## Core model to hold in your head
 
-- **GitOps = desired state in Git, an in-cluster agent pulls and reconciles.** Argo CD continuously syncs actual state to the repo; `selfHeal: true` reverts manual drift, `prune: true` deletes what Git no longer declares. CI still validates changes; Argo CD only deploys what passed review — deployment credentials never live in CI.
+- **GitOps = desired state in Git, an in-cluster agent pulls and reconciles.** Argo CD continuously syncs actual state to the configured revision; `selfHeal: true` reverts manual drift and `prune: true` deletes what Git no longer declares. Argo CD does not prove a commit passed review or CI. Enforce that boundary with protected branches, required checks, CODEOWNERS approval, least-privilege repository writes, and signed commits/tags or immutable production revisions. Deployment credentials never live in CI.
 - **App-of-apps** = one root Application pointing at a folder of Application manifests; syncing the root fans out to children. Best for **cluster bootstrap** and managing a related set as one unit.
 - **ApplicationSet** = a controller that *generates* Applications from a template + a generator (data source). Best for **scale and vending**: N clusters × M add-ons, or one environment per tenant folder. Field experience: teams converge on ApplicationSets for scalable infrastructure; app-of-apps stays for bootstrap.
 - **Sync waves** (`argocd.argoproj.io/sync-wave` annotation) order resources/apps within a sync: lower waves finish healthy before higher waves start. This is how you encode "CRDs and GPU operator before workloads that request GPUs."
@@ -75,7 +75,7 @@ spec:
   project: platform
   source:
     repoURL: git@github.com:org/platform.git
-    targetRevision: main
+    targetRevision: main               # only with protected branch + required checks/CODEOWNERS
     path: applicationsets          # root syncs the ApplicationSets, which generate everything else
     directory:
       recurse: true
@@ -88,7 +88,7 @@ spec:
       selfHeal: true
 ```
 
-Day-0 sequence on a fresh (Lambda-provisioned) cluster: provider hands you a kubeconfig → install Argo CD (Helm) → apply `root-app.yaml` → everything else flows from Git. The managed control plane changes nothing about this pattern; you just never manage etcd/apiserver manifests in the repo.
+Day-0 sequence on a fresh (Lambda-provisioned) cluster: provider hands you a kubeconfig → install Argo CD (Helm) → apply `root-app.yaml` → everything else flows from Git. Before automated sync/prune, prove branch protection, required CI, CODEOWNERS, least-privilege writers, and audit logging. Prefer signed release tags or commit SHAs for production child applications; a mutable branch is acceptable only when those repository controls are enforced. The managed control plane changes nothing about this pattern; you just never manage etcd/apiserver manifests in the repo.
 
 ## Sync-wave plan for a GPU platform
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "K8s Security Baseline"
+  short_description: "Help with K8s Security Baseline tasks"
+  default_prompt: "Use $k8s-security-baseline to guide this research-platform task."

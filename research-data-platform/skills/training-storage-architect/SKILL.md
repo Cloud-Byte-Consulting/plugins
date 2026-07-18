@@ -1,7 +1,12 @@
 ---
 name: training-storage-architect
 description: >-
-  Architect the physical storage substrate for research training and eval data on Kubernetes — lakehouse zone layout (raw/cleansed/curated plus research-specific feature and eval zones), open table format selection (Apache Iceberg vs Delta Lake vs Apache Hudi: ACID, schema evolution, partition evolution, time travel for reproducibility, object-store compatibility), dataset versioning with lineage to model checkpoints, and MinIO/S3 + catalog deployment on managed K8s. Use whenever the user asks to design a lakehouse, data lake, or storage layer for ML/training data; choose between Iceberg, Delta, and Hudi (or Parquet/ORC/Avro file formats); set up medallion zones, snapshots, time travel, or dataset version pinning; plan training-run reproducibility, dataset-to-checkpoint lineage, or eval-set isolation; run a stakeholder storage-design questionnaire; or deploy MinIO, an Iceberg REST catalog, Spark, or Trino for data workloads on Kubernetes. This skill designs the physical substrate; the discovery layer over it is designed by the sibling dataset-catalog-designer skill, and the per-dataset guarantees riding on it are authored via data-contract-author.
+  Architect secure, reproducible training and evaluation storage on Kubernetes,
+  including lakehouse zones, Iceberg/Delta/Hudi selection, MinIO or S3 access
+  controls, snapshot retention, immutable materialized-input manifests, and
+  dataset-to-checkpoint lineage. Use for data lakes, table or file formats,
+  medallion zones, time travel, eval isolation, byte-reproducible training
+  inputs, Iceberg catalogs, Spark, Trino, or storage-design workshops.
 ---
 
 # Training Storage Architect
@@ -18,7 +23,7 @@ Design the storage substrate that makes "which exact bytes trained this checkpoi
 | Raw (bronze) | Source data as-is (JSON/WARC/audio/images), foldered by source/table | No transformation; no tables needed on top; retain long (reprocessing, audit, license disputes); archive to cold tier post-processing |
 | Cleansed (silver) | Validated, deduplicated, open-table-format data; level 1: 1:1 with raw post-quality-checks; level 2: integrated across sources by domain | Convert to the chosen table format here; valid and invalid data both kept — stewards triage invalid back to source; EDA and ad hoc SQL happen here |
 | Curated (gold) | Training-ready corpora arranged per use (mixes, tokenized shards, filtered subsets) | Retain all historical versions; this is what training jobs pin |
-| **Feature/training zone** (research addition) | Materialized training artifacts: tokenized/packed shards, embeddings, webdataset tars derived from curated snapshots | Every artifact records the curated snapshot ID it derives from; regenerable, so retention can be shorter |
+| **Feature/training zone** (research addition) | Materialized training artifacts: tokenized/packed shards, embeddings, webdataset tars derived from curated snapshots | Every artifact set has an immutable manifest with object paths, content hashes, source snapshot, transform/image digest, loader version, ordering, and seed; regenerable, so retention can be shorter |
 | **Eval zone** (research addition) | Frozen benchmark and eval sets | Physically separated prefix/bucket + distinct access policy; immutable after freeze; contamination gate between curated and eval is a publish-time check |
 | Archive / Logs / Ad hoc | Cold copies; system logs (lifecycle-deleted); researcher scratch (write access only here) | Scratch is explicitly non-governed — exploration must stay cheap |
 
@@ -40,8 +45,8 @@ Decision rule for a research division on K8s/MinIO: **Iceberg by default** — p
 File format beneath the table format is a separate, smaller decision: Parquet (columnar, default for curated analytics-and-training reads), ORC (columnar alternative), Avro (row-oriented; supports full schema evolution including column modification, so suited to landing/ingest streams). Parquet/ORC only support adding columns at the end — another reason schema changes route through the table format's evolution machinery, not raw file edits.
 
 ### Versioning and lineage-to-checkpoint (the reproducibility contract)
-1. **Dataset version** = contract semver (human-meaningful) **+** table snapshot ID (byte-exact). A training config pins both: `dataset://curation/instr-tuning@2.1.0` and `snapshot=8412370493812`.
-2. **Every training/eval run records** the full set of (dataset, version, snapshot) triples it read, plus transformation code revision — emitted to the experiment tracker and to lineage (OpenLineage-class events), making dataset→run→checkpoint a queryable graph in the catalog (the horizontal browse dimension of the sibling `dataset-catalog-designer`).
+1. **Dataset version** = contract semver (human-meaningful) + table snapshot ID (logical table state), not a byte-exact training input by itself. A training config pins both: `dataset://curation/instr-tuning@2.1.0` and `snapshot=8412370493812`.
+2. **Materialized-input manifest** pins the bytes actually consumed: ordered object paths and content hashes, source snapshot, transformation code revision, container image digest, tokenizer/dataloader version, shuffle/order policy, and random seed. Every training/eval run records the dataset/version/snapshot plus this manifest digest in the experiment tracker and lineage graph.
 3. **Snapshot retention is an SLO**: time travel only reproduces runs while snapshots live; set retention (e.g., 12 months of snapshot history on curated; forever on frozen eval) deliberately and put it in the contract — vacuum/compaction jobs that expire snapshots are silently deleting reproducibility.
 4. **Serving is immutable and append-only**: consumers never see update-in-place; corrections arrive as new snapshots/versions. Bitemporality (event time + processing time) on curated tables lets "as-of" questions survive backfills.
 5. **Eval isolation**: eval snapshots are frozen at creation; the contamination scan runs before an eval snapshot is published; any breach is repaired by a new eval version, never by editing in place.
@@ -66,7 +71,7 @@ Run in workshops; each answer maps to a design decision:
 - **Role-based governance incl. AI assets**: treat models, features, and eval artifacts as governed assets with owners and access policy, same as tables; audit access logs for who reads PII-tagged attributes and prune standing access.
 
 ### K8s / MinIO / S3 deployment notes
-- **Object store**: MinIO (or the cloud's S3) via its operator; erasure-coded pools; distinct buckets or prefixes per zone with per-zone lifecycle policies (raw→cold archive; logs auto-delete; scratch quotas). Bucket policy ≠ access control story — access rides on catalog + tags.
+- **Object store**: MinIO (or the cloud's S3) via its operator; erasure-coded pools; distinct buckets or prefixes per zone with per-zone lifecycle policies. Object-store IAM, bucket/prefix policies, and short-lived scoped credentials are the hard access boundary and must prevent direct catalog bypass. Catalog tags may drive policy generation and discovery filtering, but never replace storage enforcement.
 - **Catalog service**: Iceberg REST catalog (or Nessie for git-like catalog branching of experimental table states) as a K8s deployment; back it with a small HA Postgres. This is a tier-1 service: if the catalog is down, the platform is down — HA and backups accordingly.
 - **Compute**: Spark on K8s (operator) for curation jobs; Trino for interactive SQL over all zones; both read the same Iceberg tables — one copy of data, many engines.
 - **Training data path**: GPU nodes read shards straight from the object store; budget aggregate read throughput against training-node fan-out (the Th SLO from the sibling QoS skill); consider node-local NVMe cache for hot shards; keep the feature zone's materialized shards in dataloader-native layouts (webdataset/tfrecord) generated from — and stamped with — curated snapshots.
@@ -78,11 +83,11 @@ Run in workshops; each answer maps to a design decision:
 3. **Select the table format** via the criteria table against the actual workload mix; record an ADR.
 4. **Design the versioning scheme**: pinning convention, snapshot-retention SLOs, run-metadata emission, lineage events to the catalog.
 5. **Specify the deployment**: operators, catalog HA, engines, throughput budget, lifecycle jobs — as manifests/Helm values lists, not prose.
-6. **Validate with a golden-path test**: ingest → cleanse → curate snapshot → train from pinned snapshot → reproduce byte-identical read a week later → trace checkpoint back through lineage. The design passes when this runs unattended.
+6. **Validate with a golden-path test**: ingest → cleanse → curate snapshot → materialize and hash training shards → train from the pinned manifest → reproduce the exact ordered input bytes with the pinned image/transform/loader a week later → trace checkpoint back through lineage. The design passes when this runs unattended.
 
 Reproducibility failure modes to test for explicitly in step 6:
 - Snapshot expired by a default vacuum job → pinned read fails (retention SLO violated).
-- Compaction rewrote files but the pinned snapshot still resolves byte-identically (it must).
+- Compaction rewrote table files while preserving the logical snapshot; the materialized-input manifest must still resolve its immutable objects and hashes.
 - A backfill changed history → "as-of" query via bitemporal columns still returns the original view.
 - Feature-zone shards regenerated from a *newer* curated snapshot while carrying an old stamp → lineage stamp must be write-once.
 - Eval set edited in place instead of versioned → the immutability policy must make this impossible, not just discouraged.

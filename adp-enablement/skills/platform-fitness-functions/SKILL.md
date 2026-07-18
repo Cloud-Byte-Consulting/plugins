@@ -1,24 +1,12 @@
 ---
 name: platform-fitness-functions
 description: >-
-  Instrument a platform roadmap with architectural fitness functions and
-  metrics - the six-axis fitness-function taxonomy, an authoring workflow
-  (context plus target metric plus automated CI test), cascading
-  warning-to-error thresholds as the maturity-progression mechanic, DORA
-  four-keys instrumentation from raw commit/deploy/incident data, GQM
-  (Goal-Question-Metric) workshops to derive division-specific metrics, and
-  MMI-style numeric maturity-index construction. Use whenever the user asks
-  about fitness functions, evolutionary architecture governance, measuring
-  platform success, DORA metrics or the four key metrics, deployment
-  frequency, lead time, change failure rate, MTTR, SPACE or DevEx metrics,
-  platform KPIs or dashboards, GQM trees, metric workshops, maturity scoring
-  or index construction, architecture tests in CI (ArchUnit-style dependency
-  rules, policy gates), dependency currency checks, or how to prove a
-  platform roadmap is actually progressing. Disambiguation - the sibling
-  platform-roi-scorecard skill (platform-assessment plugin) builds the
-  business and ROI case; this skill engineers the technical instrumentation:
-  executable checks and metric pipelines that make each roadmap milestone
-  verifiable.
+  Instrument a platform roadmap with executable architectural fitness
+  functions and metrics using CI tests, staged warning-to-error thresholds,
+  DORA signals, GQM workshops, and transparent maturity indexes. Use for
+  evolutionary architecture, platform KPIs, deployment frequency, lead time,
+  change failure rate, MTTR, SPACE or DevEx metrics, policy gates, dependency
+  currency, metric workshops, or proving roadmap progress with evidence.
 ---
 
 # Platform Fitness Functions

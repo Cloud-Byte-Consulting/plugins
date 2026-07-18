@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Data Governance"
+  short_description: "Help with Research Data Governance tasks"
+  default_prompt: "Use $research-data-governance to guide this research-platform task."

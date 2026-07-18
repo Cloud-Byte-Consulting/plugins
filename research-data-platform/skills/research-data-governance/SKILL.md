@@ -1,6 +1,6 @@
 ---
 name: research-data-governance
-description: Design right-sized data governance for a research division — blend a lightweight steward council (business + technical stewards, chair, security/ethics/documentation/compliance roles mapped onto existing researchers) with federated computational governance (global vs domain-local rules, policy-as-code embedded per dataset, certification instead of approval gates) and bootstrap it in six steps from a data mission statement. Use whenever the user asks to set up data governance, a governance council, data stewards or stewardship roles, governance operating model, certification process, policy-as-code for datasets, global vs local data rules, governance maturity assessment (data mesh CMM, enterprise data maturity stages), or complains about governance bottlenecks, approval queues, governance theater, or councils slowing research velocity. This skill designs the governance operating model and roles; the certification checks it mandates are implemented as contracts and SLOs via the sibling data-contract-author and dataset-qos-slo-designer skills, and dataset-level compliance is scored by data-product-reviewer.
+description: Design right-sized research-data governance with steward roles, a lightweight council, policy-as-code, and certification that distinguishes hard-stop security/legal failures from visibility-only quality gaps. Use for governance operating models, data stewards, global-versus-local rules, certification, policy automation, data-mesh maturity, governance bottlenecks, approval queues, or governance theater.
 ---
 
 # Research Data Governance
@@ -50,7 +50,7 @@ Minimize global rules relentlessly — each one adds friction everywhere; implem
 Replace pre-publication approval with **governance-by-certification** — like UL/CSA marks for physical products: the standard is central, the attestation is the producer's.
 - The center defines policies; each dataset team implements, attests, and **publishes certification status** through a standard interface (`/certify/status` → OK / NOT COMPLIANT; `/certify/report` → per-policy detail).
 - Data contracts inserted between interface and data are the natural enforcement point — certification checks largely *are* contract checks running in CI.
-- Consequences of failing certification are **visibility-based** (flagged in catalog, ranked down in search, ineligible for the "certified" badge agents filter on), not blocking research use.
+- Split certification failures by policy class. Noncritical quality/documentation failures are visibility-based (flagged, ranked down, beta-only). Security, access-control, privacy/PII, license/provenance, legal-hold, retention, consent, and eval-contamination failures are hard stops that block publication, access expansion, and egress until remediated or formally waived by the accountable authority. Exploratory work may remain in a quarantined restricted zone; it is never discoverable as approved data.
 - Prefer **feedback loops over control structures**: don't pre-approve datasets to prevent duplication — let self-registration + usage/satisfaction telemetry rank duplicates down and nudge owners to prune (automated garbage collection). Balancing loops degrade the redundant; reinforcing loops ("success to the successful") promote the useful — and need an upper-bound leverage point (lead-time-to-change ceilings) so winners don't bloat into god-datasets.
 - Pair **local incentives** (dataset-user satisfaction and growth) with **global incentives** (adoption of global policies counts in the steward's success measures); without the global half, policy work always loses to feature work.
 
@@ -86,7 +86,7 @@ Replace pre-publication approval with **governance-by-certification** — like U
 2. **Place the org on the spectrum** and record the blend decision with rationale tied to research-velocity constraints.
 3. **Run the six-step bootstrap**, producing the mission statement, framework-to-steward mapping table, council charter, and the first policy-as-code list with owners.
 4. **Draw the global/local split** for this org — start from the table, cut anything without a named cross-domain need.
-5. **Design certification**: policy list, check implementation per policy (route to `data-contract-author` / `dataset-qos-slo-designer`), status interface, visibility consequences, incentive wiring.
+5. **Design certification**: classify every policy as hard-stop or visibility-only; define check implementation, accountable waiver authority and expiry, status interface, quarantine behavior, visibility consequences, and incentive wiring.
 6. **Define fitness functions** and the quarterly review that tunes rules, incentives, and council scope.
 
 ## Output spec
