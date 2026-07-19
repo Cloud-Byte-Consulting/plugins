@@ -26,6 +26,7 @@ Azure implementation arm of the platform suite: read-only estate assessment (Res
 
 ## Plugin files
 
+- [Usage guide](../../azure-platform-engineering/GUIDE.md)
 - [Claude manifest](../../azure-platform-engineering/.claude-plugin/plugin.json)
 - Codex: install individual skill directories through an Agent Skills-compatible installer.
 - [Skill source directory](../../azure-platform-engineering/skills/)

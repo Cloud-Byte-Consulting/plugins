@@ -20,6 +20,31 @@ If you installed `platform-assessment` and `authoring`, you now have 11 skills. 
 | "Turn this research pile into a brief" | `research-brief-writer` |
 | "Write up this interview/customer call" | `interview-case-study-writer` |
 
+## Optional Azure implementation track
+
+Install `azure-platform-engineering` when the assessment includes an Azure
+estate or must continue from findings into a governed implementation. The
+[Azure platform-engineering guide](azure-platform-engineering/GUIDE.md) covers
+permissions, I9 discovery, Radius/Dapr portability, and the complete workflow.
+
+Use this sequence:
+
+1. Establish constraints with `platform-constitution`.
+2. Run I9 through `assessment-orchestrator` and `azure-estate-assessor`.
+3. Design the target with `azure-platform-designer`.
+4. Execute the disposition map with `workload-onboarder` and
+   `radius-golden-path-builder`.
+5. Validate every change with `iac-guardrail-verifier`.
+6. Add governed self-service with `golden-path-api-designer` and
+   `agentic-ops-builder`.
+
+Start with:
+
+> Use assessment-orchestrator and azure-estate-assessor to run I9 for these
+> approved subscriptions. Confirm Reader-only access, emit an I9 delta and
+> disposition map, keep cost under I4, exclude secret values, and label every
+> exported IaC artifact as draft evidence.
+
 ## The growth path
 
 Four stages. Each takes roughly one iteration of effort and unlocks the next. You can stop after any stage and still have gained something.
@@ -44,7 +69,7 @@ Optional same-session add-on:
 
 **Goal: replace self-report with system data.**
 
-1. **Wire evidence sources.** Connect what you have — GitHub MCP or Azure DevOps MCP (PRs, pipelines), Atlassian MCP (work items), your cloud's MCP server (resources/cost). The skills know how to use them and will tell you which caveats apply.
+1. **Wire evidence sources.** Connect what you have — GitHub MCP or Azure DevOps MCP (PRs, pipelines), Atlassian MCP (work items), your cloud's MCP server (resources/cost). For Azure estate inventory, governance, IaC coverage, and workload disposition, run I9 through `azure-estate-assessor`; keep cost evidence under I4. The skills know how to use the sources and will tell you which caveats apply.
 2. **Run a 2–4 week observation window.** Don't change anything yet — collect: deploy frequency, lead time, PR merge rates, agent-PR attribution, onboarding time of the last few hires.
 3. **Run the authorized assessment increments** with connectors live:
 
@@ -68,6 +93,7 @@ Then pick **one or two gaps** — not five. Typical first picks:
 - Ownership/staffing gap → `platform-org-design-advisor`
 - Agents scaling faster than controls, or regulated environment → `platform-security-playbook` (do this one *before* scaling agent autonomy, not after)
 - Leadership asks "what do peers do?" → `platform-industry-brief`
+- Azure estate or implementation gap → `azure-platform-designer` with the I9 disposition map and approved constitution
 
 Write it up: `research-brief-writer` turns the quarter's findings into a brief; keep the reporter's evidence appendix attached.
 

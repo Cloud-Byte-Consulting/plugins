@@ -48,6 +48,9 @@ claude plugin install ai-engineering@cloud-byte-plugins
 claude plugin install prompt-workflows@cloud-byte-plugins
 ```
 
+For Azure estate discovery, Radius/Dapr platform design, and implementation
+sequencing, read the [Azure platform-engineering guide](azure-platform-engineering/GUIDE.md).
+
 ### GitHub Copilot
 GitHub Copilot loads skills from `.github/skills/`, `.claude/skills/`, or `.agents/skills/` in your project. Copy the skill folders in:
 
