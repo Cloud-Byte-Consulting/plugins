@@ -25,6 +25,12 @@ Capture only decided, enforceable constraints — aspirations belong in roadmaps
 
 1. **Scope and sovereignty** — allowed Azure regions, data-residency rules,
    allowed clouds (this plugin assumes Azure + OSS), sovereignty requirements.
+   Where residency boundaries apply, encode them as enforceable rules: every
+   persistence/messaging dependency goes through a Dapr building block (no
+   native backing-store SDK on a sovereignty-critical path), and each boundary
+   gets its own Radius environment with region-pinned Recipes — so relocation
+   is a deployment decision, not a rewrite. See
+   `references/dapr-radius-sovereignty.md`.
 2. **Compliance regimes** — which of SOC 2 / ISO 27001 / NIS2 / DORA / sector
    rules apply, and the evidence each demands from the platform.
 3. **Naming, tagging, hierarchy** — management-group layout, subscription

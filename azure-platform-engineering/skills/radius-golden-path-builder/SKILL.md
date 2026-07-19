@@ -46,6 +46,20 @@ Template source: the `azure-agentic-idp` repository (pin a tag). One
   `host`/`port`/`baseUrl`; stateStores return Dapr `type`/`version`/metadata;
   apiRoutes return `publicUrl`. Breaking these breaks every app on the path.
 
+## Two axes of portability (why this design holds)
+This golden path implements the Radius + Dapr portability model directly:
+- **Code portability (Dapr):** the app talks to building-block APIs (state,
+  pub/sub, secrets), never a backend's native SDK — so the `statestore`
+  component swaps Redis → Cosmos DB → PostgreSQL with no application change.
+- **Deployment portability (Radius):** abstract Resource Types + per-environment
+  Recipes mean the same `app.bicep` binds different infrastructure per
+  Environment; across a sovereignty boundary **only the Recipes differ**.
+
+The rule that makes it real: keep recipe `result.values` contracts stable, and
+never let a workload import a backing store's native SDK — that is the failure
+mode that silently breaks portability. Full guidance, the sovereignty
+checklist, and caveats: `references/dapr-radius-sovereignty.md`.
+
 ## Workflow
 1. Read constitution + the target environment design; resolve template tokens
    (org namespace, naming, registry) from TEMPLATING.md.

@@ -43,6 +43,18 @@ No authoritative source prescribes a number; the converged guidance:
 | Application-centric | Environment set + resource group per application | Per-app recipe customization needed |
 | Enterprise | Environments by business unit x region x prod/non-prod | Multi-BU, sovereignty, or regulatory splits |
 
+## Sovereignty as a topology driver
+When data-residency or regulatory boundaries are in play, they are a primary
+topology input, not an afterthought. The Radius + Dapr model makes relocation a
+deployment decision rather than a rewrite (Dapr = code portability, Radius =
+deployment portability), so the design move is: **one Radius environment per
+sovereignty boundary**, at the enterprise rung, with region-pinned Recipes and
+no cross-boundary data connections. Because only Recipes differ across
+boundaries, the same application definition serves every region — the platform
+carries the sovereignty constraint, the app does not. Encode the residency
+boundaries as constitution rules and cite them in the topology ADR. Full model
+and checklist: `references/dapr-radius-sovereignty.md`.
+
 ## Landing-zone design (AVM-first)
 - Management groups / policy / subscription vending via the ALZ pattern and
   `avm/ptn/lz/sub-vending`.
