@@ -4,7 +4,7 @@
 
 Engineer the Agentic Developer Portal: CNCF platform-maturity benchmark with industry percentiles, MCP servers over platform APIs, agent identity (no standing secrets, ephemeral credentials), agent-consumable API contracts, golden paths as products, and fitness-function instrumentation for the maturity roadmap.
 
-- Version: `1.1.0`
+- Version: `1.2.0`
 - Category: `platform`
 - Skills: 6
 - Claude plugin: yes

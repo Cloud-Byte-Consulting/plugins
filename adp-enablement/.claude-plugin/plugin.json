@@ -1,6 +1,6 @@
 {
   "name": "adp-enablement",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "ADP enablement suite: the engineering layer that turns a platform-maturity roadmap into a working Agentic Developer Portal. Benchmarks platform-engineering maturity against the CNCF 4-stage x 5-aspect model with industry distribution data, then builds the enablement mechanics: MCP servers exposing platform capabilities to agents, ephemeral agent identity on Kubernetes, agent-consumable API contracts, golden paths as products (human- and machine-executable), and fitness-function instrumentation with cascading warning-to-error maturity gates. Companion to the platform-assessment plugin: that suite diagnoses agent-adoption maturity and designs the IDP-to-ADP reference architecture; this one benchmarks the platform itself and engineers the enabling surfaces.",
   "author": {
     "name": "Cloud Byte Consulting",
