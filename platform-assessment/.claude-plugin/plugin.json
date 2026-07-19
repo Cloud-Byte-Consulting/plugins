@@ -1,6 +1,6 @@
 {
   "name": "platform-assessment",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Evidence-first platform engineering and Agentic Developer Portal assessment suite: organizational discovery across communications, meetings, work items, code, infrastructure, and sentiment; ASDLC maturity scoring; ADP readiness gates; ROI, org design, security, architecture, industry context, and confidence-aware reporting. Formal platform scoring uses the companion adp-enablement plugin.",
   "author": {
     "name": "Cloud Byte Consulting",

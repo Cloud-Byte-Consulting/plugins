@@ -76,6 +76,7 @@ provider documentation before requesting named roles or token permissions.
 | I6 | Data platform | Data platform owner | Catalog/metastore, lineage, schema, quality-result, and pipeline metadata viewer | Data product, context, discoverability, and reproducibility evidence |
 | I7 | Surveys and interviews | Platform product/assessment lead | Approved authority to distribute the survey and conduct interviews; no communication-content access by default | Aggregate adoption, trust, friction, cognitive-load, and intent evidence |
 | I8 | Reconciliation and synthesis | Assessment lead | Canonical state, deltas, scorer versions, and approved evidence summaries | Coverage, contradictions, three separate readings, report input, and roadmap |
+| I9 | Cloud estate (Azure) | Platform engineer | Azure `Reader` at approved scope: Resource Graph, azqr, Governance Visualizer viewers; `aztfexport --hcl-only`/Bicep decompile with no state writes | Estate inventory, IaC-coverage ratio, governance/policy map, best-practice findings, and a workload disposition map (wrap/refactor/leave/retire); runs via `azure-platform-engineering:azure-estate-assessor` |
 
 Never request `cluster-admin`, repository write, billing contributor, secret
 read, mailbox/chat content, or raw production/customer data for the default
@@ -158,7 +159,7 @@ cannot resolve the result, report partial, unobserved, or Pending as appropriate
 1. **Charter.** Record the decision, scope, models, systems, populations,
    observation windows, approvals, evidence owners, retention, and prohibited
    uses. Stop on unclear authority for sensitive sources.
-2. **Plan increments.** Map current access to I1–I8. Start any authorized
+2. **Plan increments.** Map current access to I1–I9. Start any authorized
    increment now; create an access-gap queue for the rest. Prefer bounded exports
    when a source owner cannot grant direct access.
 3. **Collect.** Invoke `platform-maturity-discovery` within each increment. Use

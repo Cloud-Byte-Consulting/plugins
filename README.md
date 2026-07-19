@@ -13,6 +13,7 @@ Every plugin is registered in the Claude marketplace and contains portable Agent
 |---|---|---|---:|:---:|---:|
 | [`platform-assessment`](docs/plugins/platform-assessment.md) | assessment | Assess an engineering org's platform and agentic readiness: ASDLC maturity scoring, platform ROI scorecard, org design, security/governance playbook, industry… | 9 | Yes | 9 |
 | [`adp-enablement`](docs/plugins/adp-enablement.md) | platform | Engineer the Agentic Developer Portal: CNCF platform-maturity benchmark with industry percentiles, MCP servers over platform APIs, agent identity (no standing secrets,… | 6 | Yes | 6 |
+| [`azure-platform-engineering`](docs/plugins/azure-platform-engineering.md) | platform | Azure implementation arm of the platform suite: read-only estate assessment (Resource Graph, azqr, Governance Visualizer, aztfexport) feeding assessment increment I9,… | 8 | — | — |
 | [`gpu-research-platform`](docs/plugins/gpu-research-platform.md) | platform | Operate GPU research workloads on managed Kubernetes (Lambda-class clouds): GPU sharing (MIG/MPS/time-slicing), KEDA autoscaling on DCGM metrics, cost chargeback,… | 7 | Yes | 7 |
 | [`model-training-ops`](docs/plugins/model-training-ops.md) | ml | Run model creation and training as a product: training pipeline architecture (Argo/Kubeflow, trigger taxonomy), MLflow experiment/registry standards,… | 6 | Yes | 6 |
 | [`inference-testing`](docs/plugins/inference-testing.md) | ml | Test and release models with evidence: model-level eval harnesses (synthetic ground truth, LLM-as-judge), GPU inference benchmarking (TTFT, tokens/sec, cost), release… | 6 | Yes | 6 |
@@ -23,7 +24,7 @@ Every plugin is registered in the Claude marketplace and contains portable Agent
 | [`ai-engineering`](docs/plugins/ai-engineering.md) | engineering | Ship production LLM apps: eval engineering (tracing, RAG metrics, LLM-as-judge, guardrails) and deployment (containers, cloud rollout, vector-store tuning). | 2 | — | — |
 | [`prompt-workflows`](docs/plugins/prompt-workflows.md) | productivity | Thirty-five reusable workflows for model routing, personal productivity, code comprehension, knowledge systems, agent evaluation, consumer AI strategy, and Office… | 35 | Yes | 35 |
 
-**11 plugins, 85 skills, and 75 upload-ready Perplexity packages.**
+**12 plugins, 93 skills, and 75 upload-ready Perplexity packages.**
 
 Browse the [plugin and skill documentation](docs/README.md) for the complete per-plugin inventories.
 <!-- END GENERATED PLUGIN INDEX -->
@@ -35,6 +36,7 @@ Browse the [plugin and skill documentation](docs/README.md) for the complete per
 claude plugin marketplace add Cloud-Byte-Consulting/plugins
 claude plugin install platform-assessment@cloud-byte-plugins
 claude plugin install adp-enablement@cloud-byte-plugins
+claude plugin install azure-platform-engineering@cloud-byte-plugins
 claude plugin install gpu-research-platform@cloud-byte-plugins
 claude plugin install model-training-ops@cloud-byte-plugins
 claude plugin install inference-testing@cloud-byte-plugins

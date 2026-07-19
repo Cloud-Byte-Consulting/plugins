@@ -4,7 +4,7 @@
 
 Assess an engineering org's platform and agentic readiness: ASDLC maturity scoring, platform ROI scorecard, org design, security/governance playbook, industry benchmarking, and IDP/ADP target architecture.
 
-- Version: `1.3.0`
+- Version: `1.4.0`
 - Category: `assessment`
 - Skills: 9
 - Claude plugin: yes

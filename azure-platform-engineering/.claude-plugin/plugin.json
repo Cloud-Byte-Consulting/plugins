@@ -1,0 +1,21 @@
+{
+  "name": "azure-platform-engineering",
+  "version": "0.1.0",
+  "description": "Azure implementation arm of the platform suite: agentic platform engineering on Azure with open-source tooling. Technical estate assessment (Resource Graph, azqr, Governance Visualizer, aztfexport) feeding the assessment-orchestrator state, platform/landing-zone topology design (Radius environment ladder, Azure Verified Modules), durable agentic operations on Dapr Workflow, four-layer IaC guardrail verification, and the golden-path-as-an-API contract behind APIM with a platform MCP server on the roadmap. Organizational maturity, org design, ROI, agent identity, and MCP authoring delegate to the companion platform-assessment and adp-enablement plugins.",
+  "author": {
+    "name": "Cloud Byte Consulting",
+    "url": "https://github.com/Cloud-Byte-Consulting"
+  },
+  "keywords": [
+    "azure",
+    "platform-engineering",
+    "radius",
+    "dapr",
+    "azure-verified-modules",
+    "bicep",
+    "landing-zones",
+    "idp",
+    "agentic",
+    "golden-path"
+  ]
+}

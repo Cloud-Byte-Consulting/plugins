@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Portable Agent Skills for platform assessment, research-division operations, AI engineering, authoring, career development, and reusable prompt workflows.",
-    "version": "1.2.0"
+    "version": "1.3.0"
   },
   "plugins": [
     {
@@ -18,6 +18,12 @@
       "name": "adp-enablement",
       "source": "./adp-enablement",
       "description": "Engineer the Agentic Developer Portal: CNCF platform-maturity benchmark with industry percentiles, MCP servers over platform APIs, agent identity (no standing secrets, ephemeral credentials), agent-consumable API contracts, golden paths as products, and fitness-function instrumentation for the maturity roadmap.",
+      "category": "platform"
+    },
+    {
+      "name": "azure-platform-engineering",
+      "source": "./azure-platform-engineering",
+      "description": "Azure implementation arm of the platform suite: read-only estate assessment (Resource Graph, azqr, Governance Visualizer, aztfexport) feeding assessment increment I9, platform/landing-zone topology design on Radius and Azure Verified Modules, durable agentic operations on Dapr Workflow, four-layer IaC guardrail verification, workload onboarding by disposition, and the golden-path-as-an-API contract behind APIM with a platform MCP server on the roadmap.",
       "category": "platform"
     },
     {
