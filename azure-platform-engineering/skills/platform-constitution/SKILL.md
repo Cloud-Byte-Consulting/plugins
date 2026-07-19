@@ -30,7 +30,7 @@ Capture only decided, enforceable constraints — aspirations belong in roadmaps
    native backing-store SDK on a sovereignty-critical path), and each boundary
    gets its own Radius environment with region-pinned Recipes — so relocation
    is a deployment decision, not a rewrite. See
-   `references/dapr-radius-sovereignty.md`.
+   `../../references/dapr-radius-sovereignty.md`.
 2. **Compliance regimes** — which of SOC 2 / ISO 27001 / NIS2 / DORA / sector
    rules apply, and the evidence each demands from the platform.
 3. **Naming, tagging, hierarchy** — management-group layout, subscription

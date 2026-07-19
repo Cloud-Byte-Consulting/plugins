@@ -53,7 +53,7 @@ no cross-boundary data connections. Because only Recipes differ across
 boundaries, the same application definition serves every region — the platform
 carries the sovereignty constraint, the app does not. Encode the residency
 boundaries as constitution rules and cite them in the topology ADR. Full model
-and checklist: `references/dapr-radius-sovereignty.md`.
+and checklist: `../../references/dapr-radius-sovereignty.md`.
 
 ## Landing-zone design (AVM-first)
 - Management groups / policy / subscription vending via the ALZ pattern and

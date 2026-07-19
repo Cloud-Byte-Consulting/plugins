@@ -58,7 +58,7 @@ This golden path implements the Radius + Dapr portability model directly:
 The rule that makes it real: keep recipe `result.values` contracts stable, and
 never let a workload import a backing store's native SDK — that is the failure
 mode that silently breaks portability. Full guidance, the sovereignty
-checklist, and caveats: `references/dapr-radius-sovereignty.md`.
+checklist, and caveats: `../../references/dapr-radius-sovereignty.md`.
 
 ## Workflow
 1. Read constitution + the target environment design; resolve template tokens
