@@ -20,6 +20,7 @@ This catalog is generated from the Claude marketplace, plugin manifests, and eac
 ## Related documentation
 
 - [Getting started](../GETTING-STARTED.md)
+- [Azure platform-engineering guide](../azure-platform-engineering/GUIDE.md)
 - [Platform-engineering source notes](../PLATFORM-ENGINEERING-SOURCE-NOTES.md)
 - [Research-division provenance](../RESEARCH-DIVISION-PROVENANCE.md)
 - [Prompt-workflow provenance](../prompt-workflows/PROVENANCE.md)

@@ -118,6 +118,7 @@ def plugin_records() -> list[dict[str, object]]:
                 "root": plugin_root,
                 "skills": skills,
                 "codex": (plugin_root / ".codex-plugin" / "plugin.json").is_file(),
+                "guide": (plugin_root / "GUIDE.md").is_file(),
                 "perplexity_count": sum(
                     1 for skill in skills if skill["archive"] is not None
                 ),
@@ -182,6 +183,7 @@ def render_docs_index(records: list[dict[str, object]]) -> str:
             "## Related documentation",
             "",
             "- [Getting started](../GETTING-STARTED.md)",
+            "- [Azure platform-engineering guide](../azure-platform-engineering/GUIDE.md)",
             "- [Platform-engineering source notes](../PLATFORM-ENGINEERING-SOURCE-NOTES.md)",
             "- [Research-division provenance](../RESEARCH-DIVISION-PROVENANCE.md)",
             "- [Prompt-workflow provenance](../prompt-workflows/PROVENANCE.md)",
@@ -228,11 +230,11 @@ def render_plugin_doc(record: dict[str, object]) -> str:
             f"| [`{skill['name']}`]({source_link.as_posix()}) | "
             f"{skill['description']} | {package} |"
         )
+    lines.extend(["", "## Plugin files", ""])
+    if record["guide"]:
+        lines.append(f"- [Usage guide](../../{name}/GUIDE.md)")
     lines.extend(
         [
-            "",
-            "## Plugin files",
-            "",
             f"- [Claude manifest](../../{name}/.claude-plugin/plugin.json)",
             (
                 f"- [Codex manifest](../../{name}/.codex-plugin/plugin.json)"

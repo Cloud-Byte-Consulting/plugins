@@ -117,6 +117,22 @@ Static file presence is a lead; validate completeness, freshness, adoption, and
 runtime behavior. Reconcile independent evidence as confirmed, contradicted, or
 gap-filled. Preserve “maturity theater” contradictions instead of averaging them.
 
+#### Run Azure estate increment I9
+
+Use I9 when the assessment needs Azure resource inventory, governance posture,
+IaC coverage, or a workload disposition map. Install the companion
+`azure-platform-engineering` plugin and follow its
+[usage guide](azure-platform-engineering/GUIDE.md).
+
+> Use assessment-orchestrator and azure-estate-assessor to run I9 for these
+> approved subscriptions. Confirm Reader-only access, emit an I9 delta and
+> disposition map, keep cost under I4, exclude secret values, and label every
+> exported IaC artifact as draft evidence.
+
+I9 hands its disposition map to `azure-platform-designer` and
+`workload-onboarder`; it does not authorize implementation. Keep Kubernetes
+runtime evidence in I3 and all cloud-cost evidence in I4.
+
 ### 3. Merge and resume
 
 When work resumes after a pause, load the canonical state and read `open_gaps`,
